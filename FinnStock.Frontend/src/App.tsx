@@ -1,34 +1,29 @@
 import React, { useState } from 'react';
-import reactLogo from './assets/react.svg';
-import viteLogo from '../public/vite.svg';
-import './App.css';
+import finnstockLogo from './assets/finnstock-white.svg';
+
+// import './App.css';
 
 function App() {
     const [count, setCount] = useState(0);
     const num = 3;
 
     return (
-        <React.Fragment>
-            <div>
-                <a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-                    <img src={viteLogo} className="logo" alt="Vite logo" />
-                </a>
-                <a href="https://react.dev" target="_blank" rel="noreferrer">
-                    <img src={reactLogo} className="logo react" alt="React logo" />
-                    {num}
-                </a>
+        <div className="bg-slate-700 h-full">
+            <div className="flex h-full">
+                <div className="flex-1">
+                    <div>
+                        <img src={finnstockLogo} alt="finnstock" />
+                    </div>
+                    <div>
+                        <h1 className="text-gray-500">Welcome Back</h1>
+                        <p>Contrary to popular belief, Lorem Ipsum is not simply random text.</p>
+                    </div>
+                </div>
+                <div className="flex-1  bg-sky-500">
+                    <h1>right</h1>
+                </div>
             </div>
-            <h1>Vite + React</h1>
-            <div className="card">
-                <button type="button" onClick={() => setCount((c) => c + 1)}>
-                    count is {count}
-                </button>
-                <p>
-                    Edit <code>src/App.tsx</code> and save to test HMR
-                </p>
-            </div>
-            <p className="read-the-docs">Click on the Vite and React logos to learn more</p>
-        </React.Fragment>
+        </div>
     );
 }
 

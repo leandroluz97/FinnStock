@@ -1,0 +1,13 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+    font-family: 'DM Sans', sans-serif;
+    height: 100vh;
+}
+
+body,
+#root {
+    height: inherit;
+}
