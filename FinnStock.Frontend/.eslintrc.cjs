@@ -8,14 +8,20 @@ module.exports = {
         'plugin:react-hooks/recommended',
         'prettier',
     ],
+
     parser: '@typescript-eslint/parser',
     parserOptions: { ecmaVersion: 'latest', sourceType: 'module' },
-    plugins: ['react-refresh', 'prettier'],
+    plugins: ['react-refresh', 'prettier', 'import'],
 
     rules: {
         'react-refresh/only-export-components': 'warn',
         'react/jsx-filename-extension': [1, { extensions: ['.js', '.jsx', '.ts', '.tsx'] }],
         'react/jsx-fragments': 0,
-        'import/no-unresolved': [2, { caseSensitive: false }],
+        'import/no-unresolved': 0,
+        'import/prefer-default-export': 0,
+        'react/function-component-definition': 0,
+        'arrow-body-style': 0,
+        'import/extensions': 0,
+        'no-param-reassign': 0,
     },
 };
