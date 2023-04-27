@@ -1,0 +1,38 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.1.32319.34
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.WebAPI", "FinnStock.WebAPI\FinnStock.WebAPI.csproj", "{A3E55F06-DC94-4CC6-88E5-738128C08A74}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Application", "Application", "{264D7916-55FC-4D5E-A3C7-1CC1F7DCF5E2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Business", "Business", "{CDFAD355-E9D4-4A10-BC1D-1640D8479EAC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{61742AFC-2743-4296-B407-B2CC627C087B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F37A65BA-C6E4-4F17-8976-B3F76E155981}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{BE701D1E-CC0C-43D2-88CE-678444BF928C}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A3E55F06-DC94-4CC6-88E5-738128C08A74}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A3E55F06-DC94-4CC6-88E5-738128C08A74}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A3E55F06-DC94-4CC6-88E5-738128C08A74}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A3E55F06-DC94-4CC6-88E5-738128C08A74}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{A3E55F06-DC94-4CC6-88E5-738128C08A74} = {264D7916-55FC-4D5E-A3C7-1CC1F7DCF5E2}
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {AB7813B9-1F9F-4FD4-8A82-1A12C3F02964}
+	EndGlobalSection
+EndGlobal
