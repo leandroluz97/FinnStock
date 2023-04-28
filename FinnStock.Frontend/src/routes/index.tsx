@@ -212,7 +212,7 @@ export const AppRoutes = () => {
                                 <div>
                                     <button
                                         type="button"
-                                        className="text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-blue-300 font-medium rounded-md text-sm px-5 py-2.5 mr-2 mb-2 dark:bg-blue-600 dark:hover:bg-blue-700 focus:outline-none dark:focus:ring-blue-800"
+                                        className="text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                                     >
                                         Create account
                                     </button>
@@ -231,7 +231,7 @@ export const AppRoutes = () => {
                                 Already have an account?{' '}
                                 <a
                                     href="/asd"
-                                    className="text-blue-600 dark:text-blue-500 hover:underline"
+                                    className="text-blue-600 dark:text-blue-500 hover:underline font-medium"
                                 >
                                     Login
                                 </a>{' '}
