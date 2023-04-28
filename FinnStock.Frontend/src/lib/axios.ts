@@ -18,10 +18,8 @@ export const axios = Axios.create({
     baseURL: API_URL,
 });
 
-axios.interceptors.request.use(authRequestInterceptor);
+axios.interceptors.request.use(authRequestInterceptor, (error) => Promise.reject(error));
 axios.interceptors.response.use(
-    (response) => {
-        return response.data;
-    },
+    (response) => response.data,
     (error) => Promise.reject(error)
 );

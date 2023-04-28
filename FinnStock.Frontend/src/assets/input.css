@@ -2,6 +2,9 @@
 @tailwind components;
 @tailwind utilities;
 
+* {
+    box-sizing: border-box;
+}
 html {
     font-family: 'DM Sans', sans-serif;
     height: 100vh;
