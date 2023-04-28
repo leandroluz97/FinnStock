@@ -42,7 +42,7 @@ export const AppRoutes = () => {
                                 />
                             </div>
 
-                            <form action="" className="py-2">
+                            <form noValidate className="py-2">
                                 <h2 className="text-3xl font-medium text-primary-900 mt-32 md:mt-6 my-6">
                                     Sign In
                                 </h2>
@@ -151,9 +151,9 @@ export const AppRoutes = () => {
                                     id="password"
                                     name="password"
                                     label="Password"
-                                    placeholder=""
+                                    placeholder="••••••••••"
                                     type="password"
-                                    groupFormClassList="my-4"
+                                    groupFormClassList="my-4 relative"
                                     hasError={false}
                                     isRequired
                                     errorMessage=""
