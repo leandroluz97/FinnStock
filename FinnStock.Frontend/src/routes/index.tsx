@@ -1,5 +1,6 @@
 import React from 'react';
 import finnstockLogo from '../assets/finnstock-white.svg';
+import finnstockPrimaryLogo from '../assets/finnstock-primary.svg';
 import googleLogo from '../assets/google-logo-sm.svg';
 import { InputField } from '../components/form/InputField';
 
@@ -20,8 +21,8 @@ export const AppRoutes = () => {
                         </p>
                     </div>
                 </div>
-                <div className="flex-1 bg-white">
-                    <div className="container max-w-lg m-auto p-5 md:p-10">
+                <div className="flex-1 overflow-y-scroll md:overflow-auto bg-white">
+                    <div className="container h-full flex flex-col justify-center align-middle max-w-lg m-auto p-5 md:p-10">
                         {/* <div className="text-right">
                             <a
                                 href="/login"
@@ -32,11 +33,21 @@ export const AppRoutes = () => {
                             </a>
                         </div> */}
 
-                        <section className="">
-                            <h2 className="text-3xl font-medium text-primary-900 mb-8">Sign In</h2>
+                        <section className="my-5">
+                            <div className="bg-white text-center md:hidden p-2 mb-2 sticky top-0 left-0 right-0 ">
+                                <img
+                                    src={finnstockPrimaryLogo}
+                                    alt="finnstock"
+                                    className="m-auto w-4/6"
+                                />
+                            </div>
+
                             <form action="" className="py-2">
+                                <h2 className="text-3xl font-medium text-primary-900 mt-32 md:mt-6 my-6">
+                                    Sign In
+                                </h2>
                                 <div className=" flex flex-col lg:flex-row gap-3">
-                                    <div className="flex-1">
+                                    {/* <div className="flex-1">
                                         <label
                                             htmlFor="first_name"
                                             className="block mb-1 text-sm font-medium text-primary-950"
@@ -51,8 +62,8 @@ export const AppRoutes = () => {
                                             placeholder="John"
                                             required
                                         />
-                                    </div>
-                                    <div className="flex-1">
+                                    </div> */}
+                                    {/* <div className="flex-1">
                                         <label
                                             htmlFor="first_name"
                                             className="block mb-1 text-sm font-medium text-primary-950"
@@ -66,9 +77,33 @@ export const AppRoutes = () => {
                                             placeholder="John"
                                             required
                                         />
-                                    </div>
+                                    </div> */}
+                                    <InputField
+                                        id="first_name"
+                                        name="first_name"
+                                        label="First Name"
+                                        placeholder="John"
+                                        type="text"
+                                        groupFormClassList="flex-1"
+                                        hasError={false}
+                                        isRequired
+                                        errorMessage=""
+                                        key="first_name"
+                                    />
+                                    <InputField
+                                        id="last_name"
+                                        name="last_name"
+                                        label="Last Name"
+                                        placeholder="Doe"
+                                        type="text"
+                                        groupFormClassList="flex-1"
+                                        hasError={false}
+                                        isRequired
+                                        errorMessage=""
+                                        key="last_name"
+                                    />
                                 </div>
-                                <div className="my-4 flex-1">
+                                {/* <div className="my-4 flex-1">
                                     <label
                                         htmlFor="first_name"
                                         className="block mb-1 text-sm font-medium text-primary-950"
@@ -87,20 +122,44 @@ export const AppRoutes = () => {
                                         <span className="font-medium">Well done!</span> Some success
                                         message.
                                     </p>
-                                </div>
+                                </div> */}
                                 <InputField
                                     id="email"
                                     name="email"
                                     label="Email"
                                     placeholder="johndoe@gmail.com"
                                     type="text"
-                                    groupFormClassList="my-4 flex-1"
+                                    groupFormClassList="my-4"
                                     hasError={false}
                                     isRequired
                                     errorMessage=""
                                     key="email"
                                 />
-                                <div className="my-4">
+                                <InputField
+                                    id="phone_number"
+                                    name="phone_number"
+                                    label="Phone number"
+                                    placeholder="915210066"
+                                    type="text"
+                                    groupFormClassList="my-4"
+                                    hasError={false}
+                                    isRequired
+                                    errorMessage=""
+                                    key="phone_number"
+                                />
+                                <InputField
+                                    id="password"
+                                    name="password"
+                                    label="Password"
+                                    placeholder=""
+                                    type="password"
+                                    groupFormClassList="my-4"
+                                    hasError={false}
+                                    isRequired
+                                    errorMessage=""
+                                    key="password"
+                                />
+                                {/* <div className="my-4">
                                     <label
                                         htmlFor="phone_number"
                                         className="block mb-1 text-sm font-medium text-primary-950"
@@ -114,8 +173,8 @@ export const AppRoutes = () => {
                                         placeholder="915210066"
                                         required
                                     />
-                                </div>
-                                <div className="my-4">
+                                </div> */}
+                                {/* <div className="my-4">
                                     <label
                                         htmlFor="first_name"
                                         className="block mb-1 text-sm font-medium text-primary-950"
@@ -128,7 +187,7 @@ export const AppRoutes = () => {
                                         className="bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
                                         required
                                     />
-                                </div>
+                                </div> */}
                                 <div className="my-4 flex items-center">
                                     <input
                                         id="link-checkbox"
