@@ -1,9 +1,11 @@
-﻿using FinnStock.SQLWork.Configurations;
+﻿using FinnStock.Domain;
+using FinnStock.SQLWork.Configurations;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace FinnStock.SQLWork
 {
-    public class ApplicationDbContext : DbContext
+    public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {
 
 
@@ -13,6 +15,7 @@ namespace FinnStock.SQLWork
         {
             modelBuilder.ApplyConfiguration(new OrderConfiguration());
             modelBuilder.ApplyConfiguration(new FavoriteConfiguration());
+            base.OnModelCreating(modelBuilder);
         }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {

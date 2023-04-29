@@ -7,8 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinnStock.Domain
 {
-    public class Role : IdentityRole<int>
+    public class Role : IdentityRole<Guid>
     {
-        public Guid GlobalId { get; set; }
     }
 }

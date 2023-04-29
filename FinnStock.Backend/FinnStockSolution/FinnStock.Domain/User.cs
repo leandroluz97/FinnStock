@@ -8,8 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinnStock.Domain
 {
-    public class User :  IdentityUser<int>
+    public class User :  IdentityUser<Guid>
     {
-        public Guid GlobalId { get; set; }
     }
 }

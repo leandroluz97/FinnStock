@@ -5,7 +5,9 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.AspNetCore.Cors;
-
+using Microsoft.AspNetCore.Identity;
+using FinnStock.Domain;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
 namespace FinnStock.DependencyInjection
 {
@@ -24,6 +26,18 @@ namespace FinnStock.DependencyInjection
                 });
             });
 
+            services.AddIdentity<User, Role>(options =>
+            {
+                options.Password.RequiredLength = 5;
+                options.Password.RequireNonAlphanumeric = true;
+                options.Password.RequireUppercase = false;
+                options.Password.RequireLowercase = true;
+                options.Password.RequireDigit = true;
+            })
+                .AddEntityFrameworkStores<ApplicationDbContext>()
+                .AddDefaultTokenProviders()
+                .AddUserStore<UserStore<User, Role, ApplicationDbContext, Guid>>()
+                .AddRoleStore<RoleStore<Role, ApplicationDbContext, Guid>>();
 
             return services;
         }
