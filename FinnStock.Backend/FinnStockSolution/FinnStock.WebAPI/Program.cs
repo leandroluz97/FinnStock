@@ -3,6 +3,15 @@ using FinnStock.DependencyInjection;
 var builder = WebApplication.CreateBuilder(args);
 
 // Add services to the container.
+
+//Configured CORS
+builder.Services.AddCors((options) => {
+    options.AddDefaultPolicy((builder) => {
+        builder.WithOrigins("http://localhost:3000");
+    });
+});
+
+
 builder.Services.ConfigureServices(builder.Configuration);
 
 builder.Services.AddControllers();
@@ -10,7 +19,7 @@ builder.Services.AddControllers();
 builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddSwaggerGen();
 
-var app = builder.Build();
+var app = builder.Build();  
 
 // Configure the HTTP request pipeline.
 if (app.Environment.IsDevelopment())
@@ -20,6 +29,8 @@ if (app.Environment.IsDevelopment())
 }
 app.UseHsts();
 app.UseHttpsRedirection();
+
+app.UseCors();
 
 app.UseAuthorization();
 
