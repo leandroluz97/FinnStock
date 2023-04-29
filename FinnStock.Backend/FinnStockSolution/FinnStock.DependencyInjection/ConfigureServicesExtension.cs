@@ -14,15 +14,16 @@ namespace FinnStock.DependencyInjection
 
         public static IServiceCollection ConfigureServices(this IServiceCollection services, IConfiguration configuration)
         {
-            services.AddCors((options) => {
-                 options.AddDefaultPolicy((builder) => {
-                     builder.WithOrigins("http://localhost:3000");
-                 });
-             });
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))); //ServiceLifetime.Transient
 
-            
+            services.AddCors((options) => {
+                options.AddDefaultPolicy((builder) => { 
+                    builder.WithOrigins("*");
+                    builder.WithOrigins(configuration.GetSection("AllowedOrigin").Value);
+                });
+            });
+
 
             return services;
         }
