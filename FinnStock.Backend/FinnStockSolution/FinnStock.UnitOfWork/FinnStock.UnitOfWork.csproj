@@ -6,4 +6,9 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\FinnStock.Infrastructure.Abstractions\FinnStock.Infrastructure.Abstractions.csproj" />
+    <ProjectReference Include="..\FinnStock.Repositories\FinnStock.SQLWork.csproj" />
+  </ItemGroup>
+
 </Project>
