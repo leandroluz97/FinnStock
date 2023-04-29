@@ -1,4 +1,4 @@
-﻿namespace FinnStock.Domain
+﻿namespace FinnStock.Utils
 {
     public class Class1
     {

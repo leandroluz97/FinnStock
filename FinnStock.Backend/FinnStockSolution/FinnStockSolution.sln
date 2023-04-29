@@ -33,6 +33,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Business.Abstract
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.DependencyInjection", "FinnStock.DependencyInjection\FinnStock.DependencyInjection.csproj", "{7BBC0106-4237-4876-BD34-3FA84B989FF2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Utils", "FinnStock.Utils\FinnStock.Utils.csproj", "{85EB1A30-ADCD-4B15-B96E-EB62222031D5}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -79,6 +81,10 @@ Global
 		{7BBC0106-4237-4876-BD34-3FA84B989FF2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{7BBC0106-4237-4876-BD34-3FA84B989FF2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{7BBC0106-4237-4876-BD34-3FA84B989FF2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{85EB1A30-ADCD-4B15-B96E-EB62222031D5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{85EB1A30-ADCD-4B15-B96E-EB62222031D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{85EB1A30-ADCD-4B15-B96E-EB62222031D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{85EB1A30-ADCD-4B15-B96E-EB62222031D5}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -94,6 +100,7 @@ Global
 		{0910DF62-33D5-401F-A1E5-20F2B1725DFC} = {61742AFC-2743-4296-B407-B2CC627C087B}
 		{A9970682-25A3-424B-9B4F-567674709FA1} = {CDFAD355-E9D4-4A10-BC1D-1640D8479EAC}
 		{7BBC0106-4237-4876-BD34-3FA84B989FF2} = {CDFAD355-E9D4-4A10-BC1D-1640D8479EAC}
+		{85EB1A30-ADCD-4B15-B96E-EB62222031D5} = {BE701D1E-CC0C-43D2-88CE-678444BF928C}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB7813B9-1F9F-4FD4-8A82-1A12C3F02964}

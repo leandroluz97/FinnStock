@@ -1,11 +1,30 @@
 {
   "version": 3,
   "targets": {
-    "net6.0": {}
+    "net6.0": {
+      "FinnStock.Utils/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v6.0",
+        "compile": {
+          "bin/placeholder/FinnStock.Utils.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/FinnStock.Utils.dll": {}
+        }
+      }
+    }
   },
-  "libraries": {},
+  "libraries": {
+    "FinnStock.Utils/1.0.0": {
+      "type": "project",
+      "path": "../FinnStock.Utils/FinnStock.Utils.csproj",
+      "msbuildProject": "../FinnStock.Utils/FinnStock.Utils.csproj"
+    }
+  },
   "projectFileDependencyGroups": {
-    "net6.0": []
+    "net6.0": [
+      "FinnStock.Utils >= 1.0.0"
+    ]
   },
   "packageFolders": {
     "C:\\Users\\Asus\\.nuget\\packages\\": {}
@@ -33,7 +52,11 @@
       "frameworks": {
         "net6.0": {
           "targetAlias": "net6.0",
-          "projectReferences": {}
+          "projectReferences": {
+            "D:\\Code\\FinnStock\\FinnStock.Backend\\FinnStockSolution\\FinnStock.Utils\\FinnStock.Utils.csproj": {
+              "projectPath": "D:\\Code\\FinnStock\\FinnStock.Backend\\FinnStockSolution\\FinnStock.Utils\\FinnStock.Utils.csproj"
+            }
+          }
         }
       },
       "warningProperties": {
