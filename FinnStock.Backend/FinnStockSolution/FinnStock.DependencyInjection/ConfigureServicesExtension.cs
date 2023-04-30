@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using FinnStock.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+using FinnStock.Infrastructure.Abstractions;
 
 namespace FinnStock.DependencyInjection
 {
@@ -25,6 +26,9 @@ namespace FinnStock.DependencyInjection
                     builder.WithOrigins(configuration.GetSection("AllowedOrigin").Value);
                 });
             });
+
+           
+            services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
 
             services.AddIdentity<User, Role>(options =>
             {
