@@ -1,7 +1,11 @@
-﻿using FinnStock.Infrastructure.Abstractions;
+﻿using FinnStock.Domain;
+using FinnStock.Domain.Helper;
+using FinnStock.Infrastructure.Abstractions;
 using FinnStock.Infrastructure.Abstractions.Repositories;
 using FinnStock.SQLWork;
 using FinnStock.UnitOfWork.Repositories;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace FinnStock.UnitOfWork
 {
@@ -32,6 +36,18 @@ namespace FinnStock.UnitOfWork
 
         public async Task SaveChangesAsync()
         {
+            foreach (var entry in _dbContext.ChangeTracker.Entries<ISignature>())
+            {
+                if (entry.State == EntityState.Added)
+                {
+                    entry.Entity.CreatedAt = DateTime.UtcNow;
+                }
+                else if (entry.State == EntityState.Modified)
+                {
+                    entry.Entity.UpdatedAt = DateTime.UtcNow;
+                }
+            }
+
             await _dbContext.SaveChangesAsync();
         }
 

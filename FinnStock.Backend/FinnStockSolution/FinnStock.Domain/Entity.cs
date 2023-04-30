@@ -1,11 +1,12 @@
-﻿namespace FinnStock.Domain
+﻿using FinnStock.Domain.Helper;
+
+namespace FinnStock.Domain
 {
-    public abstract class Entity
+    public abstract class Entity : ISignature
     {
         public int Id { get; set; }
         public Guid GlobalId { get; set; }
-        public DateTime CreateAt { get; set; }
-        public DateTime UpdateAt { get; set; }
-
+        public DateTime CreatedAt { get; set; }
+        public DateTime UpdatedAt { get; set; }
     }
 }
