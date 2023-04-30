@@ -15,6 +15,9 @@ namespace FinnStock.SQLWork.Configurations
         {
             builder.ToTable("Favorites");
             builder.HasKey(o => o.Id);
+            builder.HasOne<User>(o => o.User)
+                  .WithMany(c => c.Favorites)
+                  .HasForeignKey(o => o.UserId);
         }
     }
 }

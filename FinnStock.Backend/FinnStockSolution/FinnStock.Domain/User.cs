@@ -10,5 +10,7 @@ namespace FinnStock.Domain
 {
     public class User :  IdentityUser<Guid>
     {
+        public ICollection<Order> Orders { get; set; }
+        public ICollection<Favorite> Favorites { get; set; }
     }
 }

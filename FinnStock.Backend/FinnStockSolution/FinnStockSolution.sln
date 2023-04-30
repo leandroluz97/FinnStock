@@ -15,25 +15,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Tests", "Tests", "{F37A65BA
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Utils", "Utils", "{BE701D1E-CC0C-43D2-88CE-678444BF928C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Domain", "FinnStock.Domain\FinnStock.Domain.csproj", "{129DAE64-BF63-4E7E-A024-C41B1C4C7015}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Domain", "FinnStock.Domain\FinnStock.Domain.csproj", "{129DAE64-BF63-4E7E-A024-C41B1C4C7015}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Dtos", "FinnStock.Dtos\FinnStock.Dtos.csproj", "{AE54FC21-2CE9-4B9F-8430-3CC45A03EAC3}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Dtos", "FinnStock.Dtos\FinnStock.Dtos.csproj", "{AE54FC21-2CE9-4B9F-8430-3CC45A03EAC3}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Services", "FinnStock.Services\FinnStock.Services.csproj", "{988246EF-6B9E-4CCA-B6E8-7A60B050A66B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Services", "FinnStock.Services\FinnStock.Services.csproj", "{988246EF-6B9E-4CCA-B6E8-7A60B050A66B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.UnitOfWork", "FinnStock.UnitOfWork\FinnStock.UnitOfWork.csproj", "{9C0463D9-75E5-4869-B965-5DB1B2810DA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.UnitOfWork", "FinnStock.UnitOfWork\FinnStock.UnitOfWork.csproj", "{9C0463D9-75E5-4869-B965-5DB1B2810DA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Infrastructure.Abstractions", "FinnStock.Infrastructure.Abstractions\FinnStock.Infrastructure.Abstractions.csproj", "{91767E75-9B35-4030-A994-59A71151255A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Infrastructure.Abstractions", "FinnStock.Infrastructure.Abstractions\FinnStock.Infrastructure.Abstractions.csproj", "{91767E75-9B35-4030-A994-59A71151255A}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Clients", "FinnStock.Clients\FinnStock.Clients.csproj", "{9049A0D9-5A32-441E-A4F6-60F1F599A34B}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Clients", "FinnStock.Clients\FinnStock.Clients.csproj", "{9049A0D9-5A32-441E-A4F6-60F1F599A34B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.SQLWork", "FinnStock.Repositories\FinnStock.SQLWork.csproj", "{0910DF62-33D5-401F-A1E5-20F2B1725DFC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.SQLWork", "FinnStock.Repositories\FinnStock.SQLWork.csproj", "{0910DF62-33D5-401F-A1E5-20F2B1725DFC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Business.Abstractions", "FinnStock.Business.Abstractions\FinnStock.Business.Abstractions.csproj", "{A9970682-25A3-424B-9B4F-567674709FA1}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Business.Abstractions", "FinnStock.Business.Abstractions\FinnStock.Business.Abstractions.csproj", "{A9970682-25A3-424B-9B4F-567674709FA1}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.DependencyInjection", "FinnStock.DependencyInjection\FinnStock.DependencyInjection.csproj", "{7BBC0106-4237-4876-BD34-3FA84B989FF2}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.DependencyInjection", "FinnStock.DependencyInjection\FinnStock.DependencyInjection.csproj", "{7BBC0106-4237-4876-BD34-3FA84B989FF2}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Utils", "FinnStock.Utils\FinnStock.Utils.csproj", "{85EB1A30-ADCD-4B15-B96E-EB62222031D5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Utils", "FinnStock.Utils\FinnStock.Utils.csproj", "{85EB1A30-ADCD-4B15-B96E-EB62222031D5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Tests", "FinnStock.Tests\FinnStock.Tests.csproj", "{F368EE00-EA28-4623-9E76-67429B311BAB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -85,6 +87,10 @@ Global
 		{85EB1A30-ADCD-4B15-B96E-EB62222031D5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{85EB1A30-ADCD-4B15-B96E-EB62222031D5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{85EB1A30-ADCD-4B15-B96E-EB62222031D5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{F368EE00-EA28-4623-9E76-67429B311BAB}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{F368EE00-EA28-4623-9E76-67429B311BAB}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{F368EE00-EA28-4623-9E76-67429B311BAB}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{F368EE00-EA28-4623-9E76-67429B311BAB}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -101,6 +107,7 @@ Global
 		{A9970682-25A3-424B-9B4F-567674709FA1} = {CDFAD355-E9D4-4A10-BC1D-1640D8479EAC}
 		{7BBC0106-4237-4876-BD34-3FA84B989FF2} = {CDFAD355-E9D4-4A10-BC1D-1640D8479EAC}
 		{85EB1A30-ADCD-4B15-B96E-EB62222031D5} = {BE701D1E-CC0C-43D2-88CE-678444BF928C}
+		{F368EE00-EA28-4623-9E76-67429B311BAB} = {F37A65BA-C6E4-4F17-8976-B3F76E155981}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB7813B9-1F9F-4FD4-8A82-1A12C3F02964}

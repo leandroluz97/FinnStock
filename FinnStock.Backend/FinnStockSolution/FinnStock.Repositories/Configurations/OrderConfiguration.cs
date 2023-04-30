@@ -18,6 +18,9 @@ namespace FinnStock.SQLWork.Configurations
             builder.HasKey(o => o.Id);
             builder.Property(x => x.Id).IsRequired();
             builder.Property(o => o.Type).HasConversion(type => type.DisplayName, displayName => OrderType.FromDisplayName<OrderType>(displayName));
+            builder.HasOne<User>(o => o.User)
+                    .WithMany(c => c.Orders)
+                    .HasForeignKey(o => o.UserId);
 
         }
     }
