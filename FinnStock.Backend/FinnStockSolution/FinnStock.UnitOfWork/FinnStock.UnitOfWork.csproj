@@ -7,6 +7,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FinnStock.Business.Abstractions\FinnStock.Business.Abstractions.csproj" />
     <ProjectReference Include="..\FinnStock.Infrastructure.Abstractions\FinnStock.Infrastructure.Abstractions.csproj" />
     <ProjectReference Include="..\FinnStock.Repositories\FinnStock.SQLWork.csproj" />
   </ItemGroup>
