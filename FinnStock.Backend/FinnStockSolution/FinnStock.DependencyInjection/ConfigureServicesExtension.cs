@@ -10,6 +10,9 @@ using Microsoft.AspNetCore.Identity;
 using FinnStock.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using FinnStock.Infrastructure.Abstractions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.IdentityModel.Tokens;
 
 namespace FinnStock.DependencyInjection
 {
@@ -43,6 +46,24 @@ namespace FinnStock.DependencyInjection
                 .AddDefaultTokenProviders()
                 .AddUserStore<UserStore<User, Role, ApplicationDbContext, Guid>>()
                 .AddRoleStore<RoleStore<Role, ApplicationDbContext, Guid>>();
+
+            services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options => {
+                options.TokenValidationParameters = new TokenValidationParameters()
+                {
+                    ValidateAudience = true,
+                    ValidAudience = configuration["Jwt:Audience"],
+                    ValidateIssuer = true,
+                    ValidIssuer = configuration["Jwt:Issuer"],
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration["Jwt:Secret_key"]))
+                };
+            });
 
             return services;
         }
