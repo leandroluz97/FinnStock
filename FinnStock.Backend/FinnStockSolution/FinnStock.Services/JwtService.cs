@@ -5,6 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
+using System.Security.Cryptography;
 using System.Text;
 
 namespace FinnStock.Services
@@ -31,18 +32,30 @@ namespace FinnStock.Services
             SigningCredentials signingCredentials = new SigningCredentials(securityKey, SecurityAlgorithms.HmacSha256);
 
             JwtSecurityToken tokenGenerator = new JwtSecurityToken(
-                _configuration["Jwt:Issuer"], 
+                _configuration["Jwt:Issuer"],
                 _configuration["Jwt:Audience"],
                 claims,
                 expires: expiration,
-                signingCredentials :signingCredentials
+                signingCredentials: signingCredentials
                 );
 
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.WriteToken(tokenGenerator);
 
 
-            return new ResponseToken() { Token = token };
+            return new ResponseToken() { 
+                Token = token, 
+                RefreshToken = GenerateRefreshToken(),
+                RefreshTokenExpirationTime = DateTime.Now.AddMinutes(Convert.ToInt32(_configuration["RefreshToken:Exp_time"]))
+            };
+        }
+
+        private string GenerateRefreshToken()
+        {
+            var bytes = new byte[64];
+            var randomNumberGenerator = RandomNumberGenerator.Create();
+            randomNumberGenerator.GetBytes(bytes);
+            return Convert.ToBase64String(bytes);
         }
     }
 }

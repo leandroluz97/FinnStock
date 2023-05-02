@@ -12,5 +12,7 @@ namespace FinnStock.Domain
     {
         public ICollection<Order> Orders { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
+        public string? RefreshToken { get; set; }
+        public DateTime RefreshTokenExpirationDateTime { get; set; }
     }
 }
