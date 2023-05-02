@@ -50,12 +50,36 @@ namespace FinnStock.Services
             };
         }
 
+
         private string GenerateRefreshToken()
         {
             var bytes = new byte[64];
             var randomNumberGenerator = RandomNumberGenerator.Create();
             randomNumberGenerator.GetBytes(bytes);
             return Convert.ToBase64String(bytes);
+        }
+        public ClaimsPrincipal? GetPrincipalFromJwt(string? token)
+        {
+            var tokenValidationParameters = new TokenValidationParameters()
+            {
+                ValidateAudience = true,
+                ValidAudience = _configuration["Jwt:Audience"],
+                ValidateIssuer = true,
+                ValidIssuer = _configuration["Jwt:Issuer"],
+                ValidateIssuerSigningKey = true,
+                IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(_configuration["Jwt:Secret_key"])),
+                ValidateLifetime = false, //Should Be false as the Jwtoken is already expired
+            };
+
+            JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
+            var principal = tokenHandler.ValidateToken(token, tokenValidationParameters, out SecurityToken securityToken);
+
+            if(securityToken is not JwtSecurityToken jwtSecurityToken || !jwtSecurityToken.Header.Alg.Equals(SecurityAlgorithms.HmacSha256, StringComparison.InvariantCultureIgnoreCase))
+            {
+                throw new SecurityTokenException("Invalid token");
+            }
+
+            return principal;
         }
     }
 }
