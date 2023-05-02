@@ -1,12 +1,7 @@
 import React from 'react';
 import { ChangeHandler } from 'react-hook-form';
+import { IRegister } from '../../types';
 
-type IRegister = {
-    onChange: ChangeHandler;
-    onBlur: ChangeHandler;
-    ref: React.Ref<HTMLInputElement>;
-    name: string;
-};
 interface IInputFieldProps {
     id: string;
     name: string;
@@ -17,7 +12,7 @@ interface IInputFieldProps {
     placeholder: string;
     isRequired: boolean;
     groupFormClassList: string;
-    register: IRegister;
+    register: IRegister<HTMLInputElement>;
 }
 export const InputField = ({
     id,

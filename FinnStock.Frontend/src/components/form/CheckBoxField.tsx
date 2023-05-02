@@ -1,19 +1,12 @@
 import React, { ReactNode } from 'react';
-import { ChangeHandler } from 'react-hook-form';
-
-type IRegister = {
-    onChange: ChangeHandler;
-    onBlur: ChangeHandler;
-    ref: React.Ref<HTMLInputElement>;
-    name: string;
-};
+import { IRegister } from '../../types';
 
 interface ICheckBoxFieldProps {
     children: ReactNode;
     id: string;
     hasError: boolean;
     groupFormClassList: string;
-    register: IRegister;
+    register: IRegister<HTMLInputElement>;
     errorMessage: string;
 }
 
