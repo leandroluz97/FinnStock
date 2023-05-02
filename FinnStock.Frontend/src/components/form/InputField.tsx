@@ -1,5 +1,12 @@
 import React from 'react';
+import { ChangeHandler } from 'react-hook-form';
 
+type IRegister = {
+    onChange: ChangeHandler;
+    onBlur: ChangeHandler;
+    ref: React.Ref<HTMLInputElement>;
+    name: string;
+};
 interface IInputFieldProps {
     id: string;
     name: string;
@@ -10,6 +17,7 @@ interface IInputFieldProps {
     placeholder: string;
     isRequired: boolean;
     groupFormClassList: string;
+    register: IRegister;
 }
 export const InputField = ({
     id,
@@ -21,6 +29,7 @@ export const InputField = ({
     placeholder,
     isRequired,
     groupFormClassList,
+    register,
 }: IInputFieldProps) => {
     let classList = hasError
         ? 'bg-red-50 border-red-200 border-2 text-red-700 text-sm rounded focus:ring-red-100 focus:ring-2 focus:border-red-600 focus:border-2 block w-full p-2.5 placeholder-red-400'
@@ -39,6 +48,7 @@ export const InputField = ({
                 className={classList}
                 placeholder={placeholder}
                 required={isRequired}
+                {...register}
             />
             {hasError && (
                 <p className="mt-2 text-xs text-red-600 dark:text-red-500">{errorMessage}</p>
@@ -46,7 +56,9 @@ export const InputField = ({
             {groupFormClassList.includes('relative') && (
                 <button
                     type="button"
-                    className="absolute bottom-0 right-0 p-2.5 text-sm font-medium text-white rounded-r"
+                    className={`absolute  right-0 p-2.5 text-sm font-medium text-white rounded-r${
+                        hasError ? ' bottom-6' : ' bottom-0'
+                    }`}
                 >
                     <svg
                         width="22"
@@ -57,15 +69,19 @@ export const InputField = ({
                     >
                         <path
                             d="M20.544 9.04498C20.848 9.4713 21 9.68447 21 10C21 10.3155 20.848 10.5287 20.544 10.955C19.1779 12.8706 15.6892 17 11 17C6.31078 17 2.8221 12.8706 1.45604 10.955C1.15201 10.5287 1 10.3155 1 10C1 9.68447 1.15201 9.47131 1.45604 9.04499C2.8221 7.12944 6.31078 3 11 3C15.6892 3 19.1779 7.12944 20.544 9.04498Z"
-                            stroke="#BCD1EB"
+                            stroke={hasError ? '#fca5a5' : '#BCD1EB'}
                             strokeWidth="1.5"
                         />
                         <path
                             d="M14.0005 10C14.0005 8.34315 12.6573 7 11.0005 7C9.34363 7 8.00049 8.34315 8.00049 10C8.00049 11.6569 9.34363 13 11.0005 13C12.6573 13 14.0005 11.6569 14.0005 10Z"
-                            stroke="#BCD1EB"
+                            stroke={hasError ? '#fca5a5' : '#BCD1EB'}
                             strokeWidth="1.5"
                         />
-                        <path d="M20 1L2 19" stroke="#BCD1EB" strokeWidth="1.5" />
+                        <path
+                            d="M20 1L2 19"
+                            stroke={hasError ? '#fca5a5' : '#BCD1EB'}
+                            strokeWidth="1.5"
+                        />
                     </svg>
                 </button>
             )}

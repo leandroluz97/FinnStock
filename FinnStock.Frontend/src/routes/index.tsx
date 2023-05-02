@@ -1,11 +1,45 @@
 import React from 'react';
+import { useForm } from 'react-hook-form';
+import * as yup from 'yup';
+import { yupResolver } from '@hookform/resolvers/yup';
 import finnstockLogo from '../assets/finnstock-white.svg';
 import finnstockPrimaryLogo from '../assets/finnstock-primary.svg';
 import googleLogo from '../assets/google-logo-sm.svg';
-import { InputField } from '../components/form/InputField';
+import { InputField, CheckBoxField } from '../components/form';
+
+type Inputs = {
+    firstName: string;
+    lastName: string;
+    phoneNumber: string;
+    email: string;
+    password: string;
+    term: boolean;
+};
+const schema = yup.object().shape({
+    firstName: yup.string().required('FirstName is a required field'),
+    lastName: yup.string().required('LastName is a required field'),
+    email: yup.string().email().required('Email is a required field'),
+    phoneNumber: yup.string().required('Email is a required field'),
+    term: yup.boolean().isTrue().required(),
+    password: yup
+        .string()
+        .required('Password is a required field')
+        .min(8, 'Password is too short - should be 8 chars minimum.')
+        .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+});
 
 export const AppRoutes = () => {
-    // throw Error('error');
+    const {
+        register,
+        formState: { errors },
+        handleSubmit,
+    } = useForm<Inputs>({ resolver: yupResolver(schema) });
+    console.log(!!errors.password, errors.password?.message);
+
+    const submit = (d: any) => {
+        console.log(d);
+    };
+
     return (
         <div className="h-screen">
             <div className="flex h-full">
@@ -42,87 +76,38 @@ export const AppRoutes = () => {
                                 />
                             </div>
 
-                            <form noValidate className="py-2">
+                            <form noValidate className="py-2" onSubmit={handleSubmit(submit)}>
                                 <h2 className="text-3xl font-medium text-primary-900 mt-32 md:mt-6 my-6">
                                     Sign In
                                 </h2>
                                 <div className=" flex flex-col lg:flex-row gap-3">
-                                    {/* <div className="flex-1">
-                                        <label
-                                            htmlFor="first_name"
-                                            className="block mb-1 text-sm font-medium text-primary-950"
-                                        >
-                                            First Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="first_name"
-                                            className="bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
-                                            // className="bg-gray-50 border border-gray-300 text-gray-900 text-sm rounded-md focus:ring-primary-500 ring-2 focus:border-primary border-2 block w-full p-2.5 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                                            placeholder="John"
-                                            required
-                                        />
-                                    </div> */}
-                                    {/* <div className="flex-1">
-                                        <label
-                                            htmlFor="first_name"
-                                            className="block mb-1 text-sm font-medium text-primary-950"
-                                        >
-                                            Last Name
-                                        </label>
-                                        <input
-                                            type="text"
-                                            id="first_name"
-                                            className="bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
-                                            placeholder="John"
-                                            required
-                                        />
-                                    </div> */}
                                     <InputField
                                         id="first_name"
-                                        name="first_name"
+                                        name="firstName"
                                         label="First Name"
                                         placeholder="John"
                                         type="text"
                                         groupFormClassList="flex-1"
-                                        hasError={false}
                                         isRequired
-                                        errorMessage=""
                                         key="first_name"
+                                        register={register('firstName')}
+                                        hasError={!!errors.firstName}
+                                        errorMessage={errors.firstName?.message || ''}
                                     />
                                     <InputField
                                         id="last_name"
-                                        name="last_name"
+                                        name="lastName"
                                         label="Last Name"
                                         placeholder="Doe"
                                         type="text"
                                         groupFormClassList="flex-1"
-                                        hasError={false}
                                         isRequired
-                                        errorMessage=""
                                         key="last_name"
+                                        register={register('lastName')}
+                                        hasError={!!errors.lastName}
+                                        errorMessage={errors.lastName?.message || ''}
                                     />
                                 </div>
-                                {/* <div className="my-4 flex-1">
-                                    <label
-                                        htmlFor="first_name"
-                                        className="block mb-1 text-sm font-medium text-primary-950"
-                                    >
-                                        Email
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="email"
-                                        // className="bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
-                                        className="bg-red-50 border-red-200 border-2 text-red-700 text-sm rounded focus:ring-red-100 focus:ring-2 focus:border-red-600 focus:border-2 block w-full p-2.5 placeholder-red-400"
-                                        placeholder="johndoe@gmail.com"
-                                        required
-                                    />
-                                    <p className="mt-2 text-xs text-red-600 dark:text-red-500">
-                                        <span className="font-medium">Well done!</span> Some success
-                                        message.
-                                    </p>
-                                </div> */}
                                 <InputField
                                     id="email"
                                     name="email"
@@ -130,22 +115,24 @@ export const AppRoutes = () => {
                                     placeholder="johndoe@gmail.com"
                                     type="text"
                                     groupFormClassList="my-4"
-                                    hasError={false}
                                     isRequired
-                                    errorMessage=""
                                     key="email"
+                                    register={register('email')}
+                                    hasError={!!errors.email}
+                                    errorMessage={errors.email?.message || ''}
                                 />
                                 <InputField
                                     id="phone_number"
-                                    name="phone_number"
+                                    name="phoneNumber"
                                     label="Phone number"
                                     placeholder="915210066"
                                     type="text"
                                     groupFormClassList="my-4"
-                                    hasError={false}
                                     isRequired
-                                    errorMessage=""
                                     key="phone_number"
+                                    register={register('phoneNumber')}
+                                    hasError={!!errors.phoneNumber}
+                                    errorMessage={errors.phoneNumber?.message || ''}
                                 />
                                 <InputField
                                     id="password"
@@ -154,50 +141,23 @@ export const AppRoutes = () => {
                                     placeholder="••••••••••"
                                     type="password"
                                     groupFormClassList="my-4 relative"
-                                    hasError={false}
                                     isRequired
-                                    errorMessage=""
                                     key="password"
+                                    register={register('password')}
+                                    hasError={!!errors.password}
+                                    errorMessage={errors.password?.message || ''}
                                 />
-                                {/* <div className="my-4">
-                                    <label
-                                        htmlFor="phone_number"
-                                        className="block mb-1 text-sm font-medium text-primary-950"
-                                    >
-                                        Phone number
-                                    </label>
-                                    <input
-                                        type="text"
-                                        id="first_name"
-                                        className="bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
-                                        placeholder="915210066"
-                                        required
-                                    />
-                                </div> */}
-                                {/* <div className="my-4">
-                                    <label
-                                        htmlFor="first_name"
-                                        className="block mb-1 text-sm font-medium text-primary-950"
-                                    >
-                                        Password
-                                    </label>
-                                    <input
-                                        type="password"
-                                        id="first_name"
-                                        className="bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
-                                        required
-                                    />
-                                </div> */}
-                                <div className="my-4 flex items-center">
-                                    <input
-                                        id="link-checkbox"
-                                        type="checkbox"
-                                        value=""
-                                        className="w-4 h-4 text-primary-900 bg-gray-100 border-gray-300 rounded focus:ring-primary-900 "
-                                    />
+                                <CheckBoxField
+                                    id="link_checkbox"
+                                    groupFormClassList="my-4 flex items-center"
+                                    key="link_checkbox"
+                                    register={register('term')}
+                                    hasError={!!errors.term}
+                                    errorMessage={errors.term?.message || ''}
+                                >
                                     <label
                                         htmlFor="link-checkbox"
-                                        className="ml-2 text-sm font-medium text-primary-950 "
+                                        className="ml-2 text-sm font-medium text-primary-950"
                                     >
                                         I agree with the{' '}
                                         <a
@@ -208,10 +168,11 @@ export const AppRoutes = () => {
                                         </a>
                                         .
                                     </label>
-                                </div>
+                                </CheckBoxField>
+
                                 <div>
                                     <button
-                                        type="button"
+                                        type="submit"
                                         className="text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                                     >
                                         Create account
