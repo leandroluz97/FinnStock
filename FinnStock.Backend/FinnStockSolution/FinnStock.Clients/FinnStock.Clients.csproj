@@ -6,4 +6,12 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Sendgrid" Version="9.28.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\FinnStock.Infrastructure.Abstractions\FinnStock.Infrastructure.Abstractions.csproj" />
+  </ItemGroup>
+
 </Project>
