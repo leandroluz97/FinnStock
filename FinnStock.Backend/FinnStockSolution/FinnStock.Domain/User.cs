@@ -10,6 +10,8 @@ namespace FinnStock.Domain
 {
     public class User :  IdentityUser<Guid>
     {
+        public string FirstName { get; set; }
+        public string LastName { get; set; }
         public ICollection<Order> Orders { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
         public string? RefreshToken { get; set; }
