@@ -1,11 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
+
+import codes from 'country-calling-code';
 import { yupResolver } from '@hookform/resolvers/yup';
 import finnstockLogo from '../assets/finnstock-white.svg';
 import finnstockPrimaryLogo from '../assets/finnstock-primary.svg';
 import googleLogo from '../assets/google-logo-sm.svg';
 import { InputField, CheckBoxField } from '../components/form';
+import { CountryCode } from '../components/elements';
 
 type Inputs = {
     firstName: string;
@@ -34,7 +37,7 @@ export const AppRoutes = () => {
         formState: { errors },
         handleSubmit,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
-    console.log(!!errors.password, errors.password?.message);
+    const [code, setCode] = useState<number>(228);
 
     const submit = (d: any) => {
         console.log(d);
@@ -121,19 +124,27 @@ export const AppRoutes = () => {
                                     hasError={!!errors.email}
                                     errorMessage={errors.email?.message || ''}
                                 />
-                                <InputField
-                                    id="phone_number"
-                                    name="phoneNumber"
-                                    label="Phone number"
-                                    placeholder="915210066"
-                                    type="text"
-                                    groupFormClassList="my-4"
-                                    isRequired
-                                    key="phone_number"
-                                    register={register('phoneNumber')}
-                                    hasError={!!errors.phoneNumber}
-                                    errorMessage={errors.phoneNumber?.message || ''}
-                                />
+                                <div className="flex content-end flex-row gap-3">
+                                    <CountryCode
+                                        code={code}
+                                        setCode={setCode}
+                                        hasError={!!errors.phoneNumber}
+                                    />
+                                    <InputField
+                                        id="phone_number"
+                                        name="phoneNumber"
+                                        label="Phone number"
+                                        placeholder="915210066"
+                                        type="text"
+                                        groupFormClassList="flex-1 w-full"
+                                        isRequired
+                                        key="phone_number"
+                                        register={register('phoneNumber')}
+                                        hasError={!!errors.phoneNumber}
+                                        errorMessage={errors.phoneNumber?.message || ''}
+                                    />
+                                </div>
+
                                 <InputField
                                     id="password"
                                     name="password"
