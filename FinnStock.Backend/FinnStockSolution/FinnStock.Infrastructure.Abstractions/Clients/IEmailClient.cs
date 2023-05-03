@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinnStock.Infrastructure.Abstractions.Clients
 {
-    public interface EmailClient
+    public interface IEmailClient
     {
         public Task SendAccountConfirmationAsync(string recipientEmail, string confirmationLink);
     }

@@ -13,6 +13,8 @@ using FinnStock.Infrastructure.Abstractions;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
+using FinnStock.Infrastructure.Abstractions.Clients;
+using FinnStock.Clients.Email;
 
 namespace FinnStock.DependencyInjection
 {
@@ -30,8 +32,9 @@ namespace FinnStock.DependencyInjection
                     builder.WithOrigins(configuration.GetSection("AllowedOrigin").Value);
                 });
             });
+            services.AddLogging();
 
-           
+            services.AddTransient<IEmailClient, SengridClient>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
 
             services.AddIdentity<User, Role>(options =>
@@ -41,6 +44,7 @@ namespace FinnStock.DependencyInjection
                 options.Password.RequireUppercase = false;
                 options.Password.RequireLowercase = true;
                 options.Password.RequireDigit = true;
+                options.SignIn.RequireConfirmedEmail = true;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()

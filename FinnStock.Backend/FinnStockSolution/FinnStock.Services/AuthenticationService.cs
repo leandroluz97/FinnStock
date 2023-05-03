@@ -1,6 +1,7 @@
 ﻿using FinnStock.Business.Abstractions;
 using FinnStock.Domain;
 using FinnStock.Dtos;
+using FinnStock.Infrastructure.Abstractions.Clients;
 using FinnStock.Services.Exceptions;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -16,11 +17,13 @@ namespace FinnStock.Services
     {
         private readonly UserManager<User> _userManager;
         private readonly ILogger<AuthenticationService> _logger;
+        private readonly IEmailClient _sendgridClient;
 
-        public AuthenticationService(ILogger<AuthenticationService> logger, UserManager<User> userManager )
+        public AuthenticationService(ILogger<AuthenticationService> logger, UserManager<User> userManager, IEmailClient sendgridClient)
         {
             _logger = logger;
             _userManager = userManager;
+            _sendgridClient = sendgridClient;
         }
         public async Task Register(RegisterDto registerDto)
         {
@@ -34,11 +37,19 @@ namespace FinnStock.Services
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
+            if (!result.Succeeded)
+            {
+                throw new Exception(result.Errors.ToList().ToString());
+            }
+
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
 
-            //TODO: sent email confirmation via SendGrid email 
+            var uriBuilder = new UriBuilder("https://localhost:3000/auth/confirm");
+            uriBuilder.Query = $"token={token}";
+            var confirmationLink = uriBuilder.Uri.ToString();
 
-            throw new NotImplementedException();
+            await _sendgridClient.SendAccountConfirmationAsync(user.Email, confirmationLink);
+    
         }
         public Task Login()
         {

@@ -10,7 +10,7 @@ using SendGrid.Helpers.Mail;
 
 namespace FinnStock.Clients.Email
 {
-    public class SengridClient : EmailClient
+    public class SengridClient : IEmailClient
     {
         private readonly IConfiguration _configuration;
         public SengridClient(IConfiguration configuration)
@@ -20,7 +20,7 @@ namespace FinnStock.Clients.Email
 
         public async Task SendAccountConfirmationAsync(string recipientEmail, string confirmationLink)
         {
-            var client = new SendGridClient("");
+            var client = new SendGridClient(_configuration["SendGrid:Api_Key"]);
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("leandroluz97@gmail.com", "Leandro Luz"),
@@ -33,7 +33,7 @@ namespace FinnStock.Clients.Email
 
             if (!response.IsSuccessStatusCode)
             {
-                throw new Exception($"Couldn't send {nameof(recipientEmail)} account confirmation email.");
+                throw new Exception($"Failed to send confirmation email.StatusCode ={ response.StatusCode }, Body ={ await response.Body.ReadAsStringAsync()}");
             }
         }
     }
