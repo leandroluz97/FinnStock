@@ -1,26 +1,30 @@
 import React from 'react';
 import codes from 'country-calling-code';
+import { error } from 'console';
 
 interface ICountryCodeProps {
     code: number;
     setCode: (code: number) => void;
     hasError: boolean;
 }
+
 export const CountryCode = ({ code, setCode, hasError }: ICountryCodeProps) => {
     return (
         <React.Fragment>
             <div>
                 <p className="block mb-1 text-sm font-medium text-primary-950">Code</p>
                 <button
-                    data-dropdown-offset-distance="-50"
-                    data-dropdown-offset-skidding="100"
+                    data-dropdown-offset-distance="-100"
+                    data-dropdown-offset-skidding="130"
                     data-dropdown-placement="right"
                     id="dropdownUsersButton"
                     data-dropdown-toggle="dropdownUsers"
-                    className="w-auto self-end  gap bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
+                    // data-dropdown-placement="bottom"
+                    className="flex w-auto self-end  gap bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
                     type="button"
                 >
                     {codes[code].isoCode2} (+{codes[code].countryCodes})
+                    {/* (+{codes[code].countryCodes}) */}
                     <svg
                         className="w-4 h-4 ml-2"
                         aria-hidden="true"
