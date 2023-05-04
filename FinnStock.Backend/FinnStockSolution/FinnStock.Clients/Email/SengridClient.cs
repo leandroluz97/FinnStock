@@ -21,14 +21,14 @@ namespace FinnStock.Clients.Email
         public async Task SendAccountConfirmationAsync(string recipientEmail, string confirmationLink)
         {
             //var client = new SendGridClient(_configuration["SendGrid:Api_Key"]);
-            var client = new SendGridClient("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");
+            var client = new SendGridClient("");
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("leandroluz97@gmail.com", "Leandro Luz"),
-                ReplyTo = new EmailAddress(recipientEmail),
+                From = new EmailAddress("lsluz@yopmail.com", "Leandro Luz"),
                 Subject = "Confirm your email address",
                 HtmlContent = $"<p>This is your confirmation link: <a href={confirmationLink} ></a></p>"
             };
+            msg.AddTo(new EmailAddress(recipientEmail));
 
             var response = await client.SendEmailAsync(msg);
 
