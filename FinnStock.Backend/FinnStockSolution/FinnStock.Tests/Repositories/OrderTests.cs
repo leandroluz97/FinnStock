@@ -18,7 +18,7 @@ namespace FinnStock.Tests.Repositories
         public readonly IUnitOfWork _unitOfWork;
         public OrderTests()
         {
-            _unitOfWork = this._serviceProvider.GetService<IUnitOfWork>();
+            _unitOfWork = this.ServiceProvider.GetRequiredService<IUnitOfWork>();
             _orderRepository = _unitOfWork.OrderRepository;
         }
         [SetUp]

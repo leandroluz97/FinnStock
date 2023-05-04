@@ -12,7 +12,7 @@ namespace FinnStock.Tests
 {
     public class BaseTest
     {
-        protected IServiceProvider _serviceProvider;
+        protected IServiceProvider ServiceProvider;
         public BaseTest()
         {
             var configuration = new ConfigurationBuilder()
@@ -23,7 +23,7 @@ namespace FinnStock.Tests
             var service = new ServiceCollection();
             service.ConfigureServices(configuration);
 
-            _serviceProvider = service.BuildServiceProvider();
+            ServiceProvider = service.BuildServiceProvider();
 
         }
     }

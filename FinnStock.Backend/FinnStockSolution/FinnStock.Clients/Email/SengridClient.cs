@@ -12,15 +12,16 @@ namespace FinnStock.Clients.Email
 {
     public class SengridClient : IEmailClient
     {
-        private readonly IConfiguration _configuration;
-        public SengridClient(IConfiguration configuration)
+        //private readonly IConfiguration _configuration;
+        public SengridClient()
         {
-            _configuration = configuration;
+            //_configuration = configuration;
         }
 
         public async Task SendAccountConfirmationAsync(string recipientEmail, string confirmationLink)
         {
-            var client = new SendGridClient(_configuration["SendGrid:Api_Key"]);
+            //var client = new SendGridClient(_configuration["SendGrid:Api_Key"]);
+            var client = new SendGridClient("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");
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("leandroluz97@gmail.com", "Leandro Luz"),

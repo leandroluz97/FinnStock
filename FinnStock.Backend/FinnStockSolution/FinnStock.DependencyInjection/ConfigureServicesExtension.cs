@@ -15,6 +15,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using FinnStock.Infrastructure.Abstractions.Clients;
 using FinnStock.Clients.Email;
+using FinnStock.Business.Abstractions;
+using FinnStock.Services;
 
 namespace FinnStock.DependencyInjection
 {
@@ -35,6 +37,7 @@ namespace FinnStock.DependencyInjection
             services.AddLogging();
 
             services.AddTransient<IEmailClient, SengridClient>();
+            services.AddTransient<AuthenticationService>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
 
             services.AddIdentity<User, Role>(options =>

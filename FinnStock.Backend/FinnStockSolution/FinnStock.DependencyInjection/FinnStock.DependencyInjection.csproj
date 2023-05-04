@@ -17,6 +17,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FinnStock.Clients\FinnStock.Clients.csproj" />
     <ProjectReference Include="..\FinnStock.Repositories\FinnStock.SQLWork.csproj" />
+    <ProjectReference Include="..\FinnStock.Services\FinnStock.Services.csproj" />
     <ProjectReference Include="..\FinnStock.UnitOfWork\FinnStock.UnitOfWork.csproj" />
   </ItemGroup>
 

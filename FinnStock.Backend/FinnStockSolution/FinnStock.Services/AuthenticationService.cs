@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 
 namespace FinnStock.Services
 {
-    public class AuthenticationService : IAuthorizationService
+    public class AuthenticationService 
     {
         private readonly UserManager<User> _userManager;
         private readonly ILogger<AuthenticationService> _logger;
@@ -34,6 +34,7 @@ namespace FinnStock.Services
                 PhoneNumber = registerDto.PhoneNumber,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
+                UserName = registerDto.Email
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
