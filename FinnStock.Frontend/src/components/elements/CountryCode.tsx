@@ -17,7 +17,7 @@ export const CountryCode = ({ code, setCode, hasError }: ICountryCodeProps) => {
                     data-dropdown-placement="right"
                     id="dropdownUsersButton"
                     data-dropdown-toggle="dropdownUsers"
-                    className="flex w-auto self-end  gap bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
+                    className="w-auto self-end  gap bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400"
                     type="button"
                 >
                     {codes[code].isoCode2} (+{codes[code].countryCodes})
