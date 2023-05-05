@@ -1,0 +1,6 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/FinnStock.Backend/FinnStockSolution/FinnStock.Tests/appsettings.json
+/FinnStock.Backend/FinnStockSolution/FinnStock.WebAPI/appsettings.json
