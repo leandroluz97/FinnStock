@@ -17,6 +17,7 @@ using FinnStock.Infrastructure.Abstractions.Clients;
 using FinnStock.Clients.Email;
 using FinnStock.Business.Abstractions;
 using FinnStock.Services;
+using FinnStock.Clients.Message;
 
 namespace FinnStock.DependencyInjection
 {
@@ -37,6 +38,7 @@ namespace FinnStock.DependencyInjection
             services.AddLogging();
 
             services.AddTransient<IEmailClient, SengridClient>();
+            services.AddTransient<IMessageClient, TwilioClient>();
             services.AddTransient<AuthenticationService>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
 
@@ -53,6 +55,11 @@ namespace FinnStock.DependencyInjection
                 .AddDefaultTokenProviders()
                 .AddUserStore<UserStore<User, Role, ApplicationDbContext, Guid>>()
                 .AddRoleStore<RoleStore<Role, ApplicationDbContext, Guid>>();
+
+            services.Configure<DataProtectionTokenProviderOptions>(options =>
+            {
+                options.TokenLifespan = TimeSpan.FromHours(1);
+            });
 
             services.AddAuthentication(options =>
             {

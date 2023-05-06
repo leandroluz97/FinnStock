@@ -26,11 +26,11 @@ namespace FinnStock.Tests.Services
         {
             var user = new RegisterDto
             {
-                Email = "leandroluz97@gmai.com",
+                Email = "lsluz1@yopmail.com",
                 FirstName = "Leandro",
                 LastName = "Luz",
                 Password = "Password12$",
-                PhoneNumber = "99999999"
+                PhoneNumber = "99999998"
             };
             await _authenticationService.Register(user);
 
