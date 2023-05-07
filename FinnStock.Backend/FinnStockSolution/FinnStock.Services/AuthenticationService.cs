@@ -74,15 +74,21 @@ namespace FinnStock.Services
     
         }
 
-        public async Task ConfirmEmail(string token, string email)
+        public async Task ConfirmEmail(ConfirmEmailDto confirmEmailDto)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            if(confirmEmailDto == null)
+            {
+                throw new ArgumentNullException();
+            }
+            confirmEmailDto.EnsureValidation();
+
+            var user = await _userManager.FindByEmailAsync(confirmEmailDto.Email);
             if (user == null)
             {
-                throw new NotFoundException($"{nameof(user)} with {email} not found");
+                throw new NotFoundException($"{nameof(user)} with {confirmEmailDto.Email} not found");
             }
 
-            var result = await _userManager.ConfirmEmailAsync(user, token);
+            var result = await _userManager.ConfirmEmailAsync(user, confirmEmailDto.Token);
 
             if (!result.Succeeded)
             {
@@ -90,7 +96,7 @@ namespace FinnStock.Services
             }
         }
 
-        public async Task Login(LoginDto loginDto)
+        public async Task<LoginResponseDto> Login(LoginDto loginDto)
         {
             if (loginDto == null)
             {
@@ -115,22 +121,27 @@ namespace FinnStock.Services
             {
                 throw new InvalidOperationException("Unable to load two-factor authentication user.");
             }
-          
+
+            return new LoginResponseDto() { UserId = user.Id.ToString() };
+
+
         }
 
-        public async Task<ResponseToken> ValidateOTP(string otpCode, string userId)
+        public async Task<ResponseToken> ValidateOTP(ValidateOtpDto validateOtpDto)
         {
-           if(otpCode == null)
+           if(validateOtpDto == null)
             {
-                throw new ArgumentNullException(nameof(otpCode));
+                throw new ArgumentNullException(nameof(validateOtpDto));
             }
-            var result = await _signInManager.TwoFactorSignInAsync("Phone", otpCode, isPersistent:true, rememberClient:true);
+            validateOtpDto.EnsureValidation();
+
+             var result = await _signInManager.TwoFactorSignInAsync("Phone", validateOtpDto.OtpCode, isPersistent:true, rememberClient:true);
             if (!result.Succeeded)
             {
-                throw new InvalidOperationException($"Invalid {nameof(otpCode)}");
+                throw new InvalidOperationException($"Invalid {nameof(validateOtpDto.OtpCode)}");
             }
             
-            var user = await _userManager.FindByIdAsync(userId);
+            var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
 
             return CreateJWToken(user);
         }
