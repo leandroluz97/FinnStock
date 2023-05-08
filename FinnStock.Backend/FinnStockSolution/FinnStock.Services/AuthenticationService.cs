@@ -55,7 +55,8 @@ namespace FinnStock.Services
                 PhoneNumber = registerDto.PhoneNumber,
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
-                UserName = registerDto.Email
+                UserName = registerDto.Email,
+                TwoFactorEnabled = true
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
@@ -117,7 +118,7 @@ namespace FinnStock.Services
                 var message = "Your security code is: " + code;
                 await _twilioClient.SendOTPMessageAsync(user.PhoneNumber, message);
             }
-            if (!result.Succeeded)
+            else if (!result.Succeeded)
             {
                 throw new InvalidOperationException("Unable to load two-factor authentication user.");
             }

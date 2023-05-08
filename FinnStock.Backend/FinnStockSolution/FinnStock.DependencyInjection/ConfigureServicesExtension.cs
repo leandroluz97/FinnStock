@@ -37,6 +37,7 @@ namespace FinnStock.DependencyInjection
             });
             services.AddLogging();
 
+            services.AddSingleton<IConfiguration>(configuration);
             services.AddTransient<IEmailClient, SengridClient>();
             services.AddTransient<IMessageClient, TwilioClient>();
             services.AddTransient<AuthenticationService>();
@@ -50,6 +51,7 @@ namespace FinnStock.DependencyInjection
                 options.Password.RequireLowercase = true;
                 options.Password.RequireDigit = true;
                 options.SignIn.RequireConfirmedEmail = true;
+                //options.SignIn.RequireConfirmedAccount = false;
             })
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultTokenProviders()

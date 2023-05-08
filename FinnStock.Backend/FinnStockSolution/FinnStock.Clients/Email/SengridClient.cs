@@ -23,9 +23,9 @@ namespace FinnStock.Clients.Email
             var client = new SendGridClient(_configuration["SendGrid:Api_Key"]);
             var msg = new SendGridMessage()
             {
-                From = new EmailAddress("lsluz@yopmail.com", "Leandro Luz"),
+                From = new EmailAddress("reiscv@yopmail.com", "Leia Reis"),
                 Subject = "Confirm your email address",
-                HtmlContent = $"<p>This is your confirmation link: <a href={confirmationLink} ></a></p>"
+                HtmlContent = $"<p>This is your confirmation link: <a href={confirmationLink} >Click here to confirm</a></p>"
             };
             msg.AddTo(new EmailAddress(recipientEmail));
 
