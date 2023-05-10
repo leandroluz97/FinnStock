@@ -17,7 +17,7 @@ using System.Threading.Tasks;
 
 namespace FinnStock.Services
 {
-    public class AuthenticationService 
+    public class AuthenticationService
     {
         private readonly ILogger<AuthenticationService> _logger;
         private readonly IConfiguration _configuration;
@@ -27,8 +27,8 @@ namespace FinnStock.Services
         private readonly IMessageClient _twilioClient;
 
         public AuthenticationService(
-            ILogger<AuthenticationService> logger, 
-            IConfiguration configuration, 
+            ILogger<AuthenticationService> logger,
+            IConfiguration configuration,
             UserManager<User> userManager,
             SignInManager<User> signInManager,
             IEmailClient sendgridClient,
@@ -43,7 +43,7 @@ namespace FinnStock.Services
         }
         public async Task Register(RegisterDto registerDto)
         {
-            if(registerDto == null)
+            if (registerDto == null)
             {
                 throw new ArgumentNullException(nameof(registerDto));
             }
@@ -72,12 +72,12 @@ namespace FinnStock.Services
             var confirmationLink = uriBuilder.Uri.ToString();
 
             await _sendgridClient.SendAccountConfirmationAsync(user.Email, confirmationLink);
-    
+
         }
 
         public async Task ConfirmEmail(ConfirmEmailDto confirmEmailDto)
         {
-            if(confirmEmailDto == null)
+            if (confirmEmailDto == null)
             {
                 throw new ArgumentNullException();
             }
@@ -106,7 +106,7 @@ namespace FinnStock.Services
             loginDto.EnsureValidation();
 
             var user = await _userManager.FindByEmailAsync(loginDto.Email);
-            if(user == null)
+            if (user == null)
             {
                 throw new NotFoundException($"{nameof(user)} with {loginDto.Email} not found");
             }
@@ -130,26 +130,104 @@ namespace FinnStock.Services
 
         public async Task<ResponseToken> ValidateOTP(ValidateOtpDto validateOtpDto)
         {
-           if(validateOtpDto == null)
+            if (validateOtpDto == null)
             {
                 throw new ArgumentNullException(nameof(validateOtpDto));
             }
             validateOtpDto.EnsureValidation();
 
-             var result = await _signInManager.TwoFactorSignInAsync("Phone", validateOtpDto.OtpCode, isPersistent:true, rememberClient:true);
+            var result = await _signInManager.TwoFactorSignInAsync("Phone", validateOtpDto.OtpCode, isPersistent: true, rememberClient: true);
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Invalid {nameof(validateOtpDto.OtpCode)}");
             }
-            
+
             var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
 
             return CreateJWToken(user);
         }
 
+        public async Task LoginWithGoogle()
+        {
+            var info = await _signInManager.GetExternalLoginInfoAsync();
+            if (info == null)
+            {
+                throw new ArgumentNullException();
+            }
+
+            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            if (!result.Succeeded)
+            {
+                var email = info.Principal.FindFirstValue(ClaimTypes.Email);
+                var user = new User()
+                {
+                    Email = email,
+                    UserName = email,
+                    TwoFactorEnabled = false
+                };
+
+                var createResult = await _userManager.CreateAsync(user);
+                if (createResult.Succeeded)
+                {
+                    var addLoginResult = await _userManager.AddLoginAsync(user, info);
+                    if (addLoginResult.Succeeded)
+                    {
+                        await _signInManager.SignInAsync(user, isPersistent: false);
+                    }
+                }
+            }
+        }
+
+        public async Task<ResponseToken> ExternalLogin(ExternalLoginInfo externalLoginInfo)
+        {
+            if (externalLoginInfo == null)
+            {
+                return null;
+            }
+
+            var signinResult = await _signInManager.ExternalLoginSignInAsync(externalLoginInfo.LoginProvider, externalLoginInfo.ProviderKey, false);
+            var email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email);
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if (signinResult.Succeeded)
+            {
+                var jwt = CreateJWToken(user);
+
+                await _userManager.SetAuthenticationTokenAsync(user, TokenOptions.DefaultProvider, "jwt", jwt.Token);
+
+                return jwt;
+            }
+
+            if (string.IsNullOrEmpty(email))
+            {
+                if(user == null)
+                {
+                    user = new User()
+                    {
+                        UserName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email),
+                        Email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email),
+                        TwoFactorEnabled = false,
+                    };
+                    await _userManager.CreateAsync(user);
+                }
+                await _userManager.AddLoginAsync(user, externalLoginInfo);
+                await _signInManager.SignInAsync(user, false);
+
+                var jwt = CreateJWToken(user);
+                await _userManager.SetAuthenticationTokenAsync(user, TokenOptions.DefaultProvider, "jwt", jwt.Token);
+                return jwt;
+            }
+
+            return null;
+        }
+
+        private Task GetUserClaims(User user)
+        {
+            throw new NotImplementedException();
+        }
+
         public async Task ResetPassword()
         {
-           
             throw new NotImplementedException();
         }
 
@@ -180,7 +258,7 @@ namespace FinnStock.Services
 
 
             return new ResponseToken() { Token = token };
-           
+
         }
 
 

@@ -18,6 +18,9 @@ using FinnStock.Clients.Email;
 using FinnStock.Business.Abstractions;
 using FinnStock.Services;
 using FinnStock.Clients.Message;
+using Microsoft.AspNetCore.Authentication.Google;
+using Microsoft.AspNetCore.Builder;
+using Microsoft.AspNetCore.Http;
 
 namespace FinnStock.DependencyInjection
 {
@@ -29,10 +32,21 @@ namespace FinnStock.DependencyInjection
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))); //ServiceLifetime.Transient
 
-            services.AddCors((options) => {
-                options.AddDefaultPolicy((builder) => { 
-                    builder.WithOrigins("*");
-                    builder.WithOrigins(configuration.GetSection("AllowedOrigin").Value);
+            //services.AddCors((options) =>
+            //{
+            //    options.AddDefaultPolicy((builder) =>
+            //    {
+            //        builder.WithOrigins("*");
+            //        builder.WithOrigins(configuration.GetSection("AllowedOrigin").Value);
+            //    });
+            //});
+            services.AddCors(options =>
+            {
+                options.AddDefaultPolicy(builder =>
+                {
+                    builder.WithOrigins("http://localhost:3000")
+                           .AllowAnyHeader()
+                           .AllowAnyMethod();
                 });
             });
             services.AddLogging();
@@ -67,8 +81,11 @@ namespace FinnStock.DependencyInjection
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                //options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
+                //options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
             })
-            .AddJwtBearer(options => {
+            .AddJwtBearer(options =>
+            {
                 options.TokenValidationParameters = new TokenValidationParameters()
                 {
                     ValidateAudience = true,
@@ -79,7 +96,22 @@ namespace FinnStock.DependencyInjection
                     ValidateIssuerSigningKey = true,
                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration["Jwt:Secret_key"]))
                 };
-            });
+            })
+            //.AddCookie()
+            .AddGoogle(googleOptions =>
+                {
+                    googleOptions.ClientId = configuration["GoogleAuth:ClientId"];
+                    googleOptions.ClientSecret = configuration["GoogleAuth:ClientSecret"];
+                    //googleOptions.SignInScheme = GoogleDefaults.AuthenticationScheme;
+                    //googleOptions.AuthorizationEndpoint
+                });
+
+            //services.Configure<CookiePolicyOptions>(options =>
+            //{
+            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            //    options.CheckConsentNeeded = context => true;
+            //    options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+            //});
 
             return services;
         }
