@@ -97,20 +97,31 @@ namespace FinnStock.DependencyInjection
                     IssuerSigningKey = new SymmetricSecurityKey(System.Text.Encoding.UTF8.GetBytes(configuration["Jwt:Secret_key"]))
                 };
             })
-            //.AddCookie()
+            .AddCookie()
             .AddGoogle(googleOptions =>
                 {
                     googleOptions.ClientId = configuration["GoogleAuth:ClientId"];
                     googleOptions.ClientSecret = configuration["GoogleAuth:ClientSecret"];
                     //googleOptions.SignInScheme = GoogleDefaults.AuthenticationScheme;
                     //googleOptions.AuthorizationEndpoint
+
+                    googleOptions.Scope.Add("profile");
+                    googleOptions.SignInScheme = Microsoft.AspNetCore.Identity.IdentityConstants.ExternalScheme;
                 });
 
+            services.Configure<CookiePolicyOptions>(options =>
+            {
+                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+                options.CheckConsentNeeded = context => true;
+                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+            });
             //services.Configure<CookiePolicyOptions>(options =>
             //{
-            //    // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-            //    options.CheckConsentNeeded = context => true;
             //    options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+            //    options.OnAppendCookie = cookieContext =>
+            //        CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+            //    options.OnDeleteCookie = cookieContext =>
+            //        CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
             //});
 
             return services;

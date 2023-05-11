@@ -19,12 +19,14 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-//app.UseHsts();
-//app.UseHttpsRedirection();
-app.UseStaticFiles();
 
+app.UseHsts();
+app.UseHttpsRedirection();
+app.UseStaticFiles();
 app.UseRouting();
 app.UseCors();
+
+app.UseCookiePolicy();
 
 app.UseAuthentication();
 app.UseAuthorization();

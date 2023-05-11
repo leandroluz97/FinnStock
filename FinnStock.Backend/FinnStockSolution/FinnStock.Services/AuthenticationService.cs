@@ -198,7 +198,7 @@ namespace FinnStock.Services
                 return jwt;
             }
 
-            if (string.IsNullOrEmpty(email))
+            if (!string.IsNullOrEmpty(email))
             {
                 if(user == null)
                 {

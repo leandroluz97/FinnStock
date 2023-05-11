@@ -53,6 +53,13 @@ export const SignupForm = () => {
         }
     };
 
+    const handleGoogleLogin = async () => {
+        await fetch(
+            'http://localhost:5100/api/v1/auth/ExternalLogin?provider=Google&returnUrl=/home',
+            { method: 'POST' }
+        );
+    };
+
     return (
         <React.Fragment>
             <form noValidate className="py-2" onSubmit={handleSubmit(submit)}>
@@ -160,13 +167,18 @@ export const SignupForm = () => {
                 </div>
             </form>
             <div>
-                <button
-                    type="button"
-                    className="w-full flex justify-center gap-2 text-primary-900 border-solid bg-primary-50 border-primary-500 border hover:bg-primary-100 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none"
+                <form
+                    action="https://localhost:7100/api/v1/auth/ExternalLogin?provider=Google&returnUrl=/home"
+                    method="post"
                 >
-                    <img src={googleLogo} alt="google logo" />
-                    Login with Google acount
-                </button>
+                    <button
+                        type="submit"
+                        className="w-full flex justify-center gap-2 text-primary-900 border-solid bg-primary-50 border-primary-500 border hover:bg-primary-100 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2  focus:outline-none"
+                    >
+                        <img src={googleLogo} alt="google logo" />
+                        Login with Google acount
+                    </button>
+                </form>
             </div>
             <p className="my-4 text-center text-primary-950 text-sm">
                 Already have an account?{' '}
