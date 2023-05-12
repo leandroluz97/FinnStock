@@ -42,7 +42,7 @@ namespace FinnStock.WebAPI.Controllers
         }
 
         [HttpGet]
-        public async Task<IActionResult> ExternalAuthCallBack()
+        public async Task<ActionResult> ExternalAuthCallBack()
         {
             ExternalLoginInfo info = await _signInManager.GetExternalLoginInfoAsync();
             var result = await _authenticationService.ExternalLogin(info);
@@ -70,7 +70,8 @@ namespace FinnStock.WebAPI.Controllers
             //        Formatting = Formatting.Indented
             //    }), options);
 
-            return Redirect($"http://localhost:3000/dashboard/");
+            return Redirect($"http://localhost:3000/dashboard?token={result.Token}");
+
         }
 
         [HttpPost]

@@ -71,7 +71,10 @@ namespace FinnStock.Services
             uriBuilder.Query = $"token={token}&email={user.Email}";
             var confirmationLink = uriBuilder.Uri.ToString();
 
-            await _sendgridClient.SendAccountConfirmationAsync(user.Email, confirmationLink);
+            var subject = "Confirm your email address";
+            var htmlContent = $"<p>This is your confirmation link: <a href={confirmationLink} >Click here to confirm</a></p>";
+
+            await _sendgridClient.SendEmail(user.Email, subject, htmlContent);
 
         }
 
@@ -204,9 +207,12 @@ namespace FinnStock.Services
                 {
                     user = new User()
                     {
+                        FirstName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.GivenName),
+                        LastName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Surname),
                         UserName = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email),
                         Email = externalLoginInfo.Principal.FindFirstValue(ClaimTypes.Email),
                         TwoFactorEnabled = false,
+                        EmailConfirmed = true
                     };
                     await _userManager.CreateAsync(user);
                 }
@@ -221,9 +227,27 @@ namespace FinnStock.Services
             return null;
         }
 
-        private Task GetUserClaims(User user)
+        private async Task RequestResetPassword(string email)
         {
-            throw new NotImplementedException();
+            if (string.IsNullOrWhiteSpace(email))
+            {
+                throw new ArgumentNullException(nameof(email));
+            }
+
+            var user = await _userManager.FindByEmailAsync(email);
+
+            if(user == null)
+            {
+                throw new NotFoundException();
+            }
+
+            var code  = await _userManager.GeneratePasswordResetTokenAsync(user);
+
+            var uriBuilder = new UriBuilder("https://localhost:3000/auth/reset-password");
+            uriBuilder.Query = $"activationToken={code}&email={user.Email}";
+            var confirmationLink = uriBuilder.Uri.ToString();
+
+            await _sendgridClient.SendEmail(user.Email, confirmationLink);
         }
 
         public async Task ResetPassword()

@@ -8,6 +8,6 @@ namespace FinnStock.Infrastructure.Abstractions.Clients
 {
     public interface IEmailClient
     {
-        public Task SendAccountConfirmationAsync(string recipientEmail, string confirmationLink);
+        public Task SendEmailAsync(string recipientEmail, string subject, string htmlContent);
     }
 }
