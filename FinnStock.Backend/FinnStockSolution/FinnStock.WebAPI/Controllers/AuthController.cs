@@ -34,7 +34,6 @@ namespace FinnStock.WebAPI.Controllers
         [HttpPost]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
-            //use on POST html button http://localhost:5100/api/v1/auth/ExternalLogin?provider=Google&returnUrl=/home
             var redirectUrl = $"http://localhost:5100/api/v1/auth/ExternalAuthCallBack?returnUrl={returnUrl}";
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             properties.AllowRefresh = true;
@@ -49,29 +48,10 @@ namespace FinnStock.WebAPI.Controllers
 
             if (result == null)
             {
-                //sign in failed
+                throw new InvalidOperationException();
             }
 
-            //var options = new CookieOptions()
-            //{
-            //    //Needed so that domain.com can access  the cookie set by api.domain.com
-            //    Domain = settings.AppDomain,
-            //    Expires = DateTime.UtcNow.AddMinutes(5)
-            //};
-
-            //Response.Cookies.Append(
-            //    Common.IdentityConstants.AuthTokenHolderCookieName,
-            //    JsonConvert.SerializeObject(result, new JsonSerializerSettings
-            //    {
-            //        ContractResolver = new DefaultContractResolver
-            //        {
-            //            NamingStrategy = new CamelCaseNamingStrategy()
-            //        },
-            //        Formatting = Formatting.Indented
-            //    }), options);
-
             return Redirect($"http://localhost:3000/dashboard?token={result.Token}");
-
         }
 
         [HttpPost]
@@ -91,6 +71,20 @@ namespace FinnStock.WebAPI.Controllers
         public async Task<ActionResult<ResponseToken>> ValidateOTPCode(ValidateOtpDto validateOtpDto)
         {
             return await _authenticationService.ValidateOTP(validateOtpDto);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> RequestResetPassword(string email)
+        {
+             await _authenticationService.RequestResetPassword(email);
+            return Ok();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
+        {
+            await _authenticationService.ResetPassword(resetPasswordDto);
+            return Ok();
         }
     }
 }

@@ -227,7 +227,7 @@ namespace FinnStock.Services
             return null;
         }
 
-        private async Task RequestResetPassword(string email)
+        public async Task RequestResetPassword(string email)
         {
             if (string.IsNullOrWhiteSpace(email))
             {
