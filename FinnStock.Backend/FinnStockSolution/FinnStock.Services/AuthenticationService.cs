@@ -74,7 +74,7 @@ namespace FinnStock.Services
             var subject = "Confirm your email address";
             var htmlContent = $"<p>This is your confirmation link: <a href={confirmationLink} >Click here to confirm</a></p>";
 
-            await _sendgridClient.SendEmail(user.Email, subject, htmlContent);
+            await _sendgridClient.SendEmailAsync(user.Email, subject, htmlContent);
 
         }
 
@@ -203,7 +203,7 @@ namespace FinnStock.Services
 
             if (!string.IsNullOrEmpty(email))
             {
-                if(user == null)
+                if (user == null)
                 {
                     user = new User()
                     {
@@ -236,23 +236,44 @@ namespace FinnStock.Services
 
             var user = await _userManager.FindByEmailAsync(email);
 
-            if(user == null)
+            if (user == null)
             {
                 throw new NotFoundException();
             }
 
-            var code  = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var code = await _userManager.GeneratePasswordResetTokenAsync(user);
 
             var uriBuilder = new UriBuilder("https://localhost:3000/auth/reset-password");
             uriBuilder.Query = $"activationToken={code}&email={user.Email}";
             var confirmationLink = uriBuilder.Uri.ToString();
 
-            await _sendgridClient.SendEmail(user.Email, confirmationLink);
+            var subject = "Reset Password";
+            var htmlContent = $"<p>This is your Reset Password link: <a href={confirmationLink} >Click here to confirm</a></p>";
+
+            await _sendgridClient.SendEmailAsync(user.Email, subject, htmlContent);
+
         }
 
-        public async Task ResetPassword()
+        public async Task ResetPassword(ResetPasswordDto resetDto)
         {
-            throw new NotImplementedException();
+            if (resetDto == null)
+            {
+                throw new ArgumentNullException(nameof(resetDto));
+            }
+
+            var user = await _userManager.FindByEmailAsync(resetDto.Email);
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(user));
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, resetDto.ActivationToken, resetDto.Password);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException();
+            }
         }
 
         private ResponseToken CreateJWToken(User user)
