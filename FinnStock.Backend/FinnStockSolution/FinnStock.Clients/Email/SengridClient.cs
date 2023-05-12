@@ -18,14 +18,14 @@ namespace FinnStock.Clients.Email
             _configuration = configuration;
         }
 
-        public async Task SendAccountConfirmationAsync(string recipientEmail, string confirmationLink)
+        public async Task SendEmailAsync(string recipientEmail, string subject, string htmlContent)
         {
             var client = new SendGridClient(_configuration["SendGrid:Api_Key"]);
             var msg = new SendGridMessage()
             {
                 From = new EmailAddress("reiscv@yopmail.com", "Leia Reis"),
-                Subject = "Confirm your email address",
-                HtmlContent = $"<p>This is your confirmation link: <a href={confirmationLink} >Click here to confirm</a></p>"
+                Subject = subject,
+                HtmlContent = htmlContent
             };
             msg.AddTo(new EmailAddress(recipientEmail));
 
@@ -36,5 +36,6 @@ namespace FinnStock.Clients.Email
                 throw new Exception($"Failed to send confirmation email.StatusCode ={ response.StatusCode }, Body ={ await response.Body.ReadAsStringAsync()}");
             }
         }
+
     }
 }
