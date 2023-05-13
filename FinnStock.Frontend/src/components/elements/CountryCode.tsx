@@ -54,6 +54,7 @@ export const CountryCode = ({ code, setCode, hasError }: ICountryCodeProps) => {
                     {codes.map((code, index) => {
                         return (
                             <li
+                                key={code.country}
                                 onClick={() => {
                                     setCode(index);
                                 }}

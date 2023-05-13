@@ -5,11 +5,12 @@ import parsePhoneNumber from 'libphonenumber-js';
 import * as yup from 'yup';
 import codes from 'country-calling-code';
 
-import { CountryCode as CountryCodeType } from 'libphonenumber-js/core';
+import { CountryCode as CountryCodeType, isValidPhoneNumber } from 'libphonenumber-js/core';
 
 import { CheckBoxField, InputField } from '../../../components/form';
 import { CountryCode } from '../../../components/elements';
 import googleLogo from '../../../assets/google-logo-sm.svg';
+import validationRules from '../../../utils/formValidations';
 
 type Inputs = {
     firstName: string;
@@ -20,16 +21,12 @@ type Inputs = {
     term: boolean;
 };
 const schema = yup.object().shape({
-    firstName: yup.string().required('FirstName is a required field'),
-    lastName: yup.string().required('LastName is a required field'),
-    email: yup.string().email().required('Email is a required field'),
-    phoneNumber: yup.string().required('Email is a required field'),
-    term: yup.boolean().isTrue().required(),
-    password: yup
-        .string()
-        .required('Password is a required field')
-        .min(8, 'Password is too short - should be 8 chars minimum.')
-        .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
+    firstName: validationRules.text('FirstName'),
+    lastName: validationRules.text('LastName'),
+    email: validationRules.email(),
+    phoneNumber: validationRules.text('PhoneNumber'),
+    term: validationRules.checkbox(),
+    password: validationRules.password(),
 });
 
 export const SignupForm = () => {
@@ -42,22 +39,16 @@ export const SignupForm = () => {
     const [code, setCode] = useState<number>(228);
 
     const submit = async (data: Inputs) => {
-        const isoCode = codes[code].isoCode2 as CountryCodeType;
+        const [countryIndex] = codes[code].countryCodes;
+        const parsed = parsePhoneNumber(`+${countryIndex}${data.phoneNumber}`);
 
-        if (parsePhoneNumber(data.phoneNumber, isoCode)) {
+        if (!parsed?.isPossible()) {
             return setError(
                 'phoneNumber',
                 { type: 'custom', message: `Not a valid ${codes[code].country} phone number` },
                 { shouldFocus: true }
             );
         }
-    };
-
-    const handleGoogleLogin = async () => {
-        await fetch(
-            'http://localhost:5100/api/v1/auth/ExternalLogin?provider=Google&returnUrl=/home',
-            { method: 'POST' }
-        );
     };
 
     return (
