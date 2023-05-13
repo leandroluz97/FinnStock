@@ -43,6 +43,8 @@ namespace FinnStock.Services
         }
         public async Task Register(RegisterDto registerDto)
         {
+            _logger.LogInformation("{Register} param value {registerDto}", nameof(Register), registerDto);
+
             if (registerDto == null)
             {
                 throw new ArgumentNullException(nameof(registerDto));
@@ -76,10 +78,13 @@ namespace FinnStock.Services
 
             await _sendgridClient.SendEmailAsync(user.Email, subject, htmlContent);
 
+            _logger.LogInformation("{Register} send email: {subject}", nameof(Register), subject);
         }
 
         public async Task ConfirmEmail(ConfirmEmailDto confirmEmailDto)
         {
+            _logger.LogInformation("{ConfirmEmail} param value {confirmEmailDto}", nameof(ConfirmEmail), confirmEmailDto);
+
             if (confirmEmailDto == null)
             {
                 throw new ArgumentNullException();
@@ -98,10 +103,14 @@ namespace FinnStock.Services
             {
                 throw new InvalidOperationException();
             }
+
+            _logger.LogInformation("{ConfirmEmail} {user}", nameof(ConfirmEmail), user);
         }
 
         public async Task<LoginResponseDto> Login(LoginDto loginDto)
         {
+            _logger.LogInformation("{Login} param value {loginDto}", nameof(Login), loginDto);
+
             if (loginDto == null)
             {
                 throw new ArgumentNullException(nameof(loginDto));
@@ -126,13 +135,15 @@ namespace FinnStock.Services
                 throw new InvalidOperationException("Unable to load two-factor authentication user.");
             }
 
+            _logger.LogInformation("{Login} with {user}", nameof(Login), user);
+
             return new LoginResponseDto() { UserId = user.Id.ToString() };
-
-
         }
 
         public async Task<ResponseToken> ValidateOTP(ValidateOtpDto validateOtpDto)
         {
+            _logger.LogInformation("{ValidateOTP} param value {validateOtpDto}", nameof(ValidateOTP), validateOtpDto);
+
             if (validateOtpDto == null)
             {
                 throw new ArgumentNullException(nameof(validateOtpDto));
@@ -146,6 +157,8 @@ namespace FinnStock.Services
             }
 
             var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
+
+            _logger.LogInformation("{ValidateOTP} validated {user}", nameof(ValidateOTP), user);
 
             return CreateJWToken(user);
         }
@@ -183,6 +196,8 @@ namespace FinnStock.Services
 
         public async Task<ResponseToken> ExternalLogin(ExternalLoginInfo externalLoginInfo)
         {
+            _logger.LogInformation("{ExternalLogin} param value {externalLoginInfo}", nameof(ExternalLogin), externalLoginInfo);
+
             if (externalLoginInfo == null)
             {
                 return null;
@@ -224,11 +239,15 @@ namespace FinnStock.Services
                 return jwt;
             }
 
+            _logger.LogInformation("{ExternalLogin} failed", nameof(ExternalLogin));
+
             return null;
         }
 
         public async Task RequestResetPassword(string email)
         {
+            _logger.LogInformation("{RequestResetPassword} param value {email}", nameof(RequestResetPassword), email);
+
             if (string.IsNullOrWhiteSpace(email))
             {
                 throw new ArgumentNullException(nameof(email));
@@ -252,10 +271,13 @@ namespace FinnStock.Services
 
             await _sendgridClient.SendEmailAsync(user.Email, subject, htmlContent);
 
+            _logger.LogInformation("{RequestResetPassword} {user}", nameof(RequestResetPassword), user);
         }
 
         public async Task ResetPassword(ResetPasswordDto resetDto)
         {
+            _logger.LogInformation("{ResetPassword} param value {email}", nameof(ResetPassword), resetDto);
+
             if (resetDto == null)
             {
                 throw new ArgumentNullException(nameof(resetDto));
@@ -274,6 +296,8 @@ namespace FinnStock.Services
             {
                 throw new InvalidOperationException();
             }
+
+            _logger.LogInformation("{ResetPassword} failed {email}", nameof(ResetPassword));
         }
 
         private ResponseToken CreateJWToken(User user)
@@ -301,13 +325,7 @@ namespace FinnStock.Services
             JwtSecurityTokenHandler tokenHandler = new JwtSecurityTokenHandler();
             var token = tokenHandler.WriteToken(tokenGenerator);
 
-
             return new ResponseToken() { Token = token };
-
         }
-
-
-
-
     }
 }

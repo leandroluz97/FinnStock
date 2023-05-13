@@ -18,7 +18,7 @@ namespace FinnStock.WebAPI.Controllers
     {
         private readonly AuthenticationService _authenticationService;
         private readonly SignInManager<User> _signInManager;
-        public AuthController(AuthenticationService authenticationService, SignInManager<User> signInManager)
+        public AuthController(AuthenticationService authenticationService, SignInManager<User> signInManager )
         {
             _authenticationService = authenticationService;
             _signInManager = signInManager;
