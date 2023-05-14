@@ -1,7 +1,7 @@
 import Axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { storageService } from '../utils/storage';
 
-const API_URL = 'http://localhost:7000';
+const API_URL = 'https://localhost:7100/api/v1';
 
 const authRequestInterceptor = (
     config: InternalAxiosRequestConfig<AxiosRequestConfig>
