@@ -12,12 +12,12 @@ export type LoginDto = {
     };
 };
 
-export const register = ({ data }: LoginDto): Promise<any> => {
+export const login = ({ data }: LoginDto): Promise<any> => {
     return axios.post('/auth/login', data);
 };
 
 type UseLogin = {
-    config?: MutationConfig<typeof register>;
+    config?: MutationConfig<typeof login>;
 };
 
 export const useLogin = ({ config }: UseLogin = {}) => {
@@ -31,6 +31,6 @@ export const useLogin = ({ config }: UseLogin = {}) => {
             navigate('/auth/two-factor-validation');
         },
         ...config,
-        mutationFn: register,
+        mutationFn: login,
     });
 };

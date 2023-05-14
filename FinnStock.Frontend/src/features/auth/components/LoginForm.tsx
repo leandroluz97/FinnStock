@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 
 import { NavLink } from 'react-router-dom';
 import validationRules from '../../../utils/formValidations';
-import { InputField } from '../../../components/form';
+import { CheckBoxField, InputField } from '../../../components/form';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import { Spinner } from '../../../components/elements';
 import { useLogin } from '../api/login';
@@ -13,6 +13,7 @@ import { useLogin } from '../api/login';
 type Inputs = {
     email: string;
     password: string;
+    remember: boolean;
 };
 const schema = yup.object().shape({
     email: validationRules.email(),
@@ -67,6 +68,29 @@ export const LoginForm = () => {
                     hasError={!!errors.password}
                     errorMessage={errors.password?.message || ''}
                 />
+                <div className="flex flex-row justify-between items-center">
+                    <CheckBoxField
+                        id="link_checkbox"
+                        groupFormClassList="mb-4 mt-0 flex items-center"
+                        key="link_checkbox"
+                        register={register('remember')}
+                        hasError={!!errors.remember}
+                        errorMessage={errors.remember?.message || ''}
+                    >
+                        <label
+                            htmlFor="link-checkbox"
+                            className="ml-2 text-sm font-medium text-primary-950"
+                        >
+                            Remember me
+                        </label>
+                    </CheckBoxField>
+                    <NavLink
+                        to="/auth/forgot-password"
+                        className="mb-4 mt-0 text-blue-600 text-xs dark:text-blue-500 hover:underline"
+                    >
+                        Forgot Password?
+                    </NavLink>
+                </div>
                 <div>
                     <button
                         disabled={loginUser.isLoading}
