@@ -5,12 +5,14 @@ import finnstockPrimaryLogo from '../../../assets/finnstock-primary.svg';
 
 interface ILayoutProps {
     children: ReactNode;
+    title: string;
+    content: ReactNode;
 }
-export const Layout = ({ children }: ILayoutProps) => {
+export const Layout = ({ children, title, content }: ILayoutProps) => {
     return (
         <div className="h-screen">
             <div className="flex h-full">
-                <Banner />
+                <Banner title={title} content={content} />
                 <div className="flex-1 overflow-y-scroll md:overflow-auto bg-white">
                     <div className="container h-full flex flex-col justify-center align-middle max-w-lg m-auto p-5 md:p-10">
                         <section className="my-5">

@@ -7,6 +7,7 @@ import codes from 'country-calling-code';
 
 import { CountryCode as CountryCodeType, isValidPhoneNumber } from 'libphonenumber-js/core';
 
+import { NavLink } from 'react-router-dom';
 import { CheckBoxField, InputField } from '../../../components/form';
 import { CountryCode, Spinner } from '../../../components/elements';
 import googleLogo from '../../../assets/google-logo-sm.svg';
@@ -201,12 +202,12 @@ export const SignupForm = () => {
             </div>
             <p className="my-4 text-center text-primary-950 text-sm">
                 Already have an account?{' '}
-                <a
-                    href="/asd"
+                <NavLink
+                    to="/auth/login"
                     className="text-blue-600 dark:text-blue-500 hover:underline font-medium"
                 >
                     Login
-                </a>{' '}
+                </NavLink>{' '}
             </p>
         </React.Fragment>
     );
