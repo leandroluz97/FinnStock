@@ -8,9 +8,10 @@ import codes from 'country-calling-code';
 import { CountryCode as CountryCodeType, isValidPhoneNumber } from 'libphonenumber-js/core';
 
 import { CheckBoxField, InputField } from '../../../components/form';
-import { CountryCode } from '../../../components/elements';
+import { CountryCode, Spinner } from '../../../components/elements';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import validationRules from '../../../utils/formValidations';
+import { RegisterDto, useRegister } from '../api/register';
 
 type Inputs = {
     firstName: string;
@@ -37,6 +38,7 @@ export const SignupForm = () => {
         setError,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
     const [code, setCode] = useState<number>(228);
+    const registerUser = useRegister();
 
     const submit = async (data: Inputs) => {
         const [countryIndex] = codes[code].countryCodes;
@@ -49,13 +51,33 @@ export const SignupForm = () => {
                 { shouldFocus: true }
             );
         }
+
+        await registerUser.mutateAsync({
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                email: data.email,
+                phoneNumber: data.phoneNumber,
+                password: data.password,
+            },
+        } as RegisterDto);
     };
 
-    return (
+    return registerUser.isSuccess ? (
+        <React.Fragment>
+            <h2 className="text-3xl font-medium text-primary-900 mt-32 md:mt-6 my-6">
+                Email confirmation Sent!🎉🎉
+            </h2>
+            <p className="text-sm font-medium text-primary-700">
+                Please check your inbox and look for an email from us. It should contain a unique
+                confirmation link. Click on the link to verify your email address.
+            </p>
+        </React.Fragment>
+    ) : (
         <React.Fragment>
             <form noValidate className="py-2" onSubmit={handleSubmit(submit)}>
                 <h2 className="text-3xl font-medium text-primary-900 mt-32 md:mt-6 my-6">
-                    Sign In
+                    Sign Up
                 </h2>
                 <div className=" flex flex-col lg:flex-row gap-3">
                     <InputField
@@ -150,10 +172,16 @@ export const SignupForm = () => {
 
                 <div>
                     <button
+                        disabled={registerUser.isLoading}
                         type="submit"
-                        className="text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
+                        className="flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                     >
                         Create account
+                        {registerUser.isLoading && (
+                            <span className="ml-2">
+                                <Spinner />
+                            </span>
+                        )}
                     </button>
                 </div>
             </form>
