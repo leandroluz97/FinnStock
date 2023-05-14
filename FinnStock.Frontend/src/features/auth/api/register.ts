@@ -36,7 +36,7 @@ export const useRegister = ({ config }: UseRegister = {}) => {
             }
             toast.error('Error Register', toasterConfig);
         },
-        onSuccess: () => {
+        onSuccess: (data) => {
             queryClient.invalidateQueries('auth');
         },
         ...config,

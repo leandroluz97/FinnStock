@@ -1,11 +1,12 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputField } from '../../../components/form';
 import validationRules from '../../../utils/formValidations';
 import { Spinner } from '../../../components/elements';
+import { useResetPassword } from '../api/resetPassword';
 
 type Inputs = {
     password: string;
@@ -15,6 +16,9 @@ const schema = yup.object().shape({
 });
 
 export const ResetPasswordForm = () => {
+    const reset = useResetPassword();
+    const location = useLocation();
+
     const {
         register,
         formState: { errors },
@@ -22,12 +26,21 @@ export const ResetPasswordForm = () => {
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     const submit = async (data: Inputs) => {
-        // await loginUser.mutateAsync({
-        //     data: {
-        //         email: data.email,
-        //         password: data.password,
-        //     },
-        // });
+        const searchQueries = new URLSearchParams(location.search);
+        const email = searchQueries.get('email');
+        const activationToken = searchQueries.get('activationToken');
+
+        if (!(email && activationToken)) {
+            return;
+        }
+
+        await reset.mutateAsync({
+            data: {
+                email,
+                activationToken,
+                password: data.password,
+            },
+        });
     };
 
     return (

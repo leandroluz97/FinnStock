@@ -1,12 +1,13 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { InputField } from '../../../components/form';
 import { Spinner } from '../../../components/elements';
 import validationRules from '../../../utils/formValidations';
+import { useTwoFactor } from '../api/twoFactor';
 
 type Inputs = {
     one: string;
@@ -33,15 +34,26 @@ export const TwoFactorForm = () => {
         handleSubmit,
         setError,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
+    const twoFactor = useTwoFactor();
+    const location = useLocation();
 
     const submit = async (data: Inputs) => {
-        // await loginUser.mutateAsync({
-        //     data: {
-        //         email: data.email,
-        //         password: data.password,
-        //     },
-        // });
+        const searchQueries = new URLSearchParams(location.search);
+        const userId = searchQueries.get('userId');
+        const otpCode = searchQueries.get('otpCode');
+
+        if (!(userId && otpCode)) {
+            return;
+        }
+
+        await twoFactor.mutateAsync({
+            data: {
+                otpCode,
+                userId,
+            },
+        });
     };
+
     return (
         <React.Fragment>
             <form noValidate className="py-2" onSubmit={handleSubmit(submit)}>

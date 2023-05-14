@@ -5,32 +5,32 @@ import { axios } from '../../../lib/axios';
 import { MutationConfig, queryClient } from '../../../lib/react-query';
 import { toasterConfig } from '../../../lib/react-toastify';
 
-export type LoginDto = {
+export type TwoFactorDto = {
     data: {
-        email: string;
-        password: string;
+        userId: string;
+        otpCode: string;
     };
 };
 
-export const login = ({ data }: LoginDto): Promise<any> => {
-    return axios.post('/auth/login', data);
+export const twoFactor = ({ data }: TwoFactorDto): Promise<any> => {
+    return axios.post('/auth/ValidateOTPCode', data);
 };
 
-type UseLogin = {
-    config?: MutationConfig<typeof login>;
+type UseTwoFactor = {
+    config?: MutationConfig<typeof twoFactor>;
 };
 
-export const useLogin = ({ config }: UseLogin = {}) => {
+export const useTwoFactor = ({ config }: UseTwoFactor = {}) => {
     const navigate = useNavigate();
     return useMutation({
         onError: (_, __, context: any) => {
             toast.error('Error Login', toasterConfig);
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
             queryClient.invalidateQueries('auth');
-            navigate('/auth/two-factor-validation');
+            navigate('/dashboard');
         },
         ...config,
-        mutationFn: login,
+        mutationFn: twoFactor,
     });
 };

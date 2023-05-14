@@ -1,7 +1,21 @@
-import React from 'react';
-import { NavLink } from 'react-router-dom';
+import React, { useEffect } from 'react';
+import { NavLink, useLocation } from 'react-router-dom';
+import { useConfirmEmailDto } from '../api/confirmEmail';
 
 export const ConfirmEmailForm = () => {
+    const location = useLocation();
+    const searchQueries = new URLSearchParams(location.search);
+    const token = searchQueries.get('token');
+    const email = searchQueries.get('email');
+    const confirmEmail = useConfirmEmailDto();
+
+    useEffect(() => {
+        (async function () {
+            if (!(email && token)) return;
+            await confirmEmail.mutateAsync({ data: { token, email } });
+        })();
+    }, []);
+
     return (
         <React.Fragment>
             <h2 className="text-3xl font-medium text-primary-900 mt-32 md:mt-6 my-6">
