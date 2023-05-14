@@ -3,6 +3,7 @@ using FinnStock.Domain;
 using FinnStock.Dtos;
 using FinnStock.Infrastructure.Abstractions.Clients;
 using FinnStock.Services.Exceptions;
+using FinnStock.Utils;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
@@ -67,10 +68,11 @@ namespace FinnStock.Services
                 throw new InvalidOperationException(result.Errors.ToList().ToString());
             }
 
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user)
+            var tokenString = Conversor.ToString(token);
 
-            var uriBuilder = new UriBuilder("https://localhost:3000/auth/confirm");
-            uriBuilder.Query = $"token={token}&email={user.Email}";
+            var uriBuilder = new UriBuilder("http://localhost:3000/auth/confirm-email");
+            uriBuilder.Query = $"token={tokenString}&email={user.Email}";
             var confirmationLink = uriBuilder.Uri.ToString();
 
             var subject = "Confirm your email address";
@@ -97,7 +99,9 @@ namespace FinnStock.Services
                 throw new NotFoundException($"{nameof(user)} with {confirmEmailDto.Email} not found");
             }
 
-            var result = await _userManager.ConfirmEmailAsync(user, confirmEmailDto.Token);
+            var token= Conversor.ToBase64(confirmEmailDto.Token);
+
+            var result = await _userManager.ConfirmEmailAsync(user, token);
 
             if (!result.Succeeded)
             {
