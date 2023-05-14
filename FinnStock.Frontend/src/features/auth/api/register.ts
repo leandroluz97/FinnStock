@@ -1,6 +1,6 @@
 import { useMutation } from 'react-query';
 import { axios } from '../../../lib/axios';
-import { queryClient } from '../../../lib/react-query';
+import { MutationConfig, queryClient } from '../../../lib/react-query';
 
 export type RegisterDto = {
     data: {
@@ -12,11 +12,15 @@ export type RegisterDto = {
     };
 };
 
-export const register = ({ data }: RegisterDto): Promise<unknown> => {
+export const register = ({ data }: RegisterDto): Promise<any> => {
     return axios.post('/auth/register', data);
 };
 
-export const useRegister = ({ config }: any = {}) => {
+type UseRegister = {
+    config?: MutationConfig<typeof register>;
+};
+
+export const useRegister = ({ config }: UseRegister = {}) => {
     return useMutation({
         onMutate: async (newAuth) => {
             await queryClient.cancelQueries('auth');
@@ -24,7 +28,7 @@ export const useRegister = ({ config }: any = {}) => {
             queryClient.setQueriesData('auth', { ...previousAuth, newAuth });
             return { previousAuth };
         },
-        onError: (error: any, variables: void, context: any) => {
+        onError: (_, __, context: any) => {
             if (context?.previousAuth) {
                 queryClient.setQueriesData('auth', context.previousAuth);
             }

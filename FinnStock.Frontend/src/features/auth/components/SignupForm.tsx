@@ -60,7 +60,7 @@ export const SignupForm = () => {
                 phoneNumber: data.phoneNumber,
                 password: data.password,
             },
-        } as RegisterDto);
+        });
     };
 
     return registerUser.isSuccess ? (

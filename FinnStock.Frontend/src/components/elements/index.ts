@@ -1,2 +1,2 @@
-export * from './countryCode';
+export * from './CountryCode';
 export * from './Spinner';
