@@ -25,10 +25,10 @@ type UseRegister = {
 export const useRegister = ({ config }: UseRegister = {}) => {
     return useMutation({
         onMutate: async (newAuth) => {
-            await queryClient.cancelQueries('auth');
-            const previousAuth = queryClient.getQueriesData('auth');
-            queryClient.setQueriesData('auth', { ...previousAuth, newAuth });
-            return { previousAuth };
+            // await queryClient.cancelQueries('auth');
+            // const previousAuth = queryClient.getQueriesData('auth');
+            // queryClient.setQueriesData('auth', { ...previousAuth, newAuth });
+            // return { previousAuth };
         },
         onError: (_, __, context: any) => {
             if (context?.previousAuth) {
