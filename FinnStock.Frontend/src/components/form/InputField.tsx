@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { ChangeHandler } from 'react-hook-form';
 import { IRegister } from '../../types';
 
@@ -26,6 +26,7 @@ export const InputField = ({
     groupFormClassList,
     register,
 }: IInputFieldProps) => {
+    const [showPassword, setShowPassword] = useState(false);
     let classList = hasError
         ? 'bg-red-50 border-red-200 border-2 text-red-700 text-sm rounded focus:ring-red-100 focus:ring-2 focus:border-red-600 focus:border-2 block w-full p-2.5 placeholder-red-400'
         : 'bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400';
@@ -38,7 +39,7 @@ export const InputField = ({
                 {label}
             </label>
             <input
-                type={type}
+                type={showPassword ? 'text' : type}
                 id={id}
                 className={classList}
                 placeholder={placeholder}
@@ -50,6 +51,9 @@ export const InputField = ({
             )}
             {groupFormClassList.includes('relative') && (
                 <button
+                    onClick={() => {
+                        setShowPassword((show) => !show);
+                    }}
                     type="button"
                     className={`absolute  right-0 p-2.5 text-sm font-medium text-white rounded-r${
                         hasError ? ' bottom-6' : ' bottom-0'
@@ -72,11 +76,13 @@ export const InputField = ({
                             stroke={hasError ? '#fca5a5' : '#BCD1EB'}
                             strokeWidth="1.5"
                         />
-                        <path
-                            d="M20 1L2 19"
-                            stroke={hasError ? '#fca5a5' : '#BCD1EB'}
-                            strokeWidth="1.5"
-                        />
+                        {!showPassword && (
+                            <path
+                                d="M20 1L2 19"
+                                stroke={hasError ? '#fca5a5' : '#BCD1EB'}
+                                strokeWidth="1.5"
+                            />
+                        )}
                     </svg>
                 </button>
             )}
