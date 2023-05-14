@@ -1,6 +1,8 @@
 import { useMutation } from 'react-query';
+import { toast } from 'react-toastify';
 import { axios } from '../../../lib/axios';
 import { MutationConfig, queryClient } from '../../../lib/react-query';
+import { toasterConfig } from '../../../lib/react-toastify';
 
 export type RegisterDto = {
     data: {
@@ -32,6 +34,7 @@ export const useRegister = ({ config }: UseRegister = {}) => {
             if (context?.previousAuth) {
                 queryClient.setQueriesData('auth', context.previousAuth);
             }
+            toast.error('Error Register', toasterConfig);
         },
         onSuccess: () => {
             queryClient.invalidateQueries('auth');
