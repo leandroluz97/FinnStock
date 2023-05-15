@@ -9,6 +9,7 @@ using Newtonsoft.Json;
 using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using static Azure.Core.HttpHeader;
+using FinnStock.Services.Exceptions;
 
 namespace FinnStock.WebAPI.Controllers
 {
@@ -27,7 +28,8 @@ namespace FinnStock.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-            await _authenticationService.Register(registerDto);
+            throw new ArgumentNullException("Register");
+           // await _authenticationService.Register(registerDto);
             return Ok();
         }
 

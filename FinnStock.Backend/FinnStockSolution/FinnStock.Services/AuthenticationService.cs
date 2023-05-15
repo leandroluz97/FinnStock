@@ -68,7 +68,7 @@ namespace FinnStock.Services
                 throw new InvalidOperationException(result.Errors.ToList().ToString());
             }
 
-            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user)
+            var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             var tokenString = Conversor.ToString(token);
 
             var uriBuilder = new UriBuilder("http://localhost:3000/auth/confirm-email");
