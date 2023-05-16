@@ -19,7 +19,7 @@ namespace FinnStock.WebAPI.Controllers
     {
         private readonly AuthenticationService _authenticationService;
         private readonly SignInManager<User> _signInManager;
-        public AuthController(AuthenticationService authenticationService, SignInManager<User> signInManager )
+        public AuthController(AuthenticationService authenticationService, SignInManager<User> signInManager)
         {
             _authenticationService = authenticationService;
             _signInManager = signInManager;
@@ -28,8 +28,7 @@ namespace FinnStock.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> Register(RegisterDto registerDto)
         {
-            throw new ArgumentNullException("Register");
-           // await _authenticationService.Register(registerDto);
+            await _authenticationService.Register(registerDto);
             return Ok();
         }
 
@@ -78,7 +77,7 @@ namespace FinnStock.WebAPI.Controllers
         [HttpPost]
         public async Task<IActionResult> RequestResetPassword(string email)
         {
-             await _authenticationService.RequestResetPassword(email);
+            await _authenticationService.RequestResetPassword(email);
             return Ok();
         }
 
