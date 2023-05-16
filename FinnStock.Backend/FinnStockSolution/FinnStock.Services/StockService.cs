@@ -55,7 +55,7 @@ namespace FinnStock.Services
         {
             _logger.LogInformation("{GetCompanyAsync} param value {symbol}", nameof(GetCompanyAsync), symbol);
 
-            if (symbol == null)
+            if (string.IsNullOrWhiteSpace(symbol))
             {
                 throw new ArgumentNullException(nameof(symbol));
             }
