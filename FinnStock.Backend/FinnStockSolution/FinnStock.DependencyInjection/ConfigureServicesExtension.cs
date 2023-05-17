@@ -21,6 +21,7 @@ using FinnStock.Clients.Message;
 using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
+using FinnStock.Clients.Finnhub;
 
 namespace FinnStock.DependencyInjection
 {
@@ -53,6 +54,7 @@ namespace FinnStock.DependencyInjection
 
             services.AddSingleton<IConfiguration>(configuration);
             services.AddTransient<IEmailClient, SengridClient>();
+            services.AddTransient<FinnhubClient>();
             services.AddTransient<IMessageClient, TwilioClient>();
             services.AddTransient<AuthenticationService>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();

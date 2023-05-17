@@ -1,4 +1,5 @@
-﻿using FinnStock.Infrastructure.Abstractions.Repositories;
+﻿using FinnStock.Infrastructure.Abstractions.Cache;
+using FinnStock.Infrastructure.Abstractions.Repositories;
 
 namespace FinnStock.Infrastructure.Abstractions
 {
@@ -6,6 +7,8 @@ namespace FinnStock.Infrastructure.Abstractions
     {
         IOrderRepository OrderRepository { get; }
         IFavoriteRepository FavoriteRepository { get; }
+        ICacheRepository CacheRepository { get; }
+
         void SaveChanges();
         void Rollback();
         Task SaveChangesAsync();

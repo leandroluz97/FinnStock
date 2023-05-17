@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\FinnhubStock.Cache\FinnhubStock.Cache.csproj" />
-    <ProjectReference Include="..\FinnStock.Business.Abstractions\FinnStock.Business.Abstractions.csproj" />
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+    <PackageReference Include="NRedisStack" Version="0.6.1" />
+    <PackageReference Include="StackExchange.Redis" Version="2.6.111" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\FinnStock.Infrastructure.Abstractions\FinnStock.Infrastructure.Abstractions.csproj" />
-    <ProjectReference Include="..\FinnStock.Repositories\FinnStock.SQLWork.csproj" />
   </ItemGroup>
 
 </Project>

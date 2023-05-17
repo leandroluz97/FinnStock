@@ -1,11 +1,14 @@
-﻿using FinnStock.Domain;
+﻿using FinnhubStock.Cache;
+using FinnStock.Domain;
 using FinnStock.Domain.Helper;
 using FinnStock.Infrastructure.Abstractions;
+using FinnStock.Infrastructure.Abstractions.Cache;
 using FinnStock.Infrastructure.Abstractions.Repositories;
 using FinnStock.SQLWork;
 using FinnStock.UnitOfWork.Repositories;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
+using Microsoft.Extensions.Configuration;
 
 namespace FinnStock.UnitOfWork
 {
@@ -14,8 +17,10 @@ namespace FinnStock.UnitOfWork
         private readonly ApplicationDbContext _dbContext;
         public IOrderRepository _orderRepository;
         public IFavoriteRepository _favoriteRepository;
+        public ICacheRepository _cacheRepository;
+        public IConfiguration _configuration;
 
-        public UnitOfWork(ApplicationDbContext dbContext)
+        public UnitOfWork(IConfiguration configuration, ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
@@ -27,6 +32,11 @@ namespace FinnStock.UnitOfWork
         public IFavoriteRepository FavoriteRepository
         {
             get { return _favoriteRepository = _favoriteRepository ?? new FavoriteRepository(_dbContext); }
+        }
+
+        public ICacheRepository CacheRepository
+        {
+            get { return _cacheRepository = _cacheRepository ?? new CacheRepository(_configuration); }
         }
 
         public void SaveChanges()

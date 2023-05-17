@@ -1,4 +1,5 @@
 ﻿using FinnStock.Dtos;
+using Microsoft.Extensions.Configuration;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,15 +13,18 @@ namespace FinnStock.Clients.Finnhub
     {
         private readonly HttpClient _httpClient;
         private readonly JsonSerializerOptions _jsonSerializerOptions;
-        public FinnhubClient(string accessToken)
+        private readonly IConfiguration _configuration;
+        public FinnhubClient(IConfiguration configuration)
         {
             _jsonSerializerOptions = new JsonSerializerOptions() { };
 
-            var authHandler = new AuthHandler(accessToken);
+            _configuration = configuration;
+
+            var authHandler = new AuthHandler(_configuration["Finnhub:Api_Key"]);
 
             _httpClient = new HttpClient(authHandler);
 
-            _httpClient.BaseAddress = new Uri("https://finnhub.io/api/v1");
+            _httpClient.BaseAddress = new Uri(_configuration["Finnhub:Base_Url"]);
         }
 
 
