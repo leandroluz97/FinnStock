@@ -4,7 +4,7 @@ using FinnStock.Infrastructure.Abstractions.Cache;
 using Newtonsoft.Json;
 using Microsoft.Extensions.Configuration;
 
-namespace FinnhubStock.Cache
+namespace FinnStock.Cache
 {
     public class CacheRepository : ICacheRepository
     {
