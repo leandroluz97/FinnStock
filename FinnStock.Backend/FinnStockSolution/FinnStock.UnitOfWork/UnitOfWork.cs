@@ -1,4 +1,4 @@
-﻿using FinnhubStock.Cache;
+﻿using FinnStock.Cache;
 using FinnStock.Domain;
 using FinnStock.Domain.Helper;
 using FinnStock.Infrastructure.Abstractions;
