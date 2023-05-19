@@ -16,7 +16,10 @@ namespace FinnStock.Clients.Finnhub
         private readonly IConfiguration _configuration;
         public FinnhubClient(IConfiguration configuration)
         {
-            _jsonSerializerOptions = new JsonSerializerOptions() { };
+            _jsonSerializerOptions = new JsonSerializerOptions() 
+            {
+                PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
+            };
 
             _configuration = configuration;
 
@@ -33,20 +36,20 @@ namespace FinnStock.Clients.Finnhub
 
         public async Task<IEnumerable<StockDto>> GetStocksAsync()
         {
-            var response = await _httpClient.GetAsync("/stock/symbol?exchange=US");
+            var response = await _httpClient.GetAsync("/api/v1/stock/symbol?exchange=US");
 
             response.EnsureSuccessStatusCode();
 
             var responseJson = await response.Content.ReadAsStringAsync();
 
-            var responseData = JsonSerializer.Deserialize<IEnumerable<StockDto>>(responseJson, _jsonSerializerOptions);
+             var responseData = JsonSerializer.Deserialize<IEnumerable<StockDto>>(responseJson, _jsonSerializerOptions);
 
             return responseData;
         }
 
         public async Task<IEnumerable<SymbolDto>> SearchStocksAsync(string searchText)
         {
-            var response = await _httpClient.GetAsync($"/search?q={searchText}");
+            var response = await _httpClient.GetAsync($"/api/v1/search?q={searchText}");
 
             response.EnsureSuccessStatusCode();
 
@@ -59,7 +62,7 @@ namespace FinnStock.Clients.Finnhub
 
         public async Task<CompanyDto> GetCompaniesAsync(string symbol)
         {
-            var response = await _httpClient.GetAsync($"/stock/profile2?symbol={symbol}");
+            var response = await _httpClient.GetAsync($"/api/v1/stock/profile2?symbol={symbol}");
 
             response.EnsureSuccessStatusCode();
 

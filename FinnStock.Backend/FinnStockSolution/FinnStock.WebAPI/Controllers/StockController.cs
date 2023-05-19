@@ -18,7 +18,7 @@ namespace FinnStock.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("stocks")]
+        [Route("")]
         public async Task<IEnumerable<StockDto>> Stocks()
         {
            var stocks =  await _stockService.GetAllAsync();
