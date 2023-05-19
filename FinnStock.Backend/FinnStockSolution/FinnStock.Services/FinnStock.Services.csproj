@@ -13,6 +13,7 @@
   <ItemGroup>
     <ProjectReference Include="..\FinnStock.Business.Abstractions\FinnStock.Business.Abstractions.csproj" />
     <ProjectReference Include="..\FinnStock.Clients\FinnStock.Clients.csproj" />
+    <ProjectReference Include="..\FinnStock.WebSocket\FinnStock.WebSocket.csproj" />
   </ItemGroup>
 
 </Project>

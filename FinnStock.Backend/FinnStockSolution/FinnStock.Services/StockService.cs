@@ -1,5 +1,6 @@
 ﻿using FinnStock.Clients.Finnhub;
 using FinnStock.Dtos;
+using FinnStock.WebSocket;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -13,10 +14,12 @@ namespace FinnStock.Services
     {
         private readonly ILogger<StockService> _logger;
         private readonly FinnhubClient _finnhubClient;
-        public StockService(ILogger<StockService> logger, FinnhubClient finnhubClient)
+        private readonly WebSocketClient _webSocketClient;
+        public StockService(ILogger<StockService> logger, FinnhubClient finnhubClient, WebSocketClient webSocketClient)
         {
             _logger = logger;
             _finnhubClient = finnhubClient;
+            _webSocketClient = webSocketClient;
         }
 
         public async Task<IEnumerable<StockDto>> GetAllAsync()
@@ -70,5 +73,16 @@ namespace FinnStock.Services
 
             return company;
         }
+
+        public async Task ConnectToWebSocket(string symbol)
+        {
+            await _webSocketClient.StartSendingFinancialData(symbol);
+        }
+
+        public async Task CloseWebSocketConnection(string symbol)
+        {
+            await _webSocketClient.CloseConnectionAsync();
+        }
+
     }
 }
