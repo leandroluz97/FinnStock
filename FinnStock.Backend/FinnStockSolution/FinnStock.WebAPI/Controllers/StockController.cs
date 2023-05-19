@@ -24,6 +24,14 @@ namespace FinnStock.WebAPI.Controllers
            var stocks =  await _stockService.GetAllAsync();
            return stocks; 
         }
+        
+        [HttpGet]
+        [Route("{symbol}")]
+        public async Task<CompanyDto> GetCompanyAsync(string symbol)
+        {
+           var company =  await _stockService.GetCompanyAsync(symbol);
+           return company; 
+        }
 
     }
 }

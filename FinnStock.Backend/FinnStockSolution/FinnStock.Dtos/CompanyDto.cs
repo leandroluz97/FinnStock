@@ -12,7 +12,7 @@ namespace FinnStock.Dtos
         public string Currency { get; set; }
         public string Exchange { get; set; }
         public DateTime Ipo { get; set; }
-        public string MarketCapitalization { get; set; }
+        public double MarketCapitalization { get; set; }
         public string Name { get; set; }
         public string Ticker { get; set; }
         public string Weburl { get; set; }
