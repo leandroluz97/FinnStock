@@ -22,6 +22,7 @@ using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using FinnStock.Clients.Finnhub;
+using FinnStock.WebSocket;
 
 namespace FinnStock.DependencyInjection
 {
@@ -55,9 +56,12 @@ namespace FinnStock.DependencyInjection
             services.AddSingleton<IConfiguration>(configuration);
             services.AddTransient<IEmailClient, SengridClient>();
             services.AddTransient<FinnhubClient>();
+            services.AddTransient<WebSocketClient>();
             services.AddTransient<IMessageClient, TwilioClient>();
-            services.AddTransient<AuthenticationService>();
+            services.AddScoped<AuthenticationService>();
+            services.AddTransient<StockService>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
+            services.AddSignalR();
 
             services.AddIdentity<User, Role>(options =>
             {
