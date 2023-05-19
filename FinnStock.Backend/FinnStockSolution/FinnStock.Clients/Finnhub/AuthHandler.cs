@@ -19,6 +19,7 @@ namespace FinnStock.Clients.Finnhub
         {
             // Add authentication header to the request
             request.Headers.Add("X-Finnhub-Token", _accessToken);
+            request.Headers.Add("Accept", "application/json");
 
             // Perform custom logic before sending the request
             // For example, you can modify the request headers or content

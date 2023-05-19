@@ -20,7 +20,10 @@ namespace FinnStock.Clients.Finnhub
 
             _configuration = configuration;
 
-            var authHandler = new AuthHandler(_configuration["Finnhub:Api_Key"]);
+            var authHandler = new AuthHandler(_configuration["Finnhub:Api_Key"])
+            {
+                InnerHandler = new HttpClientHandler()
+            };
 
             _httpClient = new HttpClient(authHandler);
 
