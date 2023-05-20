@@ -33,6 +33,18 @@ namespace FinnStock.Clients.Finnhub
             _httpClient.BaseAddress = new Uri(_configuration["Finnhub:Base_Url"]);
         }
 
+        public async Task<QuoteDto> GetStockPriceQuoteAsync(string symbol)
+        {
+            var response = await _httpClient.GetAsync($"/api/v1/quote??symbol={symbol}");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseJson = await response.Content.ReadAsStringAsync();
+
+            var responseData = JsonSerializer.Deserialize<QuoteDto>(responseJson, _jsonSerializerOptions);
+
+            return responseData;
+        }
 
         public async Task<IEnumerable<StockDto>> GetStocksAsync()
         {
@@ -60,7 +72,7 @@ namespace FinnStock.Clients.Finnhub
             return responseData;
         }
 
-        public async Task<CompanyDto> GetCompaniesAsync(string symbol)
+        public async Task<CompanyDto> GetCompanyProfileAsync(string symbol)
         {
             var response = await _httpClient.GetAsync($"/api/v1/stock/profile2?symbol={symbol}");
 
