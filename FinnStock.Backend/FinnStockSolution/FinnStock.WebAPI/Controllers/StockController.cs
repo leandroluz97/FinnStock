@@ -26,11 +26,26 @@ namespace FinnStock.WebAPI.Controllers
         }
         
         [HttpGet]
-        [Route("{symbol}")]
+        [Route("profile/{symbol}")]
         public async Task<CompanyDto> GetCompanyAsync(string symbol)
         {
-           var company =  await _stockService.GetCompanyAsync(symbol);
+           var company =  await _stockService.GetCompanyProfileAsync(symbol);
            return company; 
+        }
+        
+        [HttpGet]
+        [Route("quote/{symbol}")]
+        public async Task<QuoteDto> GetStockQuoteAsync(string symbol)
+        {
+           var quote =  await _stockService.GetStockQuoteAsync(symbol);
+           return quote; 
+        }
+        
+        [HttpGet]
+        [Route("socket/{symbol}")]
+        public async Task Connect(string symbol)
+        {
+           await _stockService.ConnectToWebSocket(symbol);
         }
 
     }

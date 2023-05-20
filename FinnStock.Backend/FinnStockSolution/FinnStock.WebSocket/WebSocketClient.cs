@@ -24,20 +24,20 @@ namespace FinnStock.WebSocket
         }
         public async Task StartSendingFinancialData(string symbol)
         {
-            using (var clientWebSocket = new ClientWebSocket())
-            {
-                // Add the required headers
-                clientWebSocket.Options.SetRequestHeader("X-Finnhub-Token", _configuration["Finnhub:Api_key"]);
-
+            //using (var clientWebSocket = new ClientWebSocket())
+            //{
+            // Add the required headers
+            _clientWebSocket.Options.SetRequestHeader("X-Finnhub-Secret", "chk1e31r01qnu4tqug30");
+              
                 // Connect to the WebSocket provider
-                await clientWebSocket.ConnectAsync(new Uri(_configuration["Finnhub:Socket_Url"]), CancellationToken.None);
+                await _clientWebSocket.ConnectAsync(new Uri(_configuration["Finnhub:Socket_Url"]), CancellationToken.None);
 
                 // Subscribe to the desired stock symbol
-                await SubscribeToSymbol(clientWebSocket, symbol);
+                await SubscribeToSymbol(_clientWebSocket, symbol);
 
                 // Start receiving and sending financial data
-                await ReceiveAndSendData(clientWebSocket);
-            }
+                await ReceiveAndSendData(_clientWebSocket);
+            //}
         }
 
         private async Task SubscribeToSymbol(ClientWebSocket clientWebSocket, string symbol)
@@ -84,7 +84,7 @@ namespace FinnStock.WebSocket
         private async Task ProcessWebSocketData(string data)
         {
             // Send the data to connected clients
-            await _hubContext.Clients.All.SendAsync("ReceiveData", data);
+            await _hubContext.Clients.All.SendAsync("ReceiveData", data); 
         }
     }
 }
