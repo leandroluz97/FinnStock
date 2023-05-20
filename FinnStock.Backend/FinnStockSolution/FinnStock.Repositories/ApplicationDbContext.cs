@@ -7,13 +7,13 @@ namespace FinnStock.SQLWork
 {
     public class ApplicationDbContext : IdentityDbContext<User, Role, Guid>
     {
-
-
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> option):base(option){}
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            //modelBuilder.ApplyConfiguration(new OrderConfiguration());
+            modelBuilder.ApplyConfiguration(new BuyOrderConfiguration());
+            modelBuilder.ApplyConfiguration(new SellOrderConfiguration());
             modelBuilder.ApplyConfiguration(new FavoriteConfiguration());
             base.OnModelCreating(modelBuilder);
         }

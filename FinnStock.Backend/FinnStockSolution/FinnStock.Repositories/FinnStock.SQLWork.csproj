@@ -23,4 +23,8 @@
     <ProjectReference Include="..\FinnStock.Domain\FinnStock.Domain.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
 </Project>
