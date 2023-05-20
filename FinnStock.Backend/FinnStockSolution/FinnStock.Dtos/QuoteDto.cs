@@ -8,12 +8,12 @@ namespace FinnStock.Dtos
 {
     public class QuoteDto
     {
-        public string C { get; set; }
-        public string H{ get; set; }
-        public string L { get; set; }
-        public string O { get; set; } 
-        public string Pc { get; set; }
-        public string T { get; set; }
+        public double C { get; set; }
+        public double H { get; set; }
+        public double L { get; set; }
+        public double O { get; set; } 
+        public double Pc { get; set; }
+        public double T { get; set; }
     }
 }
 
