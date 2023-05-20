@@ -54,24 +54,44 @@ namespace FinnStock.Services
             return stocks;
         }
 
-        public async Task<CompanyDto> GetCompanyAsync(string symbol)
+        public async Task<CompanyDto> GetCompanyProfileAsync(string symbol)
         {
-            _logger.LogInformation("{GetCompanyAsync} param value {symbol}", nameof(GetCompanyAsync), symbol);
+            _logger.LogInformation("{GetCompanyProfileAsync} param value {symbol}", nameof(GetCompanyProfileAsync), symbol);
 
             if (string.IsNullOrWhiteSpace(symbol))
             {
                 throw new ArgumentNullException(nameof(symbol));
             }
-            var company = await _finnhubClient.GetCompaniesAsync(symbol);
+            var company = await _finnhubClient.GetCompanyProfileAsync(symbol);
 
             if (company == null)
             {
                 return null;
             }
 
-            _logger.LogInformation("{GetCompanyAsync} found: {company}", nameof(GetAllAsync), company.Name);
+            _logger.LogInformation("{GetCompanyProfileAsync} found: {company}", nameof(GetAllAsync), company.Name);
 
             return company;
+        }
+
+        public async Task<QuoteDto> GetStockQuoteAsync(string symbol)
+        {
+            _logger.LogInformation("{GetStockQuoteAsync} param value {symbol}", nameof(GetStockQuoteAsync), symbol);
+
+            if (string.IsNullOrWhiteSpace(symbol))
+            {
+                throw new ArgumentNullException(nameof(symbol));
+            }
+            var quote = await _finnhubClient.GetStockPriceQuoteAsync(symbol);
+
+            if (quote == null)
+            {
+                return null;
+            }
+
+            _logger.LogInformation("{GetStockQuoteAsync} found: {company}", nameof(GetAllAsync), quote.C); 
+
+            return quote;
         }
 
         public async Task ConnectToWebSocket(string symbol)
