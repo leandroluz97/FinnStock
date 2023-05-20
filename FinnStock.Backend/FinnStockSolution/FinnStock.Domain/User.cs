@@ -12,7 +12,8 @@ namespace FinnStock.Domain
     {
         public string? FirstName { get; set; }
         public string? LastName { get; set; }
-        public ICollection<Order> Orders { get; set; }
+        public ICollection<SellOrder> SellOrders { get; set; }
+        public ICollection<BuyOrder> BuyOrders { get; set; }
         public ICollection<Favorite> Favorites { get; set; }
         public string? RefreshToken { get; set; }
         public DateTime RefreshTokenExpirationDateTime { get; set; }
