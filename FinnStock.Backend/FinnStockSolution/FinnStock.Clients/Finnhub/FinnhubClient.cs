@@ -35,7 +35,7 @@ namespace FinnStock.Clients.Finnhub
 
         public async Task<QuoteDto> GetStockPriceQuoteAsync(string symbol)
         {
-            var response = await _httpClient.GetAsync($"/api/v1/quote??symbol={symbol}");
+            var response = await _httpClient.GetAsync($"/api/v1/quote?symbol={symbol}");
 
             response.EnsureSuccessStatusCode();
 
