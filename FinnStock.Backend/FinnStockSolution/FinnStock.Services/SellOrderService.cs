@@ -22,9 +22,14 @@ namespace FinnStock.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<SellOrderDto> CreateOrderAsync(SellOrderDto sellOrderDto, CancellationToken cancelationToken = default)
+        public async Task<SellOrderDto> CreateOrderAsync(Guid userId, SellOrderDto sellOrderDto, CancellationToken cancelationToken = default)
         {
             _logger.LogInformation("{CreateOrderAsync} param value {sellOrderDto}", nameof(CreateOrderAsync), sellOrderDto);
+
+            if (userId == default)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
 
             if (sellOrderDto == null)
             {

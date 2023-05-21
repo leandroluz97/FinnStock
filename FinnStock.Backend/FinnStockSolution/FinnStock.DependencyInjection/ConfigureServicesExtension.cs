@@ -60,6 +60,8 @@ namespace FinnStock.DependencyInjection
             services.AddTransient<IMessageClient, TwilioClient>();
             services.AddScoped<AuthenticationService>();
             services.AddTransient<StockService>();
+            services.AddTransient<BuyOrderService>();
+            services.AddTransient<SellOrderService>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
             services.AddSignalR();
 
@@ -87,8 +89,6 @@ namespace FinnStock.DependencyInjection
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                //options.DefaultAuthenticateScheme = GoogleDefaults.AuthenticationScheme;
-                //options.DefaultChallengeScheme = GoogleDefaults.AuthenticationScheme;
             })
             .AddJwtBearer(options =>
             {
