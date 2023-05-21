@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 
 namespace FinnStock.Services
 {
-    internal class BuyOrderService
+    public class BuyOrderService
     {
         private readonly ILogger<BuyOrderService> _logger;
         private readonly IUnitOfWork _unitOfWork;
@@ -23,9 +23,14 @@ namespace FinnStock.Services
             _unitOfWork = unitOfWork;
         }
 
-        public async Task<BuyOrderDto> CreateOrderAsync(BuyOrderDto buyOrderDto, CancellationToken cancelationToken = default)
+        public async Task<BuyOrderDto> CreateOrderAsync(Guid userId, BuyOrderDto buyOrderDto, CancellationToken cancelationToken = default)
         {
             _logger.LogInformation("{CreateOrderAsync} param value {buyOrderDto}", nameof(CreateOrderAsync), buyOrderDto);
+
+            if (userId == default)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
 
             if (buyOrderDto == null)
             {
@@ -35,7 +40,9 @@ namespace FinnStock.Services
             buyOrderDto.EnsureValidation();
 
             var buyOrder = BuyOrderMapper.ToDomain(buyOrderDto);
+
             buyOrder.GlobalId = Guid.NewGuid();
+            buyOrder.UserId = userId;
 
             _unitOfWork.BuyOrderRepository.Add(buyOrder);
 
