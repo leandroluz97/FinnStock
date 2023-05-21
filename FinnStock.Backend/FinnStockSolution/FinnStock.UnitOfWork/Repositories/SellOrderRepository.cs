@@ -10,21 +10,20 @@ using System.Threading.Tasks;
 
 namespace FinnStock.UnitOfWork.Repositories
 {
-    public class BuyOrderRepository : BaseRepository<BuyOrder>, IBuyOrderRepository
+    internal class SellOrderRepository : BaseRepository<SellOrder>, ISellOrderRepository
     {
-        //private readonly ApplicationDbContext _dbContext;
-        private readonly DbSet<BuyOrder> _dbSet;
-        public BuyOrderRepository(ApplicationDbContext dbContext): base(dbContext)
+        private readonly DbSet<SellOrder> _dbSet;
+        public SellOrderRepository(ApplicationDbContext dbContext) : base(dbContext)
         {
-            _dbSet = this._dbContext.Set<BuyOrder>();
+            _dbSet = this._dbContext.Set<SellOrder>();
         }
 
-        public async Task<BuyOrder> GetByGlobalIdAsync(Guid globalId, CancellationToken cancellationToken = default)
+        public async Task<SellOrder> GetByGlobalIdAsync(Guid globalId, CancellationToken cancellationToken = default)
         {
             return await _dbSet.FirstOrDefaultAsync(order => order.GlobalId.Equals(globalId), cancellationToken);
         }
 
-        public async Task<IEnumerable<BuyOrder>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken)
+        public async Task<IEnumerable<SellOrder>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken)
         {
             return await _dbSet.Where(order => order.UserId.Equals(userId)).ToListAsync(cancellationToken);
         }

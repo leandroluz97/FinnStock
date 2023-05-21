@@ -16,6 +16,8 @@ namespace FinnStock.UnitOfWork
     {
         private readonly ApplicationDbContext _dbContext;
         public IOrderRepository _orderRepository;
+        public IBuyOrderRepository _buyOrderRepository;
+        public ISellOrderRepository _sellOrderRepository;
         public IFavoriteRepository _favoriteRepository;
         public ICacheRepository _cacheRepository;
         public IConfiguration _configuration;
@@ -27,6 +29,16 @@ namespace FinnStock.UnitOfWork
         public IOrderRepository OrderRepository
         {
             get { return _orderRepository = _orderRepository ?? new OrderRepository(_dbContext); }
+        }
+
+        public IBuyOrderRepository BuyOrderRepository
+        {
+            get { return _buyOrderRepository = _buyOrderRepository ?? new BuyOrderRepository(_dbContext); }
+        }
+
+        public ISellOrderRepository SellOrderRepository
+        {
+            get { return _sellOrderRepository = _sellOrderRepository ?? new SellOrderRepository(_dbContext); }
         }
 
         public IFavoriteRepository FavoriteRepository
