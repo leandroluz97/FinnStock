@@ -9,9 +9,7 @@ namespace FinnStock.Infrastructure.Abstractions.Repositories
 {
     public interface ISellOrderRepository :  IBaseRepository<SellOrder>
     {
-        //public Task<SellOrder> GetByIdAsync(int id);
-        //public Task<SellOrder> GetByGlobalIdAsync(string globalId);
-        //public Task<IEnumerable<SellOrder>> GetAllAsync();
-        //public Task<SellOrder> CreateAsync(SellOrder order);
+        public Task<SellOrder> GetByGlobalIdAsync(Guid globalId, CancellationToken cancellationToken);
+        public Task<IEnumerable<SellOrder>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken);
     }
 }

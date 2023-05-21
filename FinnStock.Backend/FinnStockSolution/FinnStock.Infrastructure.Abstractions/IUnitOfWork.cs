@@ -6,6 +6,8 @@ namespace FinnStock.Infrastructure.Abstractions
     public interface IUnitOfWork
     {
         IOrderRepository OrderRepository { get; }
+        IBuyOrderRepository BuyOrderRepository { get; }
+        ISellOrderRepository SellOrderRepository { get; }
         IFavoriteRepository FavoriteRepository { get; }
         ICacheRepository CacheRepository { get; }
 
