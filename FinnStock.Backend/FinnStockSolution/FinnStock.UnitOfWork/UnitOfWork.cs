@@ -6,6 +6,7 @@ using FinnStock.Infrastructure.Abstractions.Cache;
 using FinnStock.Infrastructure.Abstractions.Repositories;
 using FinnStock.SQLWork;
 using FinnStock.UnitOfWork.Repositories;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.Extensions.Configuration;
@@ -20,6 +21,7 @@ namespace FinnStock.UnitOfWork
         public ISellOrderRepository _sellOrderRepository;
         public IFavoriteRepository _favoriteRepository;
         public ICacheRepository _cacheRepository;
+        private readonly UserManager<User> _userManager;
         public IConfiguration _configuration;
 
         public UnitOfWork(IConfiguration configuration, ApplicationDbContext dbContext)
