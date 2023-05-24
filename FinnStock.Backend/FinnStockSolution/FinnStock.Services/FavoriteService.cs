@@ -25,6 +25,30 @@ namespace FinnStock.Services
             _unitOfWork = unitOfWork;
         }
 
+        public async Task<IEnumerable<FavoriteDto>> GetAllAsync(Guid userId, CancellationToken cancellationToken = default)
+        {
+            if(userId == default)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
+
+            var user = _userManager.Users.FirstOrDefault(u => u.Id.Equals(userId));
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(user));
+            }
+
+            var favorites = await _unitOfWork.FavoriteRepository.GetByUserIdAsync(userId, cancellationToken);
+
+            if(favorites == null)
+            {
+                return default(IEnumerable<FavoriteDto>) ;
+            }
+
+            return favorites.Select(f => FavoriteMapper.ToDto(f));
+        }
+
         public async Task<FavoriteDto> CreateAsync(Guid userId, FavoriteDto favoriteDto)
         {
             if (favoriteDto == null)
@@ -35,7 +59,7 @@ namespace FinnStock.Services
 
             if(userId == default)
             {
-                throw new ArgumentNullException(nameof(favoriteDto));
+                throw new ArgumentNullException(nameof(userId));
             }
 
             var user = _userManager.Users.FirstOrDefault(u => u.Id.Equals(userId));
@@ -55,5 +79,38 @@ namespace FinnStock.Services
 
             return FavoriteMapper.ToDto(favorite);
         }
+
+        public async Task RemoveAsync(Guid userId, Guid favoriteId, CancellationToken cancellationToken = default)
+        {
+            if(userId == default)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
+
+            if (favoriteId == default)
+            {
+                throw new ArgumentNullException(nameof(favoriteId));
+            }
+
+            var user = _userManager.Users.FirstOrDefault(u => u.Id.Equals(userId));
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(user));
+            }
+
+            var favorite = await _unitOfWork.FavoriteRepository.GetByGloablIdAsync(userId, cancellationToken);
+
+            if (favorite == null)
+            {
+                throw new NotFoundException(nameof(favorite));
+            }
+
+            _unitOfWork.FavoriteRepository.Remove(favorite);   
+            
+            await _unitOfWork.SaveChangesAsync(); 
+        }
+
+       
     }
 }
