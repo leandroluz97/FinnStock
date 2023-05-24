@@ -18,9 +18,14 @@ namespace FinnStock.UnitOfWork.Repositories
             _dbSet = this._dbContext.Set<Favorite>();
         }
 
-        public async Task<IEnumerable<Favorite>> GetAllAsync(Guid userId, CancellationToken cancellationToken = default)
+        public async Task<IEnumerable<Favorite>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken = default)
         {
             return await _dbSet.Where(favorite => favorite.UserId.Equals(userId)).ToListAsync(cancellationToken);
+        }
+
+        public async Task<Favorite> GetByGlobalIdAsync(Guid globalId, CancellationToken cancellationToken = default)
+        {
+            return await _dbSet.FirstOrDefaultAsync(favorite => favorite.GlobalId.Equals(globalId), cancellationToken);
         }
     }
 }

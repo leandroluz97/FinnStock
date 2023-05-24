@@ -9,6 +9,7 @@ namespace FinnStock.Infrastructure.Abstractions.Repositories
 {
     public interface IFavoriteRepository : IBaseRepository<Favorite>
     {
-        public Task<IEnumerable<Favorite>> GetAllAsync(Guid userId, CancellationToken cancellationToken);
+        public Task<IEnumerable<Favorite>> GetByUserIdAsync(Guid userId, CancellationToken cancellationToken);
+        public Task<Favorite> GetByGloablIdAsync(Guid favoriteId, CancellationToken cancellationToken);
     }
 }
