@@ -19,10 +19,11 @@ namespace FinnStock.Services
         private readonly IUnitOfWork _unitOfWork;
         private readonly UserManager<User> _userManager;
 
-        public FavoriteService(ILogger<FavoriteService> logger, IUnitOfWork unitOfWork)
+        public FavoriteService(ILogger<FavoriteService> logger, IUnitOfWork unitOfWork, UserManager<User> userManager)
         {
             _logger = logger;
             _unitOfWork = unitOfWork;
+            _userManager = userManager;
         }
 
         public async Task<IEnumerable<FavoriteDto>> GetAllAsync(Guid userId, CancellationToken cancellationToken = default)
@@ -32,7 +33,7 @@ namespace FinnStock.Services
                 throw new ArgumentNullException(nameof(userId));
             }
 
-            var user = _userManager.Users.FirstOrDefault(u => u.Id.Equals(userId));
+            var user =  _userManager.Users.FirstOrDefault(u => u.Id.Equals(userId));
 
             if (user == null)
             {
@@ -49,7 +50,7 @@ namespace FinnStock.Services
             return favorites.Select(f => FavoriteMapper.ToDto(f));
         }
 
-        public async Task<FavoriteDto> CreateAsync(Guid userId, FavoriteDto favoriteDto)
+        public async Task<FavoriteDto> CreateAsync(Guid userId, FavoriteDto favoriteDto, CancellationToken cancellationToken = default)
         {
             if (favoriteDto == null)
             {

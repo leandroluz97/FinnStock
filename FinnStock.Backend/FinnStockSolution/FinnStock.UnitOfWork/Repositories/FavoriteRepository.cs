@@ -23,7 +23,7 @@ namespace FinnStock.UnitOfWork.Repositories
             return await _dbSet.Where(favorite => favorite.UserId.Equals(userId)).ToListAsync(cancellationToken);
         }
 
-        public async Task<Favorite> GetByGlobalIdAsync(Guid globalId, CancellationToken cancellationToken = default)
+        public async Task<Favorite> GetByGloablIdAsync(Guid globalId, CancellationToken cancellationToken = default)
         {
             return await _dbSet.FirstOrDefaultAsync(favorite => favorite.GlobalId.Equals(globalId), cancellationToken);
         }

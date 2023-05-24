@@ -62,6 +62,7 @@ namespace FinnStock.DependencyInjection
             services.AddTransient<StockService>();
             services.AddTransient<BuyOrderService>();
             services.AddTransient<SellOrderService>();
+            services.AddTransient<FavoriteService>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
             services.AddSignalR();
 
