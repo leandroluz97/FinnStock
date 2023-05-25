@@ -4,8 +4,8 @@ import { useForm } from 'react-hook-form';
 import { NavLink, useLocation } from 'react-router-dom';
 import * as yup from 'yup';
 
-import { InputField } from '../../../components/form';
-import { Spinner } from '../../../components/elements';
+import { InputField } from '../../../components/Form';
+import { Spinner } from '../../../components/Elements';
 import validationRules from '../../../utils/formValidations';
 import { useTwoFactor } from '../api/twoFactor';
 

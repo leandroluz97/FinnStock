@@ -4,9 +4,9 @@ import { QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
 
-import { ErrorFallback } from '../components/error';
+import { ErrorFallback } from '../components/Error';
 import { queryClient } from '../lib/react-query';
-import { Loading } from '../components/loading';
+import { Loading } from '../components/Loading';
 
 interface IPropsAppProvider {
     children: ReactNode;

@@ -5,9 +5,9 @@ import { useForm } from 'react-hook-form';
 
 import { NavLink } from 'react-router-dom';
 import validationRules from '../../../utils/formValidations';
-import { CheckBoxField, InputField } from '../../../components/form';
+import { CheckBoxField, InputField } from '../../../components/Form';
 import googleLogo from '../../../assets/google-logo-sm.svg';
-import { Spinner } from '../../../components/elements';
+import { Spinner } from '../../../components/Elements';
 import { useLogin } from '../api/login';
 
 type Inputs = {

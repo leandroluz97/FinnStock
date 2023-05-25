@@ -8,8 +8,8 @@ import codes from 'country-calling-code';
 import { CountryCode as CountryCodeType, isValidPhoneNumber } from 'libphonenumber-js/core';
 
 import { NavLink } from 'react-router-dom';
-import { CheckBoxField, InputField } from '../../../components/form';
-import { CountryCode, Spinner } from '../../../components/elements';
+import { CheckBoxField, InputField } from '../../../components/Form';
+import { CountryCode, Spinner } from '../../../components/Elements';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import validationRules from '../../../utils/formValidations';
 import { RegisterDto, useRegister } from '../api/register';

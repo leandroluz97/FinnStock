@@ -3,9 +3,9 @@ import { NavLink, useLocation } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
-import { InputField } from '../../../components/form';
+import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
-import { Spinner } from '../../../components/elements';
+import { Spinner } from '../../../components/Elements';
 import { useResetPassword } from '../api/resetPassword';
 
 type Inputs = {

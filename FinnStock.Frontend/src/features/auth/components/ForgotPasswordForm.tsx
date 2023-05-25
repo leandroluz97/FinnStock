@@ -4,10 +4,10 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 import { NavLink } from 'react-router-dom';
 
-import { InputField } from '../../../components/form';
+import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
 import { useForgotPassword } from '../api/forgotPassword';
-import { Spinner } from '../../../components/elements';
+import { Spinner } from '../../../components/Elements';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 
 type Inputs = {

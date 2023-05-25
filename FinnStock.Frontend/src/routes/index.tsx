@@ -1,16 +1,20 @@
 import React, { useState } from 'react';
 import { useRoutes } from 'react-router-dom';
-import { publicRoutes } from './public';
+
+import { ProtectedRoutes } from './protected';
+import { PublicRoutes } from './public';
 
 export const AppRoutes = () => {
-    const auth = true;
+    const auth = false;
     // const commonRoutes = [{path: '/', element:}]
 
-    const routes = publicRoutes;
+    // const routes = auth ? publicRoutes : ProtectedRoutes;
 
-    const element = useRoutes([...routes]);
+    // const element = useRoutes([...routes]);
+    // const element = routes;
 
-    return element;
+    return auth ? <PublicRoutes /> : <ProtectedRoutes />;
+    return <PublicRoutes />;
 };
 
 export default AppRoutes;
