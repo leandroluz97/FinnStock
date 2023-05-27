@@ -4,10 +4,10 @@ import FinnstockLogo from '../../assets/finnstock-log.svg';
 
 export const MainLayout = ({ children }) => {
     return (
-        <div className="h-screen p-2 bg-slate-200">
+        <div className="h-screen  bg-slate-200">
             <section className="flex h-full">
-                <aside className="bg-white rounded-lg">
-                    <div className="w-24 h-full flex flex-col">
+                <aside className="bg-white ">
+                    <div className="w-24 h-full flex flex-col  border-r-2 border-slate-200">
                         <div className="m-3 flex justify-center items-center">
                             <img src={FinnstockLogo} alt="finnstock" className="w-12 text-center" />
                         </div>
@@ -60,11 +60,11 @@ export const MainLayout = ({ children }) => {
                     </div>
                 </aside>
                 <main className="w-full flex flex-col">
-                    <header className="ml-2">
-                        <section className="bg-white rounded-lg p-4">
+                    <header className="">
+                        <section className="bg-white p-4">
                             <div className="w-100 flex justify-between">
                                 <h1 className="text-3xl font-bold text-primary-900">Finnstock</h1>
-                                <div className="bg-slate-200 p-2 rounded">
+                                <div className="bg-slate-200 p-2 ">
                                     <svg
                                         width="20"
                                         height="21"
