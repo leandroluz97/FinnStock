@@ -5,6 +5,23 @@ import ProfilePicture from '../../assets/profile.svg';
 
 export const MainLayout = ({ children }) => {
     const location = useLocation();
+    const routes = [
+        {
+            path: 'dashboard',
+            label: 'Dashboard',
+            icon: <DashboardIcon />,
+        },
+        {
+            path: 'news',
+            label: 'News',
+            icon: <NewIcon />,
+        },
+        {
+            path: 'orders',
+            label: 'Orders',
+            icon: <OrderItem />,
+        },
+    ];
 
     return (
         <div className="h-screen  bg-slate-200">
@@ -16,84 +33,35 @@ export const MainLayout = ({ children }) => {
                         </div>
                         <nav className="mt-10  h-full flex flex-col justify-between ">
                             <header>
-                                <li
-                                    data-tooltip-target="tooltip-animation-dashboard"
-                                    data-tooltip-placement="right"
-                                    className="list-none relative my-2"
-                                >
-                                    <NavLink
-                                        to="dashboard"
-                                        className={({ isActive, isPending }) =>
-                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
-                                                isActive
-                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
-                                                    : ''
-                                            }`
-                                        }
+                                {routes.map((route) => (
+                                    <li
+                                        key={route.path}
+                                        data-tooltip-target={`tooltip-animation-${route.path}`}
+                                        data-tooltip-placement="right"
+                                        className="list-none relative my-2"
                                     >
-                                        <DashboardIcon />
-                                    </NavLink>
-                                    <div
-                                        id="tooltip-animation-dashboard"
-                                        role="tooltip"
-                                        className="absolute z-10 invisible inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
-                                    >
-                                        Dashboard
-                                        <div className="tooltip-arrow" data-popper-arrow />
-                                    </div>
-                                </li>
-                                <li
-                                    data-tooltip-target="tooltip-animation-news"
-                                    data-tooltip-placement="right"
-                                    className="list-none relative my-2"
-                                >
-                                    <NavLink
-                                        to="news"
-                                        className={({ isActive, isPending }) =>
-                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
-                                                isActive
-                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
-                                                    : ''
-                                            }`
-                                        }
-                                    >
-                                        <NewIcon />
+                                        <NavLink
+                                            to={route.path}
+                                            className={({ isActive, isPending }) =>
+                                                `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                    isActive
+                                                        ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                        : ''
+                                                }`
+                                            }
+                                        >
+                                            {route.icon}
+                                        </NavLink>
                                         <div
-                                            id="tooltip-animation-news"
+                                            id={`tooltip-animation-${route.path}`}
                                             role="tooltip"
                                             className="absolute z-10 invisible inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
                                         >
-                                            News
+                                            {route.label}
                                             <div className="tooltip-arrow" data-popper-arrow />
                                         </div>
-                                    </NavLink>
-                                </li>
-                                <li
-                                    data-tooltip-target="tooltip-animation-order"
-                                    data-tooltip-placement="right"
-                                    className="list-none relative my-2"
-                                >
-                                    <NavLink
-                                        to="orders"
-                                        className={({ isActive, isPending }) =>
-                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
-                                                isActive
-                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
-                                                    : ''
-                                            }`
-                                        }
-                                    >
-                                        <OrderItem />
-                                        <div
-                                            id="tooltip-animation-order"
-                                            role="tooltip"
-                                            className="absolute z-10 invisible inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
-                                        >
-                                            Orders
-                                            <div className="tooltip-arrow" data-popper-arrow />
-                                        </div>
-                                    </NavLink>
-                                </li>
+                                    </li>
+                                ))}
                             </header>
                             <div>
                                 <li
@@ -197,9 +165,9 @@ export const MainLayout = ({ children }) => {
                         </section>
                     </header>
 
-                    <section className="ml-2 mt-2 rounded-md flex-1">
+                    <section className="m-3 flex-1">
                         <div className="">
-                            <p>content</p>
+                            {/* <p>content</p> */}
                             {/* {children} */}
                             <Outlet />
                         </div>

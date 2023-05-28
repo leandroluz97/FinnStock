@@ -1,5 +1,5 @@
 import React from 'react';
-import { Routes, Route } from 'react-router-dom';
+import { Routes, Route, Navigate } from 'react-router-dom';
 import { Signup } from './Signup';
 import { Login } from './Login';
 import { ForgotPassword } from './ForgotPassword';
@@ -17,6 +17,7 @@ export const AuthRoutes = () => {
                 <Route path="confirm-email" element={<ConfirmEmail />} />
                 <Route path="reset-password" element={<ResetPassword />} />
                 <Route path="two-factor-validation" element={<Twofactor />} />
+                <Navigate to="/login" replace />
             </Route>
         </Routes>
     );
