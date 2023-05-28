@@ -1,9 +1,11 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import FinnstockLogo from '../../assets/finnstock-log.svg';
 import ProfilePicture from '../../assets/profile.svg';
 
 export const MainLayout = ({ children }) => {
+    const location = useLocation();
+
     return (
         <div className="h-screen  bg-slate-200">
             <section className="flex h-full">
@@ -20,8 +22,14 @@ export const MainLayout = ({ children }) => {
                                     className="list-none relative my-2"
                                 >
                                     <NavLink
-                                        to="/dashboard"
-                                        className="m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg"
+                                        to="dashboard"
+                                        className={({ isActive, isPending }) =>
+                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                isActive
+                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                    : ''
+                                            }`
+                                        }
                                     >
                                         <DashboardIcon />
                                     </NavLink>
@@ -40,8 +48,14 @@ export const MainLayout = ({ children }) => {
                                     className="list-none relative my-2"
                                 >
                                     <NavLink
-                                        to="/dashboard"
-                                        className="m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100"
+                                        to="news"
+                                        className={({ isActive, isPending }) =>
+                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                isActive
+                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                    : ''
+                                            }`
+                                        }
                                     >
                                         <NewIcon />
                                         <div
@@ -60,8 +74,14 @@ export const MainLayout = ({ children }) => {
                                     className="list-none relative my-2"
                                 >
                                     <NavLink
-                                        to="/dashboard"
-                                        className="m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100"
+                                        to="orders"
+                                        className={({ isActive, isPending }) =>
+                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                isActive
+                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                    : ''
+                                            }`
+                                        }
                                     >
                                         <OrderItem />
                                         <div
@@ -82,8 +102,14 @@ export const MainLayout = ({ children }) => {
                                     className="list-none relative my-2"
                                 >
                                     <NavLink
-                                        to="/dashboard"
-                                        className="m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100"
+                                        to="settings"
+                                        className={({ isActive, isPending }) =>
+                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                isActive
+                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                    : ''
+                                            }`
+                                        }
                                     >
                                         <SettingsIcon />
                                         <div
@@ -102,8 +128,14 @@ export const MainLayout = ({ children }) => {
                                     className="list-none relative my-2"
                                 >
                                     <NavLink
-                                        to="/dashboard"
-                                        className="m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100"
+                                        to="logout"
+                                        className={({ isActive, isPending }) =>
+                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                isActive
+                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                    : ''
+                                            }`
+                                        }
                                     >
                                         <LogoutIcon />
                                         <div
@@ -168,7 +200,8 @@ export const MainLayout = ({ children }) => {
                     <section className="ml-2 mt-2 rounded-md flex-1">
                         <div className="">
                             <p>content</p>
-                            {children}
+                            {/* {children} */}
+                            <Outlet />
                         </div>
                     </section>
                 </main>
