@@ -24,15 +24,15 @@ export const MainLayout = ({ children }) => {
     ];
 
     return (
-        <div className="h-screen  bg-slate-200">
-            <section className="flex h-full">
-                <aside className="bg-white ">
-                    <div className="w-24 h-full flex flex-col  border-r-2 border-slate-200">
-                        <div className="m-3 flex justify-center items-center">
+        <div className="h-screen bg-slate-200">
+            <section className="h-full flex flex-col md:flex-row justify-between ">
+                <aside className="bg-white order-2 md:order-1">
+                    <div className="w-full md:w-24 h-full flex  justify-center md:flex-col  border-r-2 border-slate-200">
+                        <div className="hidden m-3 md:flex  md:flex-col justify-center items-center">
                             <img src={FinnstockLogo} alt="finnstock" className="w-12 text-center" />
                         </div>
-                        <nav className="mt-10  h-full flex flex-col justify-between ">
-                            <header>
+                        <nav className="md:mt-10 h-full flex flex-row md:flex-col justify-between ">
+                            <header className="flex flex-row md:flex-col">
                                 {routes.map((route) => (
                                     <li
                                         key={route.path}
@@ -43,9 +43,9 @@ export const MainLayout = ({ children }) => {
                                         <NavLink
                                             to={route.path}
                                             className={({ isActive, isPending }) =>
-                                                `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
                                                     isActive
-                                                        ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                        ? ' bg-slate-100 before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
                                                         : ''
                                                 }`
                                             }
@@ -55,7 +55,7 @@ export const MainLayout = ({ children }) => {
                                         <div
                                             id={`tooltip-animation-${route.path}`}
                                             role="tooltip"
-                                            className="absolute z-10 invisible inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
+                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
                                         >
                                             {route.label}
                                             <div className="tooltip-arrow" data-popper-arrow />
@@ -63,7 +63,7 @@ export const MainLayout = ({ children }) => {
                                     </li>
                                 ))}
                             </header>
-                            <div>
+                            <div className="flex flex-row md:flex-col">
                                 <li
                                     data-tooltip-target="tooltip-animation-settings"
                                     data-tooltip-placement="right"
@@ -72,9 +72,9 @@ export const MainLayout = ({ children }) => {
                                     <NavLink
                                         to="settings"
                                         className={({ isActive, isPending }) =>
-                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                            `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
                                                 isActive
-                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                    ? ' before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
                                                     : ''
                                             }`
                                         }
@@ -83,7 +83,7 @@ export const MainLayout = ({ children }) => {
                                         <div
                                             id="tooltip-animation-settings"
                                             role="tooltip"
-                                            className="absolute z-10 invisible inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
+                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
                                         >
                                             Settings
                                             <div className="tooltip-arrow" data-popper-arrow />
@@ -98,9 +98,9 @@ export const MainLayout = ({ children }) => {
                                     <NavLink
                                         to="logout"
                                         className={({ isActive, isPending }) =>
-                                            `m-3 p-3 py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                            `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
                                                 isActive
-                                                    ? ' bg-slate-100 before:absolute before:w-1 before:h-full before:bg-primary-800 before:right-0 before:top-0 before:rounded-s-lg'
+                                                    ? ' before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
                                                     : ''
                                             }`
                                         }
@@ -109,7 +109,7 @@ export const MainLayout = ({ children }) => {
                                         <div
                                             id="tooltip-animation-logout"
                                             role="tooltip"
-                                            className="absolute z-10 invisible inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
+                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
                                         >
                                             Logout
                                             <div className="tooltip-arrow" data-popper-arrow />
@@ -120,7 +120,7 @@ export const MainLayout = ({ children }) => {
                         </nav>
                     </div>
                 </aside>
-                <main className="w-full flex flex-col">
+                <main className="w-full flex flex-col order-1 md:order-2">
                     <header className="">
                         <section className="bg-white p-3">
                             <div className="w-100 flex justify-between items-center">
