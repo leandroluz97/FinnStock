@@ -2,9 +2,10 @@ import React from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { MainLayout } from '../components/Layout/MainLayout';
 import { NotFound } from '../features/misc/routes/NotFound';
-import { Card } from '../components/Elements/Card';
+import { Card } from '../features/stocks/components/Card';
 import { Breadcrumb } from '../components/Elements/Breadcrumb';
 import { Tab } from '../components/Elements/Tab';
+import { StocksList } from '../features/stocks/components/stocksList';
 
 export const ProtectedRoutes = () => {
     return (
@@ -17,7 +18,7 @@ export const ProtectedRoutes = () => {
                         <React.Fragment>
                             {/* <Breadcrumb /> */}
                             <Tab />
-                            <Card currency="USD" description="Microsoft" symbol="MSDT" />
+                            <StocksList />
                         </React.Fragment>
                     }
                 />
