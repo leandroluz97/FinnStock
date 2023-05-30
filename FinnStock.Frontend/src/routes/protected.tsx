@@ -5,7 +5,7 @@ import { NotFound } from '../features/misc/routes/NotFound';
 import { Card } from '../features/stocks/components/Card';
 import { Breadcrumb } from '../components/Elements/Breadcrumb';
 import { Tab } from '../components/Elements/Tab';
-import { StocksList } from '../features/stocks/components/stocksList';
+import { Stocks } from '../features/stocks/routes/Stocks';
 
 export const ProtectedRoutes = () => {
     return (
@@ -15,11 +15,11 @@ export const ProtectedRoutes = () => {
                 <Route
                     path="dashboard"
                     element={
-                        <React.Fragment>
-                            {/* <Breadcrumb /> */}
+                        <div className="h-full flex flex-col">
+                            <Breadcrumb />
                             <Tab />
-                            <StocksList />
-                        </React.Fragment>
+                            <Stocks />
+                        </div>
                     }
                 />
                 <Route path="news" element={<p>News</p>} />
