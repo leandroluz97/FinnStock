@@ -120,7 +120,7 @@ export const MainLayout = ({ children }) => {
                         </nav>
                     </div>
                 </aside>
-                <main className="w-full flex flex-col order-1 md:order-2">
+                <main className="w-full flex flex-col order-1 md:order-2 overflow-hidden">
                     <header className="">
                         <section className="bg-white p-3">
                             <div className="w-100 flex justify-between items-center">
