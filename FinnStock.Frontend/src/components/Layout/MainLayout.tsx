@@ -24,7 +24,7 @@ export const MainLayout = ({ children }) => {
     ];
 
     return (
-        <div className="h-screen bg-slate-200">
+        <div className="h-screen  overflow-hidden bg-slate-200">
             <section className="h-full flex flex-col md:flex-row justify-between ">
                 <aside className="bg-white order-2 md:order-1">
                     <div className="w-full md:w-24 h-full flex  justify-center md:flex-col  border-r-2 border-slate-200">
@@ -165,12 +165,10 @@ export const MainLayout = ({ children }) => {
                         </section>
                     </header>
 
-                    <section className="m-3 flex-1">
-                        <div className="">
-                            {/* <p>content</p> */}
-                            {/* {children} */}
-                            <Outlet />
-                        </div>
+                    <section className="flex flex-col overflow-hidden m-3 flex-1">
+                        {/* <p>content</p> */}
+                        {/* {children} */}
+                        <Outlet />
                     </section>
                 </main>
             </section>

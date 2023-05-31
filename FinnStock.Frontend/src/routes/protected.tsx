@@ -15,7 +15,7 @@ export const ProtectedRoutes = () => {
                 <Route
                     path="dashboard"
                     element={
-                        <div className="h-full flex flex-col">
+                        <div className="flex flex-col justify-between overflow-y-hidden ">
                             <Breadcrumb />
                             <Tab />
                             <Stocks />

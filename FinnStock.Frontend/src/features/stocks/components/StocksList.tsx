@@ -3,23 +3,24 @@ import { Card } from './Card';
 
 export const StocksList = () => {
     return (
-        <div className="h-full flex flex-col justify-between m-4">
-            <div className="h-full flex flex-col overflow-y-scroll">
-                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 ">
-                    {Array(50)
-                        .fill('')
-                        .map((item, index) => (
-                            <Card
-                                key={index}
-                                currency="USD"
-                                description="Microsoft"
-                                symbol="MSDT"
-                            />
-                        ))}
+        <div className="h-full overflow-hidden">
+            <div className="h-full overflow-auto">
+                <div className="">
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 ">
+                        {Array(40)
+                            .fill('')
+                            .map((item, index) => (
+                                <Card
+                                    key={index}
+                                    currency="USD"
+                                    description="Microsoft"
+                                    symbol="MSDT"
+                                />
+                            ))}
+                    </div>
                 </div>
             </div>
-
-            <nav aria-label="Page navigation flex justify-center align-center">
+            <nav className="flex justify-center align-center" aria-label="Page navigation">
                 <ul className="inline-flex items-center -space-x-px">
                     <li>
                         <a
