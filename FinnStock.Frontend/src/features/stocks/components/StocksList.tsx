@@ -6,19 +6,17 @@ export const StocksList = () => {
         <React.Fragment>
             <div className="overflow-hidden rounded-md">
                 <div className="h-full overflow-auto">
-                    <div className="">
-                        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 ">
-                            {Array(40)
-                                .fill('')
-                                .map((item, index) => (
-                                    <Card
-                                        key={index}
-                                        currency="USD"
-                                        description="Microsoft"
-                                        symbol="MSDT"
-                                    />
-                                ))}
-                        </div>
+                    <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 ">
+                        {Array(40)
+                            .fill('')
+                            .map((item, index) => (
+                                <Card
+                                    key={index}
+                                    currency="USD"
+                                    description="Microsoft"
+                                    symbol="MSDT"
+                                />
+                            ))}
                     </div>
                 </div>
             </div>
