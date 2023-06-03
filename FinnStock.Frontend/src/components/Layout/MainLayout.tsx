@@ -7,7 +7,7 @@ export const MainLayout = ({ children }) => {
     const location = useLocation();
     const routes = [
         {
-            path: 'dashboard',
+            path: 'stocks',
             label: 'Dashboard',
             icon: <DashboardIcon />,
         },

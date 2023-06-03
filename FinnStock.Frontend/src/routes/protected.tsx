@@ -1,32 +1,36 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 import { Outlet, Route, Routes } from 'react-router-dom';
 import { MainLayout } from '../components/Layout/MainLayout';
 import { NotFound } from '../features/misc/routes/NotFound';
-import { Card } from '../features/stocks/components/Card';
-import { Breadcrumb } from '../components/Elements/Breadcrumb';
-import { Tab } from '../components/Elements/Tab';
-import { Stocks } from '../features/stocks/routes/Stocks';
+import { StocksRoutes } from '../features/stocks/routes';
+import { Spinner } from '../components/Elements';
 
-export const ProtectedRoutes = () => {
+export const App = () => {
     return (
-        <Routes>
-            <Route path="/u/:userId/*" element={<MainLayout />}>
-                {/* <Route path="dashboard" element={<p>Dashboard</p>} /> */}
-                <Route
-                    path="dashboard"
-                    element={
-                        <div className="flex flex-col justify-between overflow-hidden ">
-                            <Breadcrumb />
-                            <Tab />
-                            <Stocks />
-                        </div>
-                    }
-                />
-                <Route path="news" element={<p>News</p>} />
-                <Route path="orders" element={<p>Orders</p>} />
-                <Route path="settings" element={<p>Settings</p>} />
-                <Route path="*" element={<NotFound />} />
-            </Route>
-        </Routes>
+        <MainLayout>
+            <Suspense
+                fallback={
+                    <div className="h-full w-full flex items-center justify-center">
+                        <Spinner />
+                    </div>
+                }
+            >
+                <Outlet />
+            </Suspense>
+        </MainLayout>
     );
 };
+
+export const protectedRoutes = [
+    {
+        path: '/u/:userId',
+        element: <App />,
+        children: [
+            { path: 'stocks/*', element: <StocksRoutes /> },
+            { path: 'news/*', element: <p>News</p> },
+            { path: 'orders/*', element: <p>Orders</p> },
+            { path: 'settings/*', element: <p>Settings</p> },
+            { path: '*', element: <NotFound /> },
+        ],
+    },
+];

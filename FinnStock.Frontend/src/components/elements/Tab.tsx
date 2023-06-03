@@ -9,10 +9,10 @@ export const Tab = () => {
                     <NavLink
                         to=""
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 border-transparent rounded-t-lg ${
+                            `inline-block p-4 border-b-2 rounded-t-lg ${
                                 isActive
-                                    ? ' text-primary-800 border-b-2 border-primary-600 active'
-                                    : ''
+                                    ? ' text-primary-900 border-blue-600 active'
+                                    : ' border-transparent'
                             }`
                         }
                     >
@@ -23,10 +23,10 @@ export const Tab = () => {
                     <NavLink
                         to="favorite"
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 border-transparent rounded-t-lg ${
+                            `inline-block p-4 border-b-2 rounded-t-lg ${
                                 isActive
-                                    ? ' text-primary-800 border-b-2 border-primary-600 active'
-                                    : ''
+                                    ? ' text-primary-900 border-blue-600 active'
+                                    : ' border-transparent'
                             }`
                         }
                         aria-current="page"
@@ -38,10 +38,10 @@ export const Tab = () => {
                     <NavLink
                         to="up"
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 border-transparent rounded-t-lg ${
+                            `inline-block p-4 border-b-2 rounded-t-lg ${
                                 isActive
-                                    ? ' text-primary-800 border-b-2 border-primary-600 active'
-                                    : ''
+                                    ? ' text-primary-900 border-blue-600 active'
+                                    : ' border-transparent'
                             }`
                         }
                     >
@@ -52,10 +52,10 @@ export const Tab = () => {
                     <NavLink
                         to="down"
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 border-transparent rounded-t-lg ${
+                            `inline-block p-4 border-b-2 rounded-t-lg ${
                                 isActive
-                                    ? ' text-primary-800 border-b-2 border-primary-600 active'
-                                    : ''
+                                    ? ' text-primary-900 border-blue-600 active'
+                                    : ' border-transparent'
                             }`
                         }
                     >

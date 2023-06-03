@@ -3,12 +3,12 @@ import { NavLink } from 'react-router-dom';
 
 export const Breadcrumb = () => {
     return (
-        <nav className="flex my-6" aria-label="Breadcrumb">
-            <ol className="inline-flex items-center space-x-1 md:space-x-3">
+        <nav className="flex my-2" aria-label="Breadcrumb">
+            <ol className="inline-flex items-center space-x-0 md:space-x-1">
                 <li className="inline-flex items-center">
                     <NavLink
                         href="#"
-                        className="inline-flex items-center text-sm font-medium text-primary-700 hover:text-primary-800"
+                        className="inline-flex items-center text-sm font-medium text-primary-900 hover:text-primary-800"
                     >
                         <svg
                             aria-hidden="true"
@@ -26,7 +26,7 @@ export const Breadcrumb = () => {
                     <div className="flex items-center">
                         <svg
                             aria-hidden="true"
-                            className="w-6 h-6 text-primary-700"
+                            className="w-6 h-6 text-primary-900"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
@@ -39,7 +39,7 @@ export const Breadcrumb = () => {
                         </svg>
                         <NavLink
                             href="#"
-                            className="ml-1 text-sm font-medium text-primary-700 hover:text-primary-800 md:ml-2 dark:text-gray-400 dark:hover:text-white"
+                            className="ml-1 text-sm font-medium text-primary-900 hover:text-primary-800 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                         >
                             Projects
                         </NavLink>
@@ -49,7 +49,7 @@ export const Breadcrumb = () => {
                     <div className="flex items-center">
                         <svg
                             aria-hidden="true"
-                            className="w-6 h-6 text-primary-700"
+                            className="w-6 h-6 text-primary-900"
                             fill="currentColor"
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
@@ -60,7 +60,7 @@ export const Breadcrumb = () => {
                                 clipRule="evenodd"
                             />
                         </svg>
-                        <span className="ml-1 text-sm font-medium text-primary-600 md:ml-2 dark:text-gray-400">
+                        <span className="ml-1 text-sm font-medium text-primary-900 md:ml-2 dark:text-gray-400">
                             Flowbite
                         </span>
                     </div>
