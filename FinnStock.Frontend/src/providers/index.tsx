@@ -3,6 +3,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 import { QueryClientProvider } from 'react-query';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { ToastContainer } from 'react-toastify';
+import { HelmetProvider } from 'react-helmet-async';
 
 import { ErrorFallback } from '../components/Error';
 import { queryClient } from '../lib/react-query';
@@ -14,13 +15,15 @@ interface IPropsAppProvider {
 
 export const AppProvider = ({ children }: IPropsAppProvider) => {
     return (
-        <React.Suspense fallback={<Loading />}>
-            <QueryClientProvider client={queryClient}>
-                <ErrorBoundary FallbackComponent={ErrorFallback}>
-                    <ToastContainer />
-                    <Router>{children}</Router>
-                </ErrorBoundary>
-            </QueryClientProvider>
-        </React.Suspense>
+        <HelmetProvider>
+            <React.Suspense fallback={<Loading />}>
+                <QueryClientProvider client={queryClient}>
+                    <ErrorBoundary FallbackComponent={ErrorFallback}>
+                        <ToastContainer />
+                        <Router>{children}</Router>
+                    </ErrorBoundary>
+                </QueryClientProvider>
+            </React.Suspense>
+        </HelmetProvider>
     );
 };
