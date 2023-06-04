@@ -17,7 +17,7 @@ export const AuthRoutes = () => {
             <Route path="confirm-email" element={<ConfirmEmail />} />
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="two-factor-validation" element={<Twofactor />} />
-            <Navigate to="/login" replace />
+            {/* <Navigate to="/login" replace /> */}
             {/* </Route> */}
         </Routes>
     );

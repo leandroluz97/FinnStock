@@ -5,7 +5,7 @@ import { ProtectedRoutes, protectedRoutes } from './protected';
 import { PublicRoutes, publicRoutes } from './public';
 
 export const AppRoutes = () => {
-    const auth = false;
+    const auth = true;
     // const commonRoutes = [{path: '/', element:}]
 
     const routes = auth ? publicRoutes : protectedRoutes;

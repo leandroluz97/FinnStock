@@ -8,6 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { ErrorFallback } from '../components/Error';
 import { queryClient } from '../lib/react-query';
 import { Loading } from '../components/Loading';
+import { AuthProvider } from '../lib/auth';
 
 interface IPropsAppProvider {
     children: ReactNode;
@@ -15,15 +16,17 @@ interface IPropsAppProvider {
 
 export const AppProvider = ({ children }: IPropsAppProvider) => {
     return (
-        <HelmetProvider>
-            <React.Suspense fallback={<Loading />}>
-                <QueryClientProvider client={queryClient}>
-                    <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ErrorBoundary FallbackComponent={ErrorFallback}>
+            <HelmetProvider>
+                <React.Suspense fallback={<Loading />}>
+                    <QueryClientProvider client={queryClient}>
                         <ToastContainer />
-                        <Router>{children}</Router>
-                    </ErrorBoundary>
-                </QueryClientProvider>
-            </React.Suspense>
-        </HelmetProvider>
+                        <AuthProvider>
+                            <Router>{children}</Router>
+                        </AuthProvider>
+                    </QueryClientProvider>
+                </React.Suspense>
+            </HelmetProvider>
+        </ErrorBoundary>
     );
 };

@@ -7,6 +7,8 @@ import {
     QueryObserverResult,
     RefetchOptions,
 } from 'react-query';
+import { toast } from 'react-toastify';
+import { toasterConfig } from '../lib/react-toastify';
 
 export interface AuthProviderConfig<User = unknown, Error = unknown> {
     key?: string;
@@ -41,8 +43,18 @@ export interface AuthContextValue<
     resetPassword: UseMutateAsyncFunction<User, any, ResetPasswordCredentials>;
     logout: UseMutateAsyncFunction<any, any, void, any>;
     isLoggingIn: boolean;
-    isLoggingOut: boolean;
+    isLogginSuccess: boolean;
     isRegistering: boolean;
+    isRegisterSuccess: boolean;
+    isConfirmingEmail: boolean;
+    isConfirmEmailSuccess: boolean;
+    isTwoFactor: boolean;
+    isTwoFactorSuccess: boolean;
+    isForgotingPassword: boolean;
+    isForgotPasswordSuccess: boolean;
+    isResetingPassword: boolean;
+    isResetPasswordSucess: boolean;
+    isLoggingOut: boolean;
     refetchUser: (
         options?: RefetchOptions | undefined
     ) => Promise<QueryObserverResult<User, Error>>;
@@ -110,15 +122,16 @@ export function initReactQuery<
 
         const loginMutation = useMutation({
             mutationFn: loginFn,
-            onSuccess: (user) => {
-                //  setUser(user);
+            onError: (error) => {
+                toast.error('Error Login', toasterConfig);
             },
         });
 
         const registerMutation = useMutation({
             mutationFn: registerFn,
-            onSuccess: (user) => {
-                //  setUser(user);
+            onError: (error) => {
+                console.log(error);
+                toast.error('Error Register', toasterConfig);
             },
         });
 
@@ -165,22 +178,27 @@ export function initReactQuery<
 
                 login: loginMutation.mutateAsync,
                 isLoggingIn: loginMutation.isLoading,
+                isLogginSuccess: loginMutation.isSuccess,
 
                 register: registerMutation.mutateAsync,
                 isRegistering: registerMutation.isLoading,
-                isSuccess: registerMutation.isSuccess,
+                isRegisterSuccess: registerMutation.isSuccess,
 
                 confirmEmail: confirmEmailMutation.mutateAsync,
                 isConfirmingEmail: confirmEmailMutation.isLoading,
+                isConfirmEmailSuccess: confirmEmailMutation.isSuccess,
 
                 twoFactor: twoFactorMutation.mutateAsync,
                 isTwoFactor: twoFactorMutation.isLoading,
+                isTwoFactorSuccess: twoFactorMutation.isSuccess,
 
                 forgotPassword: forgotPasswordMutation.mutateAsync,
                 isForgotingPassword: forgotPasswordMutation.isLoading,
+                isForgotPasswordSuccess: forgotPasswordMutation.isSuccess,
 
                 resetPassword: resetPasswordMutation.mutateAsync,
                 isResetingPassword: resetPasswordMutation.isLoading,
+                isResetPasswordSucess: resetPasswordMutation.isSuccess,
 
                 logout: logoutMutation.mutateAsync,
                 isLoggingOut: logoutMutation.isLoading,
@@ -191,17 +209,22 @@ export function initReactQuery<
                 refetch,
                 loginMutation.mutateAsync,
                 loginMutation.isLoading,
+                loginMutation.isSuccess,
                 registerMutation.mutateAsync,
                 registerMutation.isLoading,
                 registerMutation.isSuccess,
                 confirmEmailMutation.mutateAsync,
                 confirmEmailMutation.isLoading,
+                confirmEmailMutation.isSuccess,
                 twoFactorMutation.mutateAsync,
                 twoFactorMutation.isLoading,
+                twoFactorMutation.isSuccess,
                 forgotPasswordMutation.mutateAsync,
                 forgotPasswordMutation.isLoading,
+                forgotPasswordMutation.isSuccess,
                 resetPasswordMutation.mutateAsync,
                 resetPasswordMutation.isLoading,
+                resetPasswordMutation.isSuccess,
                 logoutMutation.mutateAsync,
                 logoutMutation.isLoading,
             ]

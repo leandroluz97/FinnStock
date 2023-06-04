@@ -1,19 +1,22 @@
 import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
 import { useConfirmEmailDto } from '../api/confirmEmail';
+import { useAuth } from '../../../lib/auth';
 
 export const ConfirmEmailForm = () => {
     const location = useLocation();
     const searchQueries = new URLSearchParams(location.search);
     const token = searchQueries.get('token');
     const email = searchQueries.get('email');
-    const confirmEmail = useConfirmEmailDto();
+    const { confirmEmail } = useAuth();
 
     useEffect(() => {
-        (async function () {
+        async function init() {
             if (!(email && token)) return;
-            await confirmEmail.mutateAsync({ data: { token, email } });
-        })();
+            await confirmEmail({ data: { token, email } });
+        }
+        init();
+        // eslint-disable-next-line
     }, []);
 
     return (

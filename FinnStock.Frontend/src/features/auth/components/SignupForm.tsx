@@ -11,6 +11,7 @@ import { CountryCode, Spinner } from '../../../components/Elements';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import validationRules from '../../../utils/formValidations';
 import { useAuth } from '../../../lib/auth';
+import { useRegister } from '../api/register';
 
 type Inputs = {
     firstName: string;
@@ -30,15 +31,14 @@ const schema = yup.object().shape({
 });
 
 export const SignupForm = () => {
+    const [code, setCode] = useState<number>(228);
+    const { register: registerUser, isRegisterSuccess, isRegistering } = useAuth();
     const {
         register,
         formState: { errors },
         handleSubmit,
         setError,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
-    const [code, setCode] = useState<number>(228);
-    // const registerUser = useRegister();
-    const { register: registerUser } = useAuth();
 
     const submit = async (data: Inputs) => {
         const [countryIndex] = codes[code].countryCodes;
@@ -51,7 +51,6 @@ export const SignupForm = () => {
                 { shouldFocus: true }
             );
         }
-
         await registerUser({
             data: {
                 firstName: data.firstName,
@@ -63,7 +62,7 @@ export const SignupForm = () => {
         });
     };
 
-    return registerUser.isSuccess ? (
+    return isRegisterSuccess ? (
         <React.Fragment>
             <h2 className="text-3xl font-medium text-primary-900 mt-32 md:mt-6 my-6">
                 Email confirmation Sent!🎉🎉
@@ -172,12 +171,12 @@ export const SignupForm = () => {
 
                 <div>
                     <button
-                        disabled={registerUser.isLoading}
+                        disabled={isRegistering}
                         type="submit"
                         className="flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                     >
                         Create account
-                        {registerUser.isLoading && (
+                        {isRegistering && (
                             <span className="ml-2">
                                 <Spinner />
                             </span>

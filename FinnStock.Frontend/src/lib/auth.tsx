@@ -11,8 +11,11 @@ import { AuthUser } from '../features/auth/types';
 import { storageService } from '../utils/storage';
 
 async function loadUser(data: userDto) {
-    const response = await getUser(data);
-    return response;
+    if (storageService.getToken()) {
+        const data = await getUser();
+        return data;
+    }
+    return null;
 }
 
 async function loginFn(data: LoginDto) {
