@@ -11,8 +11,8 @@ export const Tab = () => {
                         className={({ isActive, isPending }) =>
                             `inline-block p-4 border-b-2 rounded-t-lg ${
                                 isActive
-                                    ? ' text-primary-900 border-blue-600 active'
-                                    : ' border-transparent'
+                                    ? ' border-transparent'
+                                    : ' text-primary-900 border-blue-600 active'
                             }`
                         }
                     >

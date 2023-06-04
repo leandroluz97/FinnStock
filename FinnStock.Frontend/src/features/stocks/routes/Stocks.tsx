@@ -7,7 +7,7 @@ import { ContentLayout } from '../../../components/Layout/ContentLayout';
 export const Stocks = () => {
     return (
         <ContentLayout title="stocks" description="">
-            <div className="flex flex-col justify-between overflow-hidden ">
+            <div className="flex flex-col justify-between overflow-hidden">
                 <StocksList />
             </div>
         </ContentLayout>

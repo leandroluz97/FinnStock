@@ -5,14 +5,12 @@ import parsePhoneNumber from 'libphonenumber-js';
 import * as yup from 'yup';
 import codes from 'country-calling-code';
 
-import { CountryCode as CountryCodeType, isValidPhoneNumber } from 'libphonenumber-js/core';
-
 import { NavLink } from 'react-router-dom';
 import { CheckBoxField, InputField } from '../../../components/Form';
 import { CountryCode, Spinner } from '../../../components/Elements';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import validationRules from '../../../utils/formValidations';
-import { RegisterDto, useRegister } from '../api/register';
+import { useAuth } from '../../../lib/auth';
 
 type Inputs = {
     firstName: string;
@@ -39,7 +37,8 @@ export const SignupForm = () => {
         setError,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
     const [code, setCode] = useState<number>(228);
-    const registerUser = useRegister();
+    // const registerUser = useRegister();
+    const { register: registerUser } = useAuth();
 
     const submit = async (data: Inputs) => {
         const [countryIndex] = codes[code].countryCodes;
@@ -53,7 +52,7 @@ export const SignupForm = () => {
             );
         }
 
-        await registerUser.mutateAsync({
+        await registerUser({
             data: {
                 firstName: data.firstName,
                 lastName: data.lastName,
