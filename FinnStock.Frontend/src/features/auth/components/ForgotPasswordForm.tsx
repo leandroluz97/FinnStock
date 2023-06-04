@@ -6,9 +6,8 @@ import { NavLink } from 'react-router-dom';
 
 import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
-import { useForgotPassword } from '../api/forgotPassword';
 import { Spinner } from '../../../components/Elements';
-import googleLogo from '../../../assets/google-logo-sm.svg';
+import { useAuth } from '../../../lib/auth';
 
 type Inputs = {
     email: string;
@@ -18,7 +17,7 @@ const schema = yup.object().shape({
 });
 
 export const ForgotPasswordForm = () => {
-    const forgot = useForgotPassword();
+    const { forgotPassword, isForgotingPassword } = useAuth();
     const {
         register,
         formState: { errors },
@@ -26,7 +25,7 @@ export const ForgotPasswordForm = () => {
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     const submit = async (data: Inputs) => {
-        await forgot.mutateAsync({
+        await forgotPassword({
             data: {
                 email: data.email,
             },
@@ -55,12 +54,12 @@ export const ForgotPasswordForm = () => {
 
                 <div>
                     <button
-                        disabled={forgot.isLoading}
+                        disabled={isForgotingPassword}
                         type="submit"
                         className="flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                     >
                         Submit
-                        {forgot.isLoading && (
+                        {isForgotingPassword && (
                             <span className="ml-2">
                                 <Spinner />
                             </span>

@@ -6,7 +6,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
 import { Spinner } from '../../../components/Elements';
-import { useResetPassword } from '../api/resetPassword';
+import { useAuth } from '../../../lib/auth';
 
 type Inputs = {
     password: string;
@@ -16,9 +16,8 @@ const schema = yup.object().shape({
 });
 
 export const ResetPasswordForm = () => {
-    const reset = useResetPassword();
+    const { resetPassword, isResetingPassword } = useAuth();
     const location = useLocation();
-
     const {
         register,
         formState: { errors },
@@ -34,7 +33,7 @@ export const ResetPasswordForm = () => {
             return;
         }
 
-        await reset.mutateAsync({
+        await resetPassword({
             data: {
                 email,
                 activationToken,
@@ -65,12 +64,12 @@ export const ResetPasswordForm = () => {
 
                 <div>
                     <button
-                        disabled={false}
+                        disabled={isResetingPassword}
                         type="submit"
                         className="flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                     >
                         Submit
-                        {false && (
+                        {isResetingPassword && (
                             <span className="ml-2">
                                 <Spinner />
                             </span>

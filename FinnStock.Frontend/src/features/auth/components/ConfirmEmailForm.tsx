@@ -1,6 +1,5 @@
 import React, { useEffect } from 'react';
 import { NavLink, useLocation } from 'react-router-dom';
-import { useConfirmEmailDto } from '../api/confirmEmail';
 import { useAuth } from '../../../lib/auth';
 
 export const ConfirmEmailForm = () => {
@@ -26,7 +25,7 @@ export const ConfirmEmailForm = () => {
             </h2>
             <p className="text-sm font-medium text-primary-700">
                 Your email has been confirmed, now you can login to your account. Thank you for
-                choosing our platform. We're thrilled to have you on board and look forward to
+                choosing our platform. We are thrilled to have you on board and look forward to
                 serving you.
             </p>
             <div>

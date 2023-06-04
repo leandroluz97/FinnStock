@@ -16,9 +16,9 @@ export interface AuthProviderConfig<User = unknown, Error = unknown> {
     loginFn: (data: any) => Promise<User>;
     registerFn: (data: any) => Promise<User>;
     confirmEmailFn: (data: any) => Promise<User>;
+    twoFactorFn: (data: any) => Promise<User>;
     forgotPasswordFn: (data: any) => Promise<User>;
     resetPasswordFn: (data: any) => Promise<User>;
-    twoFactorFn: (data: any) => Promise<User>;
     logoutFn: () => Promise<any>;
     LoaderComponent?: () => JSX.Element;
     ErrorComponent?: ({ error }: { error: Error | null }) => JSX.Element;
@@ -30,11 +30,12 @@ export interface AuthContextValue<
     LoginCredentials = unknown,
     RegisterCredentials = unknown,
     ConfirmEmailCredentials = unknown,
+    TwoFactorCredentials = unknown,
     ForgotPasswordCredentials = unknown,
-    ResetPasswordCredentials = unknown,
-    TwoFactorCredentials = unknown
+    ResetPasswordCredentials = unknown
 > {
     user: User | undefined;
+    error: Error | null;
     login: UseMutateAsyncFunction<User, any, LoginCredentials>;
     register: UseMutateAsyncFunction<User, any, RegisterCredentials>;
     confirmEmail: UseMutateAsyncFunction<User, any, ConfirmEmailCredentials>;
@@ -58,7 +59,6 @@ export interface AuthContextValue<
     refetchUser: (
         options?: RefetchOptions | undefined
     ) => Promise<QueryObserverResult<User, Error>>;
-    error: Error | null;
 }
 
 export interface AuthProviderProps {

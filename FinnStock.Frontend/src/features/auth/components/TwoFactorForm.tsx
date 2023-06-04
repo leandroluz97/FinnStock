@@ -8,6 +8,7 @@ import { InputField } from '../../../components/Form';
 import { Spinner } from '../../../components/Elements';
 import validationRules from '../../../utils/formValidations';
 import { useTwoFactor } from '../api/twoFactor';
+import { useAuth } from '../../../lib/auth';
 
 type Inputs = {
     one: string;
@@ -28,14 +29,14 @@ const schema = yup.object().shape({
 });
 
 export const TwoFactorForm = () => {
+    // const twoFactor = useTwoFactor();
+    const { twoFactor, isTwoFactorSuccess } = useAuth();
+    const location = useLocation();
     const {
         register,
         formState: { errors },
         handleSubmit,
-        setError,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
-    const twoFactor = useTwoFactor();
-    const location = useLocation();
 
     const submit = async (data: Inputs) => {
         const searchQueries = new URLSearchParams(location.search);
@@ -46,7 +47,7 @@ export const TwoFactorForm = () => {
             return;
         }
 
-        await twoFactor.mutateAsync({
+        await twoFactor({
             data: {
                 otpCode,
                 userId,
@@ -90,7 +91,7 @@ export const TwoFactorForm = () => {
                     <InputField
                         id="three"
                         name="three"
-                        // label="First Name"
+                        //  label="First Name"
                         placeholder=""
                         type="text"
                         groupFormClassList="flex-1"
@@ -143,12 +144,12 @@ export const TwoFactorForm = () => {
 
                 <div>
                     <button
-                        disabled={false}
+                        disabled={isTwoFactorSuccess}
                         type="submit"
                         className="flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                     >
                         Send Code
-                        {false && (
+                        {isTwoFactorSuccess && (
                             <span className="ml-2">
                                 <Spinner />
                             </span>

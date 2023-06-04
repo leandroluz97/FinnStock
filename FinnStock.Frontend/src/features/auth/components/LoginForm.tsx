@@ -8,7 +8,7 @@ import validationRules from '../../../utils/formValidations';
 import { CheckBoxField, InputField } from '../../../components/Form';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import { Spinner } from '../../../components/Elements';
-import { useLogin } from '../api/login';
+import { useAuth } from '../../../lib/auth';
 
 type Inputs = {
     email: string;
@@ -21,7 +21,7 @@ const schema = yup.object().shape({
 });
 
 export const LoginForm = () => {
-    const loginUser = useLogin();
+    const { login, isLoggingIn } = useAuth();
     const {
         register,
         formState: { errors },
@@ -29,7 +29,7 @@ export const LoginForm = () => {
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     const submit = async (data: Inputs) => {
-        await loginUser.mutateAsync({
+        await login({
             data: {
                 email: data.email,
                 password: data.password,
@@ -93,12 +93,12 @@ export const LoginForm = () => {
                 </div>
                 <div>
                     <button
-                        disabled={loginUser.isLoading}
+                        disabled={isLoggingIn}
                         type="submit"
                         className="flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5 mr-2 mb-2"
                     >
                         Create account
-                        {loginUser.isLoading && (
+                        {isLoggingIn && (
                             <span className="ml-2">
                                 <Spinner />
                             </span>
