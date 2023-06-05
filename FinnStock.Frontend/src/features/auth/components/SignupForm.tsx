@@ -56,7 +56,7 @@ export const SignupForm = () => {
                 firstName: data.firstName,
                 lastName: data.lastName,
                 email: data.email,
-                phoneNumber: data.phoneNumber,
+                phoneNumber: `+${countryIndex}${data.phoneNumber}`,
                 password: data.password,
             },
         });

@@ -10,7 +10,6 @@ import { Twofactor } from './Twofactor';
 export const AuthRoutes = () => {
     return (
         <Routes>
-            {/* <Route path="/auth/*"> */}
             <Route path="signup" element={<Signup />} />
             <Route path="login" element={<Login />} />
             <Route path="forgot-password" element={<ForgotPassword />} />
@@ -18,8 +17,6 @@ export const AuthRoutes = () => {
             <Route path="reset-password" element={<ResetPassword />} />
             <Route path="two-factor-validation" element={<Twofactor />} />
             <Route path="*" element={<Navigate to="/auth/login" replace />} />
-            {/* <Navigate to="/login" replace /> */}
-            {/* </Route> */}
         </Routes>
     );
 };

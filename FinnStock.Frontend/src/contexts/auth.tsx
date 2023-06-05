@@ -10,10 +10,14 @@ import {
 import { toast } from 'react-toastify';
 import { toasterConfig } from '../lib/react-toastify';
 
-export interface AuthProviderConfig<User = unknown, Error = unknown> {
+export interface AuthProviderConfig<
+    User = unknown,
+    LoginResponseCredencial = unknown,
+    Error = unknown
+> {
     key?: string;
     loadUser: (data: any) => Promise<User>;
-    loginFn: (data: any) => Promise<User>;
+    loginFn: (data: any) => Promise<LoginResponseCredencial>;
     registerFn: (data: any) => Promise<User>;
     confirmEmailFn: (data: any) => Promise<User>;
     twoFactorFn: (data: any) => Promise<User>;
@@ -26,6 +30,7 @@ export interface AuthProviderConfig<User = unknown, Error = unknown> {
 
 export interface AuthContextValue<
     User = unknown,
+    LoginResponseCredencial = unknown,
     Error = unknown,
     LoginCredentials = unknown,
     RegisterCredentials = unknown,
@@ -36,7 +41,7 @@ export interface AuthContextValue<
 > {
     user: User | undefined;
     error: Error | null;
-    login: UseMutateAsyncFunction<User, any, LoginCredentials>;
+    login: UseMutateAsyncFunction<LoginResponseCredencial, any, LoginCredentials>;
     register: UseMutateAsyncFunction<User, any, RegisterCredentials>;
     confirmEmail: UseMutateAsyncFunction<User, any, ConfirmEmailCredentials>;
     twoFactor: UseMutateAsyncFunction<User, any, TwoFactorCredentials>;
@@ -67,6 +72,7 @@ export interface AuthProviderProps {
 
 export function initReactQuery<
     User = unknown,
+    LoginResponseCredencial = unknown,
     Error = unknown,
     LoginCredentials = unknown,
     RegisterCredentials = unknown,
@@ -74,9 +80,10 @@ export function initReactQuery<
     TwoFactorCredentials = unknown,
     ForgotPasswordCredentials = unknown,
     ResetPasswordCredentials = unknown
->(config: AuthProviderConfig<User, Error>) {
+>(config: AuthProviderConfig<User, LoginResponseCredencial, Error>) {
     const AuthContext = React.createContext<AuthContextValue<
         User,
+        LoginResponseCredencial,
         Error,
         LoginCredentials,
         RegisterCredentials,
@@ -122,6 +129,9 @@ export function initReactQuery<
 
         const loginMutation = useMutation({
             mutationFn: loginFn,
+            onSuccess(data) {
+                window.location = `http://localhost:3000/auth/two-factor-validation${data.userId}`;
+            },
             onError: (error) => {
                 toast.error('Error Login', toasterConfig);
             },
@@ -130,16 +140,13 @@ export function initReactQuery<
         const registerMutation = useMutation({
             mutationFn: registerFn,
             onError: (error) => {
-                console.log(error);
                 toast.error('Error Register', toasterConfig);
             },
         });
 
         const confirmEmailMutation = useMutation({
             mutationFn: confirmEmailFn,
-            onSuccess: (user) => {
-                //  setUser(user);
-            },
+            onSuccess: (user) => {},
         });
 
         const twoFactorMutation = useMutation({

@@ -41,12 +41,11 @@ export const TwoFactorForm = () => {
     const submit = async (data: Inputs) => {
         const searchQueries = new URLSearchParams(location.search);
         const userId = searchQueries.get('userId');
-        const otpCode = searchQueries.get('otpCode');
+        const otpCode = Object.values(data).join('');
 
-        if (!(userId && otpCode)) {
+        if (!userId) {
             return;
         }
-
         await twoFactor({
             data: {
                 otpCode,
@@ -91,7 +90,7 @@ export const TwoFactorForm = () => {
                     <InputField
                         id="three"
                         name="three"
-                        //  label="First Name"
+                        label=""
                         placeholder=""
                         type="text"
                         groupFormClassList="flex-1"

@@ -3,7 +3,7 @@ import { AuthProviderConfig, initReactQuery } from '../contexts/auth';
 import { ConfirmEmailDto, confirmEmail } from '../features/auth/api/confirmEmail';
 import { ForgotPasswordDto, forgotPassword } from '../features/auth/api/forgotPassword';
 import { getUser, userDto } from '../features/auth/api/getUser';
-import { LoginDto, login } from '../features/auth/api/login';
+import { LoginDto, LoginResponseDto, login } from '../features/auth/api/login';
 import { RegisterDto, register } from '../features/auth/api/register';
 import { ResetPasswordDto } from '../features/auth/api/resetPassword';
 import { TwoFactorDto, twoFactor } from '../features/auth/api/twoFactor';
@@ -53,7 +53,7 @@ async function logoutFn() {
     window.location.assign(window.location.origin as unknown as string);
 }
 
-const authConfig: AuthProviderConfig<AuthUser, unknown> = {
+const authConfig: AuthProviderConfig<AuthUser, LoginResponseDto, unknown> = {
     loadUser,
     loginFn,
     registerFn,
@@ -73,6 +73,7 @@ const authConfig: AuthProviderConfig<AuthUser, unknown> = {
 
 export const { AuthProvider, useAuth } = initReactQuery<
     AuthUser | null,
+    LoginResponseDto,
     unknown,
     LoginDto,
     RegisterDto,

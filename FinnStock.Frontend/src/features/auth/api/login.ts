@@ -11,6 +11,9 @@ export type LoginDto = {
         password: string;
     };
 };
+export type LoginResponseDto = {
+    userId: string;
+};
 
 export const login = ({ data }: LoginDto): Promise<any> => {
     return axios.post('/auth/login', data);
