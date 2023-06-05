@@ -52,6 +52,14 @@ namespace FinnStock.Services
             }
             registerDto.EnsureValidation();
 
+            var phoneNumberUtil = PhoneNumbers.PhoneNumberUtil.GetInstance();
+            var phoneNumber = phoneNumberUtil.Parse(registerDto.PhoneNumber, null);
+
+            if(phoneNumber == null)
+            {
+                throw new ArgumentException(nameof(registerDto.PhoneNumber));
+            }
+
             var user = new User()
             {
                 Email = registerDto.Email,
@@ -59,7 +67,8 @@ namespace FinnStock.Services
                 FirstName = registerDto.FirstName,
                 LastName = registerDto.LastName,
                 UserName = registerDto.Email,
-                TwoFactorEnabled = true
+                TwoFactorEnabled = true,
+                PhoneNumberConfirmed = true,
             };
             var result = await _userManager.CreateAsync(user, registerDto.Password);
 
@@ -69,7 +78,7 @@ namespace FinnStock.Services
             }
 
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var tokenString = Conversor.ToString(token);
+            var tokenString = Conversor.ToBase64(token);
 
             var uriBuilder = new UriBuilder("http://localhost:3000/auth/confirm-email");
             uriBuilder.Query = $"token={tokenString}&email={user.Email}";
@@ -99,7 +108,7 @@ namespace FinnStock.Services
                 throw new NotFoundException($"{nameof(user)} with {confirmEmailDto.Email} not found");
             }
 
-            var token= Conversor.ToBase64(confirmEmailDto.Token);
+            var token= Conversor.ToString(confirmEmailDto.Token);
 
             var result = await _userManager.ConfirmEmailAsync(user, token);
 
