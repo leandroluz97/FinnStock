@@ -90,6 +90,8 @@ namespace FinnStock.DependencyInjection
             {
                 options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
                 options.DefaultChallengeScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+
+                //options.AddPolicy("TwoFactorEnabled", x => x.RequireClaim("amr", "mfa")); 
             })
             .AddJwtBearer(options =>
             {

@@ -163,13 +163,23 @@ namespace FinnStock.Services
             }
             validateOtpDto.EnsureValidation();
 
+            //var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
+
+            //if (user == null)
+            //{
+            //    throw new NotFoundException();
+            //}
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+
+            //var twoFactorUser = await _userManager.VerifyTwoFactorTokenAsync(user, "Phone", validateOtpDto.OtpCode);
+
             var result = await _signInManager.TwoFactorSignInAsync("Phone", validateOtpDto.OtpCode, isPersistent: true, rememberClient: true);
             if (!result.Succeeded)
             {
                 throw new InvalidOperationException($"Invalid {nameof(validateOtpDto.OtpCode)}");
             }
 
-            var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
+            //var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
 
             _logger.LogInformation("{ValidateOTP} validated {user}", nameof(ValidateOTP), user);
 
