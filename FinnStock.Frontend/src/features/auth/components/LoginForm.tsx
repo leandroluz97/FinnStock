@@ -3,7 +3,7 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 
-import { NavLink } from 'react-router-dom';
+import { NavLink, useNavigate } from 'react-router-dom';
 import validationRules from '../../../utils/formValidations';
 import { CheckBoxField, InputField } from '../../../components/Form';
 import googleLogo from '../../../assets/google-logo-sm.svg';
@@ -22,6 +22,7 @@ const schema = yup.object().shape({
 
 export const LoginForm = () => {
     const { login, isLoggingIn } = useAuth();
+    const navigate = useNavigate();
     const {
         register,
         formState: { errors },
@@ -29,12 +30,13 @@ export const LoginForm = () => {
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     const submit = async (data: Inputs) => {
-        await login({
+        const user = await login({
             data: {
                 email: data.email,
                 password: data.password,
             },
         });
+        navigate(`/auth/two-factor-validation?userId=${user.userId}`);
     };
 
     return (

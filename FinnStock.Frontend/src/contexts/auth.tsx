@@ -129,9 +129,6 @@ export function initReactQuery<
 
         const loginMutation = useMutation({
             mutationFn: loginFn,
-            onSuccess(data) {
-                window.location = `http://localhost:3000/auth/two-factor-validation?userId=${data.userId}`;
-            },
             onError: (error) => {
                 toast.error('Error Login', toasterConfig);
             },
