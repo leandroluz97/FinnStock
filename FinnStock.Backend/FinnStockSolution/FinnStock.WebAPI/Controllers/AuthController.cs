@@ -63,16 +63,9 @@ namespace FinnStock.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<ActionResult> Login(LoginDto loginDto)
+        public async Task<ActionResult<LoginResponseDto>> Login(LoginDto loginDto)
         {
-            var user =  await _authenticationService.Login(loginDto);
-            if (user == null)
-            {
-                throw new InvalidOperationException();
-            }
-
-            return Redirect($"http://localhost:3000/auth/two-factor-validation?userId={user.UserId}");
-
+            return await _authenticationService.Login(loginDto);
         }
 
         [HttpPost]

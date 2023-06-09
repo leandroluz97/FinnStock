@@ -153,6 +153,15 @@ namespace FinnStock.Services
             return new LoginResponseDto() { UserId = user.Id.ToString() };
         }
 
+
+        public async Task  ValidateOTPTest()
+        {
+            //_logger.LogInformation("{ValidateOTP} param value {validateOtpDto}", nameof(ValidateOTP), validateOtpDto);
+
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            if(user != null) { }
+        }
+
         public async Task<ResponseToken> ValidateOTP(ValidateOtpDto validateOtpDto)
         {
             _logger.LogInformation("{ValidateOTP} param value {validateOtpDto}", nameof(ValidateOTP), validateOtpDto);
@@ -163,23 +172,20 @@ namespace FinnStock.Services
             }
             validateOtpDto.EnsureValidation();
 
-            //var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
+            var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
 
-            //if (user == null)
-            //{
-            //    throw new NotFoundException();
-            //}
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+            var isVerified = await _userManager.VerifyTwoFactorTokenAsync(user, "Phone", validateOtpDto.OtpCode);
 
-            //var twoFactorUser = await _userManager.VerifyTwoFactorTokenAsync(user, "Phone", validateOtpDto.OtpCode);
-
-            var result = await _signInManager.TwoFactorSignInAsync("Phone", validateOtpDto.OtpCode, isPersistent: true, rememberClient: true);
-            if (!result.Succeeded)
+            if(isVerified != true)
             {
                 throw new InvalidOperationException($"Invalid {nameof(validateOtpDto.OtpCode)}");
             }
 
-            //var user = await _userManager.FindByIdAsync(validateOtpDto.UserId);
+            //var result = await _signInManager.TwoFactorSignInAsync("Phone", validateOtpDto.OtpCode, isPersistent: true, rememberClient: true);
+            //if (!result.Succeeded)
+            //{
+            //    throw new InvalidOperationException($"Invalid {nameof(validateOtpDto.OtpCode)}");
+            //}
 
             _logger.LogInformation("{ValidateOTP} validated {user}", nameof(ValidateOTP), user);
 
