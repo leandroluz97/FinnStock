@@ -1,5 +1,6 @@
 ﻿using FinnStock.Clients.Finnhub;
 using FinnStock.Dtos;
+using FinnStock.Utils;
 using FinnStock.WebSocket;
 using Microsoft.Extensions.Logging;
 using System;
@@ -22,7 +23,7 @@ namespace FinnStock.Services
             _webSocketClient = webSocketClient;
         }
 
-        public async Task<IEnumerable<StockDto>> GetAllAsync()
+        public async Task<Pagination<StockDto>> GetAllAsync(int pageSize = 50, int pageNumber = 1)
         {
             _logger.LogInformation("{GetAllAsync} request", nameof(GetAllAsync));
 
@@ -35,10 +36,13 @@ namespace FinnStock.Services
 
             _logger.LogInformation("{GetAllAsync} found: {stocks}", nameof(GetAllAsync), stocks.Count());
 
-            return stocks;
+            return new Pagination<StockDto>() 
+            {
+                Items =  stocks
+            };
         }
 
-        public async Task<IEnumerable<SymbolDto>> SearchStockAsync(string searchText)
+        public async Task<Pagination<SymbolDto>> SearchStockAsync(string searchText, int pageSize = 50, int pageNumber = 1)
         {
             _logger.LogInformation("{SearchStockAsync} param value {searchText}", nameof(SearchStockAsync), searchText);
 
@@ -51,7 +55,7 @@ namespace FinnStock.Services
 
             _logger.LogInformation("{SearchStockAsync} found: {stocks}", nameof(GetAllAsync), stocks.Count());
 
-            return stocks;
+            return new Pagination<SymbolDto>() { Items = stocks};
         }
 
         public async Task<CompanyDto> GetCompanyProfileAsync(string symbol)
@@ -92,6 +96,17 @@ namespace FinnStock.Services
             _logger.LogInformation("{GetStockQuoteAsync} found: {company}", nameof(GetAllAsync), quote.C); 
 
             return quote;
+        }
+
+        public async Task<Pagination<NewsDto>> GetMarketNewsAsync(int pageSize, int pageNumber)
+        {
+            _logger.LogInformation("{GetMarketNewsAsync} param value", nameof(GetStockQuoteAsync));
+
+            var news = await _finnhubClient.GetMarketNewsAsync();
+
+            _logger.LogInformation("{GetStockQuoteAsync} found {news}", nameof(GetAllAsync), news.Count());
+
+            return new Pagination<NewsDto>() { Items = news };
         }
 
         public async Task ConnectToWebSocket(string symbol)

@@ -84,5 +84,18 @@ namespace FinnStock.Clients.Finnhub
 
             return responseData;
         }
+
+        public async Task<IEnumerable<NewsDto>> GetMarketNewsAsync()
+        {
+            var response = await _httpClient.GetAsync($"/api/v1/news?category=general");
+
+            response.EnsureSuccessStatusCode();
+
+            var responseJson = await response.Content.ReadAsStringAsync();
+
+            var responseData = JsonSerializer.Deserialize<IEnumerable<NewsDto>>(responseJson, _jsonSerializerOptions);
+
+            return responseData;
+        }
     }
 }
