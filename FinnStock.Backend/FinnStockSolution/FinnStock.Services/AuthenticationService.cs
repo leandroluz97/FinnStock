@@ -181,12 +181,6 @@ namespace FinnStock.Services
                 throw new InvalidOperationException($"Invalid {nameof(validateOtpDto.OtpCode)}");
             }
 
-            //var result = await _signInManager.TwoFactorSignInAsync("Phone", validateOtpDto.OtpCode, isPersistent: true, rememberClient: true);
-            //if (!result.Succeeded)
-            //{
-            //    throw new InvalidOperationException($"Invalid {nameof(validateOtpDto.OtpCode)}");
-            //}
-
             _logger.LogInformation("{ValidateOTP} validated {user}", nameof(ValidateOTP), user);
 
             return CreateJWToken(user);
