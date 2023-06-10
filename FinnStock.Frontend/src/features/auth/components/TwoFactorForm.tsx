@@ -1,14 +1,14 @@
 import React from 'react';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { InputField } from '../../../components/Form';
 import { Spinner } from '../../../components/Elements';
 import validationRules from '../../../utils/formValidations';
-import { useTwoFactor } from '../api/twoFactor';
 import { useAuth } from '../../../lib/auth';
+import { storageService } from '../../../utils/storage';
 
 type Inputs = {
     one: string;
@@ -32,6 +32,7 @@ export const TwoFactorForm = () => {
     // const twoFactor = useTwoFactor();
     const { twoFactor, isTwoFactorSuccess } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
     const {
         register,
         formState: { errors },
@@ -43,15 +44,16 @@ export const TwoFactorForm = () => {
         const userId = searchQueries.get('userId');
         const otpCode = Object.values(data).join('');
 
-        if (!userId) {
-            return;
-        }
-        await twoFactor({
+        if (!userId) return;
+
+        const { token } = await twoFactor({
             data: {
                 otpCode,
                 userId,
             },
         });
+        storageService.setToken(token);
+        navigate(`/u/${userId}/stocks`);
     };
 
     return (
