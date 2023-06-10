@@ -59,13 +59,14 @@ namespace FinnStock.Services
 
             _logger.LogInformation("{SearchStockAsync} found: {stocks}", nameof(GetAllAsync), stocks.Count());
 
-            stocks = stocks.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var pagedStocks = stocks.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
             return new Pagination<SymbolDto>()
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                Items = stocks
+                TotalPages = stocks.Count(),
+                Items = pagedStocks
             };
         }
 
@@ -115,7 +116,7 @@ namespace FinnStock.Services
 
             var news = await _finnhubClient.GetMarketNewsAsync();
 
-            news = news.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+            var pagedNews = news.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
 
             _logger.LogInformation("{GetStockQuoteAsync} found {news}", nameof(GetAllAsync), news.Count());
 
@@ -123,7 +124,8 @@ namespace FinnStock.Services
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                Items = news
+                TotalPages = news.Count(), 
+                Items = pagedNews
             };
         }
 

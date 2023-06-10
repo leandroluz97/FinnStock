@@ -1,5 +1,6 @@
 ﻿using FinnStock.Dtos;
 using FinnStock.Services;
+using FinnStock.Utils;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -19,7 +20,7 @@ namespace FinnStock.WebAPI.Controllers
 
         [HttpGet]
         [Route("")]
-        public async Task<IEnumerable<StockDto>> Stocks()
+        public async Task<Pagination<StockDto>> Stocks()
         {
            var stocks =  await _stockService.GetAllAsync();
            return stocks; 
