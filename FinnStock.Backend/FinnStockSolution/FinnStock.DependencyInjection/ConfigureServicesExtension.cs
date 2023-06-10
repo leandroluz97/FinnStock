@@ -23,6 +23,7 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using FinnStock.Clients.Finnhub;
 using FinnStock.WebSocket;
+using Azure.Storage.Blobs;
 
 namespace FinnStock.DependencyInjection
 {
@@ -33,6 +34,7 @@ namespace FinnStock.DependencyInjection
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))); //ServiceLifetime.Transient
+            services.AddScoped(x => new BlobServiceClient(configuration["Azure:BlobStorage"]));
 
             //services.AddCors((options) =>
             //{
@@ -57,6 +59,7 @@ namespace FinnStock.DependencyInjection
             services.AddTransient<IEmailClient, SengridClient>();
             services.AddTransient<FinnhubClient>();
             services.AddTransient<WebSocketClient>();
+            services.AddTransient<BlobServiceClient>();
             services.AddTransient<IMessageClient, TwilioClient>();
             services.AddScoped<AuthenticationService>();
             services.AddTransient<StockService>();
