@@ -1,5 +1,7 @@
 ﻿using FinnStock.Dtos;
 using FinnStock.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,6 +9,7 @@ namespace FinnStock.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class UsersController : ControllerBase
     {
         private readonly ILogger<UsersController> _logger;
@@ -33,21 +36,22 @@ namespace FinnStock.WebAPI.Controllers
 
         [HttpPost]
         [Route("{userId}/profile")]
-        public async Task<UserDto> UploadAsync(Guid userId)
+        public async Task UploadAsync(Guid userId)
         {
             IFormFile file = Request.Form.Files[0];
-            await using var memoryStream = new MemoryStream();
-            await file.CopyToAsync(memoryStream);
-            var bytes = memoryStream.ToArray();
- 
-            return await _userService.UploadProfileImageAsync(userId, bytes);
+            if(file == null)
+                throw new InvalidOperationException();
+            
+            Stream fileStream = file.OpenReadStream();
+     
+            await _userService.UploadProfileImageAsync(userId, fileStream);
         }
 
-        [HttpPost]
+        [HttpGet]
         [Route("{userId}/profile/{profileId}")]
-        public async Task<UserDto> UploadAsync(Guid userId, Guid profileId)
+        public async Task<string> GetProfileAsync(Guid userId)
         {
-            return await _userService.UpdateAsync(userId, user);
+            return await _userService.GetProfileImageAsync(userId);
         }
     }
 }

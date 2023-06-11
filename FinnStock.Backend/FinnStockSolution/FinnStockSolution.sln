@@ -39,7 +39,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Tests", "FinnStoc
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.Cache", "FinnhubStock.Cache\FinnStock.Cache.csproj", "{33EFC871-E222-4723-B111-1E4F48796C5B}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.WebSocket", "FinnStock.WebSocket\FinnStock.WebSocket.csproj", "{47E17111-6BC2-437A-AE71-E466C63EFEEB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FinnStock.WebSocket", "FinnStock.WebSocket\FinnStock.WebSocket.csproj", "{47E17111-6BC2-437A-AE71-E466C63EFEEB}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FinnStock.Azure", "FinnStock.Azure\FinnStock.Azure.csproj", "{37D3A1D3-2A72-41F0-830C-F1E706F38432}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -103,6 +105,10 @@ Global
 		{47E17111-6BC2-437A-AE71-E466C63EFEEB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{47E17111-6BC2-437A-AE71-E466C63EFEEB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{47E17111-6BC2-437A-AE71-E466C63EFEEB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{37D3A1D3-2A72-41F0-830C-F1E706F38432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{37D3A1D3-2A72-41F0-830C-F1E706F38432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{37D3A1D3-2A72-41F0-830C-F1E706F38432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{37D3A1D3-2A72-41F0-830C-F1E706F38432}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -122,6 +128,7 @@ Global
 		{F368EE00-EA28-4623-9E76-67429B311BAB} = {F37A65BA-C6E4-4F17-8976-B3F76E155981}
 		{33EFC871-E222-4723-B111-1E4F48796C5B} = {61742AFC-2743-4296-B407-B2CC627C087B}
 		{47E17111-6BC2-437A-AE71-E466C63EFEEB} = {61742AFC-2743-4296-B407-B2CC627C087B}
+		{37D3A1D3-2A72-41F0-830C-F1E706F38432} = {61742AFC-2743-4296-B407-B2CC627C087B}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {AB7813B9-1F9F-4FD4-8A82-1A12C3F02964}

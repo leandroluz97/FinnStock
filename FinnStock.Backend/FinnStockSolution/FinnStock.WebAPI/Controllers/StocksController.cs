@@ -1,6 +1,8 @@
 ﻿using FinnStock.Dtos;
 using FinnStock.Services;
 using FinnStock.Utils;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,11 +10,12 @@ namespace FinnStock.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class StockController : ControllerBase
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class StocksController : ControllerBase
     {
-        private readonly ILogger<StockController> _logger;
+        private readonly ILogger<StocksController> _logger;
         private readonly StockService _stockService;
-        public StockController(ILogger<StockController> logger, StockService stockService)
+        public StocksController(ILogger<StocksController> logger, StockService stockService)
         {
             _logger = logger;
             _stockService = stockService;

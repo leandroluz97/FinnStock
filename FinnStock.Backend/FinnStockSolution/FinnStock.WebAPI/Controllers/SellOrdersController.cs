@@ -1,5 +1,7 @@
 ﻿using FinnStock.Dtos;
 using FinnStock.Services;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -7,11 +9,12 @@ namespace FinnStock.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    public class SellOrderController : ControllerBase
+    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    public class SellOrdersController : ControllerBase
     {
         private readonly SellOrderService _sellOrderService;
 
-        public SellOrderController(SellOrderService sellOrderService)
+        public SellOrdersController(SellOrderService sellOrderService)
         {
             _sellOrderService = sellOrderService;
         }

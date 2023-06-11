@@ -10,10 +10,10 @@ namespace FinnStock.WebAPI.Controllers
     [Route("api/v1/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-    public class BuyOrderController : ControllerBase
+    public class BuyOrdersController : ControllerBase
     {
         private readonly BuyOrderService _buyOrderService;
-        public BuyOrderController(BuyOrderService buyOrderService)
+        public BuyOrdersController(BuyOrderService buyOrderService)
         {
             _buyOrderService = buyOrderService;
         }
