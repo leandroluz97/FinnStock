@@ -18,7 +18,7 @@ namespace FinnStock.Services.Mappers
                 LastName = dto.LastName,
                 Email = dto.Email,
                 PhoneNumber = dto.PhoneNumber,
-                ProfileId = dto.ProfileId,
+                //ProfileId = dto.ProfileId,
                 BirthDate = dto.BirthDate,
             };
         }
@@ -32,7 +32,7 @@ namespace FinnStock.Services.Mappers
                 LastName = domain.LastName,
                 Email = domain.Email,
                 PhoneNumber = domain.PhoneNumber,
-                ProfileId = domain.ProfileId,
+                //ProfileId = domain.ProfileId,
                 BirthDate = domain.BirthDate,
             };
         }

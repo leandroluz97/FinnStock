@@ -9,6 +9,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FinnStock.Azure;
 
 namespace FinnStock.Services
 {
@@ -16,10 +17,14 @@ namespace FinnStock.Services
     {
         private readonly ILogger<UserService> _logger;
         private readonly UserManager<User> _userManager;
-        public UserService(ILogger<UserService> logger, UserManager<User> userManager)
+        private readonly BlobClient _blobClient;
+        private readonly string _containerName;
+        public UserService(ILogger<UserService> logger, UserManager<User> userManager, BlobClient blobClient)
         {
             _logger = logger;
             _userManager = userManager;
+            _blobClient = blobClient;
+            _containerName = "profile";
         }
 
         public async Task<UserDto> GetByIdAsync(Guid userId, CancellationToken cancellationToken = default)
@@ -62,7 +67,7 @@ namespace FinnStock.Services
             userDomain.FirstName = user.FirstName;
             userDomain.LastName = user.LastName;
             userDomain.BirthDate = user.BirthDate;
-            userDomain.ProfileId = user.ProfileId;
+            //userDomain.ProfileId = user.ProfileId;
 
             var updatedUserResponse = await _userManager.UpdateAsync(userDomain);
 
@@ -74,20 +79,39 @@ namespace FinnStock.Services
             return UserMapper.ToDto(userDomain);
         }
 
-        public async Task<UserDto> GetProfileImageAsync()
+        public async Task<string> GetProfileImageAsync(Guid userId)
         {
+            if(userId == default) 
+            { 
+                throw new ArgumentNullException(nameof(userId)); 
+            }
+            var fileLink = await _blobClient.GetByUserIdAsync(_containerName, userId.ToString());
 
-        }
-        public async Task<byte[]> UploadProfileImageAsync(Guid userId, byte[] bytes, CancellationToken cancellationToken = default)
-        {
-            if(bytes == null)
+            if (string.IsNullOrWhiteSpace(fileLink))
             {
-                throw new ArgumentNullException(nameof(bytes));
+                throw new NotFoundException(nameof(fileLink));
             }
 
-            var fileToBase64 = Convert.ToBase64String(bytes);
+            return fileLink;
+        }
+        public async Task UploadProfileImageAsync(Guid userId, Stream file, CancellationToken cancellationToken = default)
+        {
+            if (userId == default)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
 
-            return Convert.FromBase64String(fileToBase64);  
+            if (file == null)
+            {
+                throw new ArgumentNullException(nameof(file));
+            }
+
+           var isUploaded =  await _blobClient.UploadAsync(_containerName, userId.ToString(), file);
+
+            if (!isUploaded)
+            {
+                throw new InvalidOperationException("Could not upload file");
+            }
         }
 
     }
