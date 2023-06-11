@@ -1,11 +1,9 @@
 ﻿
 
 using FinnStock.SQLWork;
-using FinnStock.UnitOfWork;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.AspNetCore.Cors;
 using Microsoft.AspNetCore.Identity;
 using FinnStock.Domain;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
@@ -15,10 +13,8 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.IdentityModel.Tokens;
 using FinnStock.Infrastructure.Abstractions.Clients;
 using FinnStock.Clients.Email;
-using FinnStock.Business.Abstractions;
 using FinnStock.Services;
 using FinnStock.Clients.Message;
-using Microsoft.AspNetCore.Authentication.Google;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
 using FinnStock.Clients.Finnhub;
@@ -34,7 +30,6 @@ namespace FinnStock.DependencyInjection
         {
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))); //ServiceLifetime.Transient
-            services.AddScoped(x => new BlobServiceClient(configuration["Azure:BlobStorage"]));
 
             //services.AddCors((options) =>
             //{
@@ -59,14 +54,16 @@ namespace FinnStock.DependencyInjection
             services.AddTransient<IEmailClient, SengridClient>();
             services.AddTransient<FinnhubClient>();
             services.AddTransient<WebSocketClient>();
-            services.AddTransient<BlobServiceClient>();
             services.AddTransient<IMessageClient, TwilioClient>();
             services.AddScoped<AuthenticationService>();
             services.AddTransient<StockService>();
             services.AddTransient<BuyOrderService>();
             services.AddTransient<SellOrderService>();
             services.AddTransient<FavoriteService>();
+            services.AddTransient<UserService>();
             services.AddScoped<IUnitOfWork, FinnStock.UnitOfWork.UnitOfWork>();
+            services.AddSingleton(x => new BlobServiceClient(configuration["Azure:BlobStorage"]));
+            services.AddSingleton<FinnStock.Azure.BlobClient>();
             services.AddSignalR();
 
             services.AddIdentity<User, Role>(options =>

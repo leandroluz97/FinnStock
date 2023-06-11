@@ -7,7 +7,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Azure.Storage.Blobs" Version="12.16.0" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="6.0.16" />
     <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.2.0" />
     <PackageReference Include="Microsoft.AspNetCore.Identity" Version="2.2.0" />
@@ -15,6 +14,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FinnStock.Azure\FinnStock.Azure.csproj" />
     <ProjectReference Include="..\FinnStock.Clients\FinnStock.Clients.csproj" />
     <ProjectReference Include="..\FinnStock.Repositories\FinnStock.SQLWork.csproj" />
     <ProjectReference Include="..\FinnStock.Services\FinnStock.Services.csproj" />
