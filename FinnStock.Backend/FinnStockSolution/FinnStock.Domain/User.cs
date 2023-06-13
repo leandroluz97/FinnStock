@@ -18,6 +18,6 @@ namespace FinnStock.Domain
         public string? RefreshToken { get; set; }
         public DateTime RefreshTokenExpirationDateTime { get; set; }
         public DateTime? BirthDate { get; set; }
-        //public string? ProfileId { get; set; }
+        //public string? ProfileUrl { get; set; }
     }
 }
