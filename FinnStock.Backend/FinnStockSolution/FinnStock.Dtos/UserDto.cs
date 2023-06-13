@@ -13,8 +13,8 @@ namespace FinnStock.Dtos
         public string LastName { get; set; }
         public string PhoneNumber { get; set; }
         public string Email { get; set; } 
-        public DateTime? BirthDate { get; set; } 
-        //public string? ProfileId { get; set; }
+        public DateTime? BirthDate { get; set; }
+        public string? ProfileUrl { get; set; }
 
         public void EnsureValidation()
         {
