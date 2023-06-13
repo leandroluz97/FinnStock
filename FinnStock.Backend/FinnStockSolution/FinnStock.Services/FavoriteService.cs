@@ -100,7 +100,7 @@ namespace FinnStock.Services
                 throw new NotFoundException(nameof(user));
             }
 
-            var favorite = await _unitOfWork.FavoriteRepository.GetByGloablIdAsync(userId, cancellationToken);
+            var favorite = await _unitOfWork.FavoriteRepository.GetByGloablIdAsync(favoriteId, cancellationToken);
 
             if (favorite == null)
             {
