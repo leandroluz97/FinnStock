@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinnStock.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/Users/{userId}/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class FavoritesController : ControllerBase
@@ -20,25 +20,26 @@ namespace FinnStock.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{userId}")]
+        [Route("")]
         public async Task<IEnumerable<FavoriteDto>> GetAllAsync(Guid userId, CancellationToken cancellationToken)
         {
           return  await _favoriteService.GetAllAsync(userId, cancellationToken);
         }
 
+        [HttpPost]
+        [Route("")]
+        public async Task<FavoriteDto> CreateAsync(Guid userId, FavoriteDto favorite, CancellationToken cancellationToken)
+        {
+            return await _favoriteService.CreateAsync(userId, favorite, cancellationToken);
+        }
+
         [HttpDelete]
-        [Route("{userId}/{favoriteId}")]
+        [Route("{favoriteId}")]
         public async Task DeleteAsync(Guid userId, Guid favoriteId, CancellationToken cancellationToken)
         {
             await _favoriteService.RemoveAsync(userId, favoriteId, cancellationToken);
         }
 
-        [HttpPost]
-        [Route("{userId}")]
-        public async Task<FavoriteDto> CreateAsync(Guid userId, FavoriteDto favorite, CancellationToken cancellationToken)
-        {
-            return await _favoriteService.CreateAsync(userId, favorite, cancellationToken);
-        }
 
     }
 }

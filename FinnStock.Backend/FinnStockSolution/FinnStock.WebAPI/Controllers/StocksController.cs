@@ -30,7 +30,7 @@ namespace FinnStock.WebAPI.Controllers
         }
         
         [HttpGet]
-        [Route("profile/{symbol}")]
+        [Route("{symbol}/profile")]
         public async Task<CompanyDto> GetCompanyAsync(string symbol)
         {
            var company =  await _stockService.GetCompanyProfileAsync(symbol);
@@ -38,7 +38,7 @@ namespace FinnStock.WebAPI.Controllers
         }
         
         [HttpGet]
-        [Route("quote/{symbol}")]
+        [Route("{symbol}/quote")]
         public async Task<QuoteDto> GetStockQuoteAsync(string symbol)
         {
            var quote =  await _stockService.GetStockQuoteAsync(symbol);
@@ -46,7 +46,7 @@ namespace FinnStock.WebAPI.Controllers
         }
         
         [HttpGet]
-        [Route("socket/{symbol}")]
+        [Route("{symbol}/socket")]
         public async Task Connect(string symbol)
         {
            await _stockService.ConnectToWebSocket(symbol);

@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace FinnStock.WebAPI.Controllers
 {
-    [Route("api/v1/[controller]")]
+    [Route("api/v1/Users/{userId}/[controller]")]
     [ApiController]
     [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class SellOrdersController : ControllerBase
@@ -20,21 +20,21 @@ namespace FinnStock.WebAPI.Controllers
         }
 
         [HttpGet]
-        [Route("{userId}")]
+        [Route("")]
         public async Task<IEnumerable<SellOrderDto>> GetAllAsync(Guid userId)
         {
             return await _sellOrderService.GetByUserIdAsync(userId);
         }
 
         [HttpPost]
-        [Route("{userId}/orders")]
+        [Route("")]
         public async Task<SellOrderDto> CreateOrderAsync(Guid userId, SellOrderDto buyOrder)
         {
             return await _sellOrderService.CreateOrderAsync(userId, buyOrder);
         }
 
         [HttpGet]
-        [Route("{userId}/orders/{orderId}")]
+        [Route("{orderId}")]
         public async Task<SellOrderDto> GetByIdAsync(Guid orderId)
         {
             return await _sellOrderService.GetByIdAsync(orderId);
