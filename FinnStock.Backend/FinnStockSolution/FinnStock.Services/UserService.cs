@@ -41,7 +41,16 @@ namespace FinnStock.Services
                 throw new NotFoundException(nameof(userId));
             }
 
-            return UserMapper.ToDto(user);
+            var userDto = UserMapper.ToDto(user);
+
+            var profileUrl = await GetProfileImageAsync(userId);
+
+            if(!string.IsNullOrWhiteSpace(profileUrl))
+            {
+                userDto.ProfileUrl = profileUrl;
+            }
+
+            return userDto;
         }
 
         public async Task<UserDto> UpdateAsync(Guid userId, UserDto user, CancellationToken cancellationToken = default)
@@ -67,7 +76,6 @@ namespace FinnStock.Services
             userDomain.FirstName = user.FirstName;
             userDomain.LastName = user.LastName;
             userDomain.BirthDate = user.BirthDate;
-            //userDomain.ProfileId = user.ProfileId;
 
             var updatedUserResponse = await _userManager.UpdateAsync(userDomain);
 
@@ -76,7 +84,16 @@ namespace FinnStock.Services
                 throw new InvalidOperationException($"Could not pdate user {userDomain.Id}");
             }
 
-            return UserMapper.ToDto(userDomain);
+            var userDto = UserMapper.ToDto(userDomain);
+
+            var profileUrl = await GetProfileImageAsync(userId);
+
+            if (!string.IsNullOrWhiteSpace(profileUrl))
+            {
+                userDto.ProfileUrl = profileUrl;
+            }
+
+            return userDto;
         }
 
         public async Task<string> GetProfileImageAsync(Guid userId)
