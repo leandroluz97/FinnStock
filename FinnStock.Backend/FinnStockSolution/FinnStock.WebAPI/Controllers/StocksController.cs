@@ -25,15 +25,22 @@ namespace FinnStock.WebAPI.Controllers
         [Route("")]
         public async Task<Pagination<StockDto>> Stocks(int pageSize = 100, int pageNumber = 1)
         {
-           var stocks =  await _stockService.GetAllAsync(pageNumber, pageSize);
+           var stocks =  await _stockService.GetAllAsync(pageSize, pageNumber);
            return stocks; 
         }
 
         [HttpGet]
-        [Route("")]
+        [Route("[action]")]
         public async Task<Pagination<NewsDto>> MarketNews(int pageSize = 100, int pageNumber = 1)
         {
-            return await _stockService.GetMarketNewsAsync(pageNumber, pageSize);
+            return await _stockService.GetMarketNewsAsync(pageSize, pageNumber);
+        }
+        
+        [HttpGet]
+        [Route("[action]")]
+        public async Task<Pagination<SymbolDto>> Search(string searchText, int pageSize = 100, int pageNumber = 1)
+        {
+            return await _stockService.SearchStockAsync(searchText, pageSize, pageNumber);
         }
 
         [HttpGet]

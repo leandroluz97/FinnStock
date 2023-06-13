@@ -30,7 +30,7 @@ namespace FinnStock.WebAPI.Controllers
         [Route("")]
         public async Task<BuyOrderDto> CreateOrderAsync(Guid userId, BuyOrderDto buyOrder)
         {
-            var u = User.Claims;
+            //var u = User.Claims;
             return await _buyOrderService.CreateOrderAsync(userId, buyOrder);
         }
 
