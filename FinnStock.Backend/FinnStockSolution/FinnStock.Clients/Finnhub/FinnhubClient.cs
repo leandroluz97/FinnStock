@@ -67,9 +67,9 @@ namespace FinnStock.Clients.Finnhub
 
             var responseJson = await response.Content.ReadAsStringAsync();
 
-            var responseData = JsonSerializer.Deserialize<IEnumerable<SymbolDto>>(responseJson, _jsonSerializerOptions);
+            var responseData = JsonSerializer.Deserialize<SearchResponseDto>(responseJson, _jsonSerializerOptions);
 
-            return responseData;
+            return responseData.Result;
         }
 
         public async Task<CompanyDto> GetCompanyProfileAsync(string symbol)
