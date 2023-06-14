@@ -16,7 +16,7 @@ namespace FinnStock.Clients.Finnhub
         private readonly IConfiguration _configuration;
         public FinnhubClient(IConfiguration configuration)
         {
-            _jsonSerializerOptions = new JsonSerializerOptions() 
+            _jsonSerializerOptions = new JsonSerializerOptions()
             {
                 PropertyNamingPolicy = JsonNamingPolicy.CamelCase,
             };
@@ -54,7 +54,7 @@ namespace FinnStock.Clients.Finnhub
 
             var responseJson = await response.Content.ReadAsStringAsync();
 
-             var responseData = JsonSerializer.Deserialize<IEnumerable<StockDto>>(responseJson, _jsonSerializerOptions);
+            var responseData = JsonSerializer.Deserialize<IEnumerable<StockDto>>(responseJson, _jsonSerializerOptions);
 
             return responseData;
         }
