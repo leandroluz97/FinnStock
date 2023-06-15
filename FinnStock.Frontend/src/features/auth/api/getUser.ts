@@ -1,4 +1,4 @@
-import axios from 'axios';
+import { axios } from '../../../lib/axios';
 
 export type userDto = {
     data: {
@@ -9,6 +9,6 @@ export type userDto = {
 // export const getUser = ({ data }: userDto): Promise<any> => {
 //     return axios.get(`/auth/user/${data.userId}`);
 // };
-export const getUser = (): Promise<any> => {
-    return axios.get(`/auth/user`);
+export const getUser = (userId: string): Promise<any> => {
+    return axios.get(`/Users/${userId}`);
 };

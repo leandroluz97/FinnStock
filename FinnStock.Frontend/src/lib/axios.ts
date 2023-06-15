@@ -1,14 +1,15 @@
 import Axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { storageService } from '../utils/storage';
 
-const API_URL = 'https://localhost:7100/api/v1';
+// const API_URL = 'https://localhost:7100/api/v1';
+const API_URL = 'https://finnstock.azurewebsites.net/api/v1';
 
 const authRequestInterceptor = (
     config: InternalAxiosRequestConfig<AxiosRequestConfig>
 ): InternalAxiosRequestConfig => {
     const token = storageService.getToken();
     if (token) {
-        config.headers.authorization = `${token}`;
+        config.headers.authorization = `Bearer ${token}`;
     }
     config.headers.Accept = 'application/json';
     return config;

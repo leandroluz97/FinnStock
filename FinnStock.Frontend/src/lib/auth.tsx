@@ -1,3 +1,4 @@
+import jwtDecode from 'jwt-decode';
 import { Spinner } from '../components/Elements';
 import { AuthProviderConfig, initReactQuery } from '../contexts/auth';
 import { ConfirmEmailDto, confirmEmail } from '../features/auth/api/confirmEmail';
@@ -11,8 +12,13 @@ import { AuthUser } from '../features/auth/types';
 import { storageService } from '../utils/storage';
 
 async function loadUser(data: userDto) {
-    if (storageService.getToken()) {
-        const data = await getUser();
+    const token = storageService.getToken();
+
+    if (token) {
+        const decoded = jwtDecode(token);
+        const userId =
+            decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
+        const data = await getUser(userId);
         return data;
     }
     return null;

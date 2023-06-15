@@ -29,7 +29,6 @@ const schema = yup.object().shape({
 });
 
 export const TwoFactorForm = () => {
-    // const twoFactor = useTwoFactor();
     const { twoFactor, isTwoFactorSuccess } = useAuth();
     const location = useLocation();
     const navigate = useNavigate();
@@ -68,7 +67,7 @@ export const TwoFactorForm = () => {
                         name="one"
                         label=""
                         placeholder=""
-                        type="text"
+                        type="number"
                         groupFormClassList="flex-1"
                         isRequired
                         key="one"
