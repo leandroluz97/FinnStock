@@ -10,7 +10,7 @@ namespace FinnStock.WebAPI.Controllers
 {
     [Route("api/v1/[controller]")]
     [ApiController]
-    [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+    //[Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
     public class StocksController : ControllerBase
     {
         private readonly ILogger<StocksController> _logger;
