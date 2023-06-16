@@ -1,13 +1,32 @@
 import React from 'react';
 import { Card } from './Card';
+import { useStocks } from '../api/getStocks';
+import { Spinner } from '../../../components/Elements';
 
 export const StocksList = () => {
+    const { data, isLoading, isError } = useStocks();
+
     return (
         <React.Fragment>
             <div className="overflow-hidden rounded-md">
                 <div className="h-full overflow-auto">
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 ">
-                        {Array(40)
+                        {isLoading ? (
+                            <div className="h-screen">
+                                <Spinner />
+                            </div>
+                        ) : (
+                            data != null &&
+                            data.items.map((stock, index) => (
+                                <Card
+                                    key={index}
+                                    currency={stock.currency}
+                                    description={stock.description}
+                                    symbol={stock.symbol}
+                                />
+                            ))
+                        )}
+                        {/* {Array(40)
                             .fill('')
                             .map((item, index) => (
                                 <Card
@@ -16,7 +35,7 @@ export const StocksList = () => {
                                     description="Microsoft"
                                     symbol="MSDT"
                                 />
-                            ))}
+                            ))} */}
                     </div>
                 </div>
             </div>

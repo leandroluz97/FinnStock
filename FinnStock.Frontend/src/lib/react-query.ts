@@ -1,5 +1,6 @@
 import { AxiosError } from 'axios';
 import { DefaultOptions, QueryClient, UseMutationOptions, UseQueryOptions } from 'react-query';
+import { Promisable } from 'type-fest';
 
 const queryConfig: DefaultOptions = {
     queries: {
@@ -11,10 +12,12 @@ const queryConfig: DefaultOptions = {
 
 export const queryClient = new QueryClient({ defaultOptions: queryConfig });
 
-export type ExtractFnReturnType<T extends (...args: any) => any> = Promise<ReturnType<T>>;
+export type ExtractFnReturnType<FnType extends (...args: any) => any> = Promisable<
+    ReturnType<FnType>
+>;
 
-export type QueryConfig<T extends (...args: any) => any> = Omit<
-    UseQueryOptions<ExtractFnReturnType<T>>,
+export type QueryConfig<QueryFnType extends (...args: any) => any> = Omit<
+    UseQueryOptions<ExtractFnReturnType<QueryFnType>>,
     'queryKey' | 'queryFn'
 >;
 

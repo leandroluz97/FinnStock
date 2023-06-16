@@ -6,3 +6,8 @@ export type IRegister<T> = {
     ref: React.Ref<T>;
     name: string;
 };
+
+export type BaseEntity = {
+    id: string;
+    createdAt: number;
+};
