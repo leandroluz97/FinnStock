@@ -4,7 +4,6 @@ import FinnstockLogo from '../../assets/finnstock-log.svg';
 import ProfilePicture from '../../assets/profile.svg';
 
 export const MainLayout = ({ children }) => {
-    const location = useLocation();
     const routes = [
         {
             path: 'stocks',
@@ -42,7 +41,7 @@ export const MainLayout = ({ children }) => {
                                     >
                                         <NavLink
                                             to={route.path}
-                                            className={({ isActive, isPending }) =>
+                                            className={({ isActive }) =>
                                                 `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
                                                     isActive
                                                         ? ' bg-slate-100 before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
@@ -71,7 +70,7 @@ export const MainLayout = ({ children }) => {
                                 >
                                     <NavLink
                                         to="settings"
-                                        className={({ isActive, isPending }) =>
+                                        className={({ isActive }) =>
                                             `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
                                                 isActive
                                                     ? ' before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
@@ -97,7 +96,7 @@ export const MainLayout = ({ children }) => {
                                 >
                                     <NavLink
                                         to="logout"
-                                        className={({ isActive, isPending }) =>
+                                        className={({ isActive }) =>
                                             `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
                                                 isActive
                                                     ? ' before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
