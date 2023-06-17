@@ -22,5 +22,11 @@ export const axios = Axios.create({
 axios.interceptors.request.use(authRequestInterceptor, (error) => Promise.reject(error));
 axios.interceptors.response.use(
     (response) => response.data,
-    (error) => Promise.reject(error)
+    (error) => {
+        if (error.response.status === 401) {
+            storageService.clearToken();
+            window.location.href = '/auth/login';
+        }
+        Promise.reject(error);
+    }
 );

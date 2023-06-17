@@ -9,7 +9,9 @@ import { ErrorFallback } from '../components/Error';
 import { queryClient } from '../lib/react-query';
 import { Loading } from '../components/Loading';
 import { AuthProvider } from '../lib/auth';
+import { URLSearch, urlQueries } from '../utils/URLSearch';
 
+URLSearch.register(urlQueries);
 interface IPropsAppProvider {
     children: ReactNode;
 }
