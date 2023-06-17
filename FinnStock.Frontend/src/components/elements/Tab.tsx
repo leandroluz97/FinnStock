@@ -1,31 +1,34 @@
 import React from 'react';
-import { NavLink } from 'react-router-dom';
+import { NavLink, useLocation } from 'react-router-dom';
 
 export const Tab = () => {
+    const { pathname } = useLocation();
+    console.log(pathname.endsWith('stocks'));
+
     return (
         <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-2">
             <ul className="flex flex-wrap -mb-px border-b-2 border-primary-300 ">
-                <li className="mr-2">
+                <li className="mr-2 list-none relative">
                     <NavLink
                         to=""
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 rounded-t-lg ${
-                                isActive
-                                    ? ' border-transparent'
-                                    : ' text-primary-900 border-blue-600 active'
+                            `inline-block p-4 pt-3 border-b-3 rounded-t-lg text-primary-800 ${
+                                pathname.endsWith('stocks')
+                                    ? ' before:md:absolute before:md:w-full before:md:h-1 before:md:bg-primary-800 before:md:right-0 before:md:bottom-0 before:md:rounded-t-lg '
+                                    : ' border-transparent'
                             }`
                         }
                     >
                         Popular
                     </NavLink>
                 </li>
-                <li className="mr-2">
+                <li className="mr-2 list-none relative">
                     <NavLink
                         to="favorite"
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 rounded-t-lg ${
+                            `inline-block p-4 pt-3 border-b-2 rounded-t-lg text-primary-800 ${
                                 isActive
-                                    ? ' text-primary-900 border-blue-600 active'
+                                    ? ' before:md:absolute before:md:w-full before:md:h-1 before:md:bg-primary-800 before:md:right-0 before:md:bottom-0 before:md:rounded-t-lg '
                                     : ' border-transparent'
                             }`
                         }
@@ -34,13 +37,13 @@ export const Tab = () => {
                         Favorite
                     </NavLink>
                 </li>
-                <li className="mr-2">
+                <li className="mr-2 list-none relative">
                     <NavLink
                         to="up"
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 rounded-t-lg ${
+                            `inline-block p-4 pt-3 border-b-2 rounded-t-lg text-primary-800 ${
                                 isActive
-                                    ? ' text-primary-900 border-blue-600 active'
+                                    ? ' before:md:absolute before:md:w-full before:md:h-1 before:md:bg-primary-800 before:md:right-0 before:md:bottom-0 before:md:rounded-t-lg '
                                     : ' border-transparent'
                             }`
                         }
@@ -48,13 +51,13 @@ export const Tab = () => {
                         Up
                     </NavLink>
                 </li>
-                <li className="mr-2">
+                <li className="mr-2 list-none relative">
                     <NavLink
                         to="down"
                         className={({ isActive, isPending }) =>
-                            `inline-block p-4 border-b-2 rounded-t-lg ${
+                            `inline-block p-4 pt-3 border-b-2 rounded-t-lg text-primary-800 ${
                                 isActive
-                                    ? ' text-primary-900 border-blue-600 active'
+                                    ? ' before:md:absolute before:md:w-full before:md:h-1 before:md:bg-primary-800 before:md:right-0 before:md:bottom-0 before:md:rounded-t-lg '
                                     : ' border-transparent'
                             }`
                         }
@@ -62,11 +65,6 @@ export const Tab = () => {
                         Down
                     </NavLink>
                 </li>
-                {/* <li>
-                    <NavLink className="inline-block p-4 text-gray-400 rounded-t-lg cursor-not-allowed dark:text-gray-500">
-                        Disabled
-                    </NavLink>
-                </li> */}
             </ul>
         </div>
     );
