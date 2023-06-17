@@ -1,6 +1,5 @@
 import { AxiosError } from 'axios';
 import { DefaultOptions, QueryClient, UseMutationOptions, UseQueryOptions } from 'react-query';
-import { Promisable } from 'type-fest';
 
 const queryConfig: DefaultOptions = {
     queries: {

@@ -22,7 +22,8 @@ export const useStocks = (
 ) => {
     return useQuery<ExtractFnReturnType<QueryFnType>>({
         ...config,
-        queryKey: ['stocks'],
+        queryKey: ['stocks', pageNumber, pageSize],
         queryFn: () => getStocks({ pageNumber, pageSize }),
+        keepPreviousData: true,
     });
 };
