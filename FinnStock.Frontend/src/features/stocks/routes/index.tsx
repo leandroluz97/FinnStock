@@ -3,6 +3,8 @@ import { Route, Routes } from 'react-router-dom';
 import { Stocks } from './Stocks';
 import { NotFound } from '../../misc/routes/NotFound';
 import { Tab } from '../../../components/Elements/Tab';
+import { FavoriteStocks } from './FavoriteStocks';
+import { EmptyState } from '../../../components/States/EmptyState';
 
 export const StocksRoutes = () => {
     return (
@@ -10,9 +12,9 @@ export const StocksRoutes = () => {
             <Tab />
             <Routes>
                 <Route index element={<Stocks />} />
-                <Route path="favorite" element={<p>Favorites</p>} />
-                <Route path="up" element={<p>Up</p>} />
-                <Route path="down" element={<p>Down</p>} />
+                <Route path="favorite" element={<FavoriteStocks />} />
+                <Route path="up" element={<EmptyState />} />
+                <Route path="down" element={<EmptyState />} />
                 <Route path="*" element={<NotFound />} />
             </Routes>
         </React.Fragment>

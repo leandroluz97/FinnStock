@@ -6,13 +6,14 @@ import { Stock } from '../types';
 import { Page, Pagination } from '../../../types/pagination';
 
 type PageRequest = {
-    searchText?: string;
+    searchText: string | null;
 } & Page;
 
 export const getStocks = (
     { pageNumber, pageSize, searchText }: PageRequest = {
         pageNumber: 1,
         pageSize: 100,
+        searchText: null,
     }
 ): Promise<Pagination<Stock>> => {
     if (searchText != null) {
@@ -31,6 +32,7 @@ export const useStocks = (
     { config, pageNumber, pageSize, searchText }: UseStocksOptions = {
         pageNumber: 1,
         pageSize: 100,
+        searchText: null,
     }
 ) => {
     return useQuery<ExtractFnReturnType<QueryFnType>>({

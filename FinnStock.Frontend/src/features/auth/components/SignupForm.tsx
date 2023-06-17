@@ -7,11 +7,11 @@ import codes from 'country-calling-code';
 
 import { NavLink } from 'react-router-dom';
 import { CheckBoxField, InputField } from '../../../components/Form';
-import { CountryCode, Spinner } from '../../../components/Elements';
+import { CountryCode } from '../../../components/Elements';
+import { Spinner } from '../../../components/Loading';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import validationRules from '../../../utils/formValidations';
 import { useAuth } from '../../../lib/auth';
-import { useRegister } from '../api/register';
 
 type Inputs = {
     firstName: string;

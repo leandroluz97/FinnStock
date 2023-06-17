@@ -7,7 +7,7 @@ import { NavLink, useNavigate } from 'react-router-dom';
 import validationRules from '../../../utils/formValidations';
 import { CheckBoxField, InputField } from '../../../components/Form';
 import googleLogo from '../../../assets/google-logo-sm.svg';
-import { Spinner } from '../../../components/Elements';
+import { Spinner } from '../../../components/Loading';
 import { useAuth } from '../../../lib/auth';
 
 type Inputs = {

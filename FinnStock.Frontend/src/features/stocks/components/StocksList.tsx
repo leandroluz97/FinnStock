@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from './Card';
 import { useStocks } from '../api/getStocks';
-import { Spinner } from '../../../components/Elements';
+import { Spinner } from '../../../components/Loading';
 import { usePagination } from '../../../hooks/usePagination';
 import { Pagination } from '../../../components/Elements/Pagination';
 
@@ -27,9 +27,9 @@ export const StocksList = () => {
                                         currency={stock.currency}
                                         description={stock.description}
                                         symbol={stock.symbol}
-                                        displaySymbol=""
-                                        figi=""
-                                        type=""
+                                        type={stock.type}
+                                        displaySymbol={stock.displaySymbol}
+                                        figi={stock.figi}
                                     />
                                 ))}
                         </div>

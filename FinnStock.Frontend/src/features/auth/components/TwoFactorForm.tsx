@@ -5,7 +5,7 @@ import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import * as yup from 'yup';
 
 import { InputField } from '../../../components/Form';
-import { Spinner } from '../../../components/Elements';
+import { Spinner } from '../../../components/Loading';
 import validationRules from '../../../utils/formValidations';
 import { useAuth } from '../../../lib/auth';
 import { storageService } from '../../../utils/storage';

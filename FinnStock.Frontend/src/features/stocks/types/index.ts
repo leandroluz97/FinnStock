@@ -9,3 +9,10 @@ export type Stock = {
     symbol: string;
     type: string;
 };
+
+export type FavoriteStock = {
+    id: string;
+    userId: string;
+    description: string;
+    symbol: string;
+};

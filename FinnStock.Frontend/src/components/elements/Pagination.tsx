@@ -39,7 +39,7 @@ export const Pagination = ({ pageNumber, pageSize, totalPages }: PaginationProps
                     </Link>
                 </li>
                 {pagination.map((page) => (
-                    <li>
+                    <li key={page}>
                         <Link
                             to={URLSearch.set({ pageNumber: page })}
                             className={`px-3 py-2 leading-tight border border-gray-300 ${

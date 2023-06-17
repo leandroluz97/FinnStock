@@ -6,7 +6,7 @@ import { NavLink } from 'react-router-dom';
 
 import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
-import { Spinner } from '../../../components/Elements';
+import { Spinner } from '../../../components/Loading';
 import { useAuth } from '../../../lib/auth';
 
 type Inputs = {

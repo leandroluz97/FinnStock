@@ -1,9 +1,9 @@
 import React, { Suspense } from 'react';
-import { Outlet, Route, Routes } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
 import { MainLayout } from '../components/Layout/MainLayout';
 import { NotFound } from '../features/misc/routes/NotFound';
 import { StocksRoutes } from '../features/stocks/routes';
-import { Spinner } from '../components/Elements';
+import { Spinner } from '../components/Loading';
 
 export const App = () => {
     return (
