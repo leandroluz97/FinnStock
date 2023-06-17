@@ -14,7 +14,7 @@ export const StocksList = () => {
         <React.Fragment>
             <div className="h-full overflow-hidden rounded-md">
                 <div className="h-full overflow-auto">
-                    {!isLoading ? (
+                    {isLoading ? (
                         <div className="h-full flex flex-col justify-center items-center">
                             <Spinner />
                         </div>
