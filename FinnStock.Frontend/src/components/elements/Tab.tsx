@@ -1,13 +1,20 @@
-import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import React, { useState } from 'react';
+import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
+import { usePagination } from '../../hooks/usePagination';
+import { debounce } from '../../utils/debounce';
+import { URLSearch } from '../../utils/URLSearch';
 
 export const Tab = () => {
+    const QUERIES = URLSearch.queries();
     const { pathname } = useLocation();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const DEBOUNCE_TIME = 1000;
+    const setSearchText = debounce(searchParams, setSearchParams, DEBOUNCE_TIME);
 
     return (
         <div className="text-sm font-medium text-center text-gray-500 border-b border-gray-200 dark:text-gray-400 dark:border-gray-700 mb-2">
             <div className="h-full flex flex-wrap justify-center md:justify-between -mb-px border-b-2 border-primary-300">
-                <div className="flex flex-wrap justify-center md:justify-between">
+                <div className=" flex flex-wrap justify-center md:justify-between">
                     <li className="mr-2 list-none relative">
                         <NavLink
                             to=""
@@ -69,6 +76,10 @@ export const Tab = () => {
                 <div>
                     <div className="mr-2 list-none w-full relative">
                         <input
+                            defaultValue={QUERIES.searchText || ''}
+                            onChange={(e) => {
+                                setSearchText(['searchText', e.target.value]);
+                            }}
                             type="text"
                             placeholder="Search stock by symbol"
                             name="search"

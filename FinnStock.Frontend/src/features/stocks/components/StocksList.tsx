@@ -6,8 +6,8 @@ import { usePagination } from '../../../hooks/usePagination';
 import { Pagination } from '../../../components/Elements/Pagination';
 
 export const StocksList = () => {
-    const { pageNumber, pageSize } = usePagination();
-    const { data, isLoading } = useStocks({ pageSize, pageNumber });
+    const { pageNumber, pageSize, searchText } = usePagination();
+    const { data, isLoading } = useStocks({ pageSize, pageNumber, searchText });
     const items = data?.items;
 
     return (
