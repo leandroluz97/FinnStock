@@ -2,8 +2,10 @@ import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import FinnstockLogo from '../../assets/finnstock-log.svg';
 import ProfilePicture from '../../assets/profile.svg';
+import { useAuth } from '../../lib/auth';
 
 export const MainLayout = ({ children }) => {
+    const { user } = useAuth();
     const routes = [
         {
             path: 'stocks',
@@ -127,12 +129,12 @@ export const MainLayout = ({ children }) => {
                                 <div className="flex ">
                                     <div className="flex bg-slate-100 items-center rounded-full pl-2 mx-3">
                                         <p className="px-2 text-primary-900 font-medium">
-                                            Leandro Luz
+                                            {`${user?.firstName} ${user?.lastName}`}
                                         </p>
                                         <img
-                                            src={ProfilePicture}
+                                            src={user?.profileUrl || ProfilePicture}
                                             alt="profile"
-                                            className="w-12 p-1"
+                                            className="w-12 p-1 rounded-full"
                                         />
                                     </div>
                                     <div className="rounded-full bg-slate-100 p-2 px-4 flex justify-center items-center">
