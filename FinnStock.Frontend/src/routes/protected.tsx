@@ -4,6 +4,7 @@ import { MainLayout } from '../components/Layout/MainLayout';
 import { NotFound } from '../features/misc/routes/NotFound';
 import { StocksRoutes } from '../features/stocks/routes';
 import { Spinner } from '../components/Loading';
+import { NewsRoutes } from '../features/news/routes';
 
 export const App = () => {
     return (
@@ -27,7 +28,7 @@ export const protectedRoutes = [
         element: <App />,
         children: [
             { path: 'stocks/*', element: <StocksRoutes /> },
-            { path: 'news/*', element: <p>News</p> },
+            { path: 'news/*', element: <NewsRoutes /> },
             { path: 'orders/*', element: <p>Orders</p> },
             { path: 'settings/*', element: <p>Settings</p> },
             { path: '*', element: <NotFound /> },

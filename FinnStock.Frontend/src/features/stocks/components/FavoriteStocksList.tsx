@@ -7,7 +7,7 @@ import { EmptyState } from '../../../components/States/EmptyState';
 
 export const FavoriteStocksList = () => {
     const { userId } = useParams();
-    const { data, isLoading } = useFavoriteStocks({ userId });
+    const { data, isLoading } = useFavoriteStocks({ userId: userId || '' });
 
     return (
         <div className="h-full overflow-hidden rounded-md">
@@ -18,23 +18,22 @@ export const FavoriteStocksList = () => {
                     </div>
                 ) : (
                     <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-2 ">
-                        {data != null ? (
-                            data.map((stock) => (
-                                <Card
-                                    key={stock.symbol}
-                                    description={stock.description}
-                                    symbol={stock.symbol}
-                                    displaySymbol=""
-                                    figi=""
-                                    type=""
-                                    currency="USD"
-                                />
-                            ))
-                        ) : (
-                            <EmptyState />
-                        )}
+                        {data != null && data.length !== 0
+                            ? data.map((stock) => (
+                                  <Card
+                                      key={stock.symbol}
+                                      description={stock.description}
+                                      symbol={stock.symbol}
+                                      displaySymbol=""
+                                      figi=""
+                                      type=""
+                                      currency="USD"
+                                  />
+                              ))
+                            : null}
                     </div>
                 )}
+                {data != null && data.length === 0 && <EmptyState />}
             </div>
         </div>
     );

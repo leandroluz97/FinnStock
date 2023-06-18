@@ -10,9 +10,10 @@ type PaginationProps = {
 export const Pagination = ({ pageNumber, pageSize, totalPages }: PaginationProps) => {
     const pagination = useMemo(() => {
         let pageNumbers = [1, 2, 3];
-        if (pageNumber > 1) pageNumbers = [pageNumber - 1, pageNumber, pageNumber + 1];
+        if (totalPages > pageNumber && pageNumber > 1)
+            pageNumbers = [pageNumber - 1, pageNumber, pageNumber + 1];
         return pageNumbers;
-    }, [pageNumber]);
+    }, [pageNumber, totalPages]);
 
     return (
         <nav className="flex justify-center align-center pt-3" aria-label="Page navigation">
@@ -55,7 +56,7 @@ export const Pagination = ({ pageNumber, pageSize, totalPages }: PaginationProps
                 <li>
                     <Link
                         to={URLSearch.set({
-                            pageNumber: totalPages < pageNumber ? pageNumber + 1 : pageNumber,
+                            pageNumber: totalPages > pageNumber ? pageNumber + 1 : pageNumber,
                         })}
                         className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
                     >
