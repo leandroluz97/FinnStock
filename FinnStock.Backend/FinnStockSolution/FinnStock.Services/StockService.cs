@@ -34,7 +34,7 @@ namespace FinnStock.Services
                 return null;
             }
             
-            stocks = stocks.Skip((pageNumber - 1 ) * pageSize).Take(pageSize).ToList();
+            var pagedStocks = stocks.Skip((pageNumber - 1 ) * pageSize).Take(pageSize).ToList();
 
             _logger.LogInformation("{GetAllAsync} found: {stocks}", nameof(GetAllAsync), stocks.Count());
 
@@ -42,7 +42,8 @@ namespace FinnStock.Services
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                Items =  stocks
+                TotalPages = stocks.Count(),
+                Items = pagedStocks
             };
         }
 
@@ -65,7 +66,7 @@ namespace FinnStock.Services
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalPages = stocks.Count(),
+                TotalPages = stocks.Count() / pageSize,
                 Items = pagedStocks
             };
         }
@@ -124,7 +125,7 @@ namespace FinnStock.Services
             {
                 PageNumber = pageNumber,
                 PageSize = pageSize,
-                TotalPages = news.Count(), 
+                TotalPages = news.Count() / pageSize, 
                 Items = pagedNews
             };
         }
