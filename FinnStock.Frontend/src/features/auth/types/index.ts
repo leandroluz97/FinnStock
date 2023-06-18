@@ -4,4 +4,6 @@ export interface AuthUser {
     firstName: string;
     lastName: string;
     profileUrl?: string;
+    phoneNumber: string;
+    birthDate?: string;
 }

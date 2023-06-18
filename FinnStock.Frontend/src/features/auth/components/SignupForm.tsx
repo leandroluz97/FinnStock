@@ -86,7 +86,7 @@ export const SignupForm = () => {
                         placeholder="John"
                         type="text"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="first_name"
                         register={register('firstName')}
                         hasError={!!errors.firstName}
@@ -99,7 +99,7 @@ export const SignupForm = () => {
                         placeholder="Doe"
                         type="text"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="last_name"
                         register={register('lastName')}
                         hasError={!!errors.lastName}
@@ -113,7 +113,7 @@ export const SignupForm = () => {
                     placeholder="johndoe@gmail.com"
                     type="text"
                     groupFormClassList="my-4"
-                    isRequired
+                    required
                     key="email"
                     register={register('email')}
                     hasError={!!errors.email}
@@ -128,7 +128,7 @@ export const SignupForm = () => {
                         placeholder="915210066"
                         type="text"
                         groupFormClassList="flex-1 w-full"
-                        isRequired
+                        required
                         key="phone_number"
                         register={register('phoneNumber')}
                         hasError={!!errors.phoneNumber}
@@ -143,7 +143,7 @@ export const SignupForm = () => {
                     placeholder="••••••••••"
                     type="password"
                     groupFormClassList="my-4 relative"
-                    isRequired
+                    required
                     key="password"
                     register={register('password')}
                     hasError={!!errors.password}

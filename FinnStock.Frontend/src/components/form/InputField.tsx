@@ -1,51 +1,38 @@
 import React, { useState } from 'react';
-import { ChangeHandler } from 'react-hook-form';
 import { IRegister } from '../../types';
 
-interface IInputFieldProps {
+interface IInputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     id: string;
-    name: string;
     label: string;
+    name: string;
     hasError: boolean;
     errorMessage: string;
-    type: string;
-    placeholder: string;
-    isRequired: boolean;
     groupFormClassList: string;
     register: IRegister<HTMLInputElement>;
 }
 export const InputField = ({
     id,
-    name,
     label,
     hasError,
     errorMessage,
-    type,
-    placeholder,
-    isRequired,
     groupFormClassList,
     register,
+    name,
+    ...inputProps
 }: IInputFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
     let classList = hasError
         ? 'bg-red-50 border-red-200 border-2 text-red-700 text-sm rounded focus:ring-red-100 focus:ring-2 focus:border-red-600 focus:border-2 block w-full p-2.5 placeholder-red-400'
         : 'bg-primary-50 border-primary-200 border-2 text-primary-900 text-sm rounded focus:ring-primary-100 focus:ring-2 focus:border-primary-800 focus:border-2 block w-full p-2.5 placeholder-primary-400';
 
-    classList = type === 'password' ? `${classList} pr-10` : classList;
+    classList = inputProps.type === 'password' ? `${classList} pr-10` : classList;
 
     return (
         <div className={groupFormClassList}>
             <label htmlFor="first_name" className="block mb-1 text-sm font-medium text-primary-950">
                 {label}
             </label>
-            <input
-                type={showPassword ? 'text' : type}
-                id={id}
-                className={classList}
-                placeholder={placeholder}
-                required={isRequired}
-                {...register}
-            />
+            <input {...inputProps} id={id} className={classList} {...register} />
             {hasError && (
                 <p className="mt-2 text-xs text-red-600 dark:text-red-500">{errorMessage}</p>
             )}

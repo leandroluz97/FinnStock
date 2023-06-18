@@ -5,6 +5,7 @@ import { NotFound } from '../features/misc/routes/NotFound';
 import { StocksRoutes } from '../features/stocks/routes';
 import { Spinner } from '../components/Loading';
 import { NewsRoutes } from '../features/news/routes';
+import { UsersRoutes } from '../features/users/routes';
 
 export const App = () => {
     return (
@@ -30,7 +31,7 @@ export const protectedRoutes = [
             { path: 'stocks/*', element: <StocksRoutes /> },
             { path: 'news/*', element: <NewsRoutes /> },
             { path: 'orders/*', element: <p>Orders</p> },
-            { path: 'settings/*', element: <p>Settings</p> },
+            { path: 'settings/*', element: <UsersRoutes /> },
             { path: '*', element: <NotFound /> },
         ],
     },

@@ -69,7 +69,7 @@ export const TwoFactorForm = () => {
                         placeholder=""
                         type="number"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="one"
                         register={register('one')}
                         hasError={!!errors.one}
@@ -82,7 +82,7 @@ export const TwoFactorForm = () => {
                         placeholder=""
                         type="text"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="last_name"
                         register={register('two')}
                         hasError={!!errors.two}
@@ -95,7 +95,7 @@ export const TwoFactorForm = () => {
                         placeholder=""
                         type="text"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="three"
                         register={register('three')}
                         hasError={!!errors.three}
@@ -108,7 +108,7 @@ export const TwoFactorForm = () => {
                         placeholder=""
                         type="text"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="four"
                         register={register('four')}
                         hasError={!!errors.four}
@@ -121,7 +121,7 @@ export const TwoFactorForm = () => {
                         placeholder=""
                         type="text"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="five"
                         register={register('five')}
                         hasError={!!errors.five}
@@ -134,7 +134,7 @@ export const TwoFactorForm = () => {
                         placeholder=""
                         type="text"
                         groupFormClassList="flex-1"
-                        isRequired
+                        required
                         key="six"
                         register={register('six')}
                         hasError={!!errors.six}

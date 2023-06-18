@@ -55,7 +55,7 @@ export const ResetPasswordForm = () => {
                     placeholder="••••••••••"
                     type="password"
                     groupFormClassList="my-4 relative"
-                    isRequired
+                    required
                     key="password"
                     register={register('password')}
                     hasError={!!errors.password}

@@ -1,6 +1,7 @@
 import * as yup from 'yup';
 
 const text = (name: string) => yup.string().required(`${name} is a required field`);
+const optionText = (name: string) => yup.string();
 const email = () => yup.string().email('Email is invalid').required('Email is a required field');
 const checkbox = () => yup.boolean().isTrue().required();
 const password = () =>
@@ -23,5 +24,5 @@ const schema = yup.object().shape({
         .matches(/[a-zA-Z]/, 'Password can only contain Latin letters.'),
 });
 
-const validationRules = { text, email, checkbox, password };
+const validationRules = { text, email, checkbox, password, optionText };
 export default validationRules;

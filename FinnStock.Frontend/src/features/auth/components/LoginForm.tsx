@@ -50,7 +50,7 @@ export const LoginForm = () => {
                     placeholder="johndoe@gmail.com"
                     type="text"
                     groupFormClassList="my-4"
-                    isRequired
+                    required
                     key="email"
                     register={register('email')}
                     hasError={!!errors.email}
@@ -64,7 +64,7 @@ export const LoginForm = () => {
                     placeholder="••••••••••"
                     type="password"
                     groupFormClassList="my-4 relative"
-                    isRequired
+                    required
                     key="password"
                     register={register('password')}
                     hasError={!!errors.password}

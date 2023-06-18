@@ -45,7 +45,7 @@ export const ForgotPasswordForm = () => {
                     placeholder="johndoe@gmail.com"
                     type="text"
                     groupFormClassList="my-4"
-                    isRequired
+                    required
                     key="email"
                     register={register('email')}
                     hasError={!!errors.email}
