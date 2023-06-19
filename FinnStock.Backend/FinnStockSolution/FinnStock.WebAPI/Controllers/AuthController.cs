@@ -10,6 +10,7 @@ using Newtonsoft.Json.Serialization;
 using Microsoft.AspNetCore.Identity;
 using static Azure.Core.HttpHeader;
 using FinnStock.Services.Exceptions;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
 
 namespace FinnStock.WebAPI.Controllers
 {
@@ -85,6 +86,15 @@ namespace FinnStock.WebAPI.Controllers
         public async Task<IActionResult> ResetPassword(ResetPasswordDto resetPasswordDto)
         {
             await _authenticationService.ResetPassword(resetPasswordDto);
+            return Ok();
+        }
+
+        [HttpPost]
+        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
+        [Route("{userId}")]
+        public async Task<IActionResult> ChangePassword(Guid userId, ChangePasswordDto changePassword)
+        {
+            await _authenticationService.ChangePassword(userId, changePassword);
             return Ok();
         }
     }
