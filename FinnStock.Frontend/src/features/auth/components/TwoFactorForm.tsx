@@ -9,6 +9,7 @@ import { Spinner } from '../../../components/Loading';
 import validationRules from '../../../utils/formValidations';
 import { useAuth } from '../../../lib/auth';
 import { storageService } from '../../../utils/storage';
+import { queryClient } from '../../../lib/react-query';
 
 type Inputs = {
     one: string;
@@ -52,6 +53,7 @@ export const TwoFactorForm = () => {
             },
         });
         storageService.setToken(token);
+        queryClient.invalidateQueries('user');
         navigate(`/u/${userId}/stocks`);
     };
 

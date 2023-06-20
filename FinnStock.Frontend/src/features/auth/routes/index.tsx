@@ -10,12 +10,12 @@ import { Twofactor } from './Twofactor';
 export const AuthRoutes = () => {
     return (
         <Routes>
-            <Route path="signup" element={<Signup />} />
-            <Route path="login" element={<Login />} />
-            <Route path="forgot-password" element={<ForgotPassword />} />
-            <Route path="confirm-email" element={<ConfirmEmail />} />
-            <Route path="reset-password" element={<ResetPassword />} />
-            <Route path="two-factor-validation" element={<Twofactor />} />
+            <Route path="auth/signup" element={<Signup />} />
+            <Route path="auth/login" element={<Login />} />
+            <Route path="auth/forgot-password" element={<ForgotPassword />} />
+            <Route path="auth/confirm-email" element={<ConfirmEmail />} />
+            <Route path="auth/reset-password" element={<ResetPassword />} />
+            <Route path="auth/two-factor-validation" element={<Twofactor />} />
             <Route path="*" element={<Navigate to="/auth/login" replace />} />
         </Routes>
     );

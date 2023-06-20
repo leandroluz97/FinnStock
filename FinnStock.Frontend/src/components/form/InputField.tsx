@@ -32,7 +32,13 @@ export const InputField = ({
             <label htmlFor="first_name" className="block mb-1 text-sm font-medium text-primary-950">
                 {label}
             </label>
-            <input {...inputProps} id={id} className={classList} {...register} />
+            <input
+                {...inputProps}
+                id={id}
+                className={classList}
+                {...register}
+                type={showPassword === false ? inputProps.type : 'text'}
+            />
             {hasError && (
                 <p className="mt-2 text-xs text-red-600 dark:text-red-500">{errorMessage}</p>
             )}
