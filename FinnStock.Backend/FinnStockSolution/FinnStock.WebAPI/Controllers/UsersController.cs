@@ -53,5 +53,13 @@ namespace FinnStock.WebAPI.Controllers
         {
             return await _userService.GetProfileImageAsync(userId);
         }
+
+        [HttpPut]
+        [Route("{userId}/ChangePassword")]
+        public async Task<IActionResult> ChangePassword(Guid userId, ChangePasswordDto changePassword)
+        {
+            await _userService.ChangePassword(userId, changePassword);
+            return Ok();
+        }
     }
 }

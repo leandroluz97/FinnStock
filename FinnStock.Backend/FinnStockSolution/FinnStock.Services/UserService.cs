@@ -131,5 +131,35 @@ namespace FinnStock.Services
             }
         }
 
+        public async Task ChangePassword(Guid userId, ChangePasswordDto changePassword)
+        {
+            _logger.LogInformation("{ChangePassword} param value {userId}", nameof(ChangePassword), userId);
+
+            if (userId == default)
+            {
+                throw new ArgumentNullException(nameof(userId));
+            }
+
+            if (changePassword == null)
+            {
+                throw new ArgumentNullException(nameof(changePassword));
+            }
+
+            var user = await _userManager.FindByIdAsync(userId.ToString());
+
+            if (user == null)
+            {
+                throw new NotFoundException(nameof(user));
+            }
+
+            var result = await _userManager.ChangePasswordAsync(user, changePassword.CurrentPassword, changePassword.NewPassword);
+
+            if (!result.Succeeded)
+            {
+                throw new InvalidOperationException();
+            }
+
+            _logger.LogInformation("{ChangePassword} failed {userId}", nameof(ChangePassword), userId);
+        }
     }
 }

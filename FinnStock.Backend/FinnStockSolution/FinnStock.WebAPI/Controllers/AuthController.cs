@@ -88,14 +88,5 @@ namespace FinnStock.WebAPI.Controllers
             await _authenticationService.ResetPassword(resetPasswordDto);
             return Ok();
         }
-
-        [HttpPost]
-        [Authorize(AuthenticationSchemes = JwtBearerDefaults.AuthenticationScheme)]
-        [Route("{userId}")]
-        public async Task<IActionResult> ChangePassword(Guid userId, ChangePasswordDto changePassword)
-        {
-            await _authenticationService.ChangePassword(userId, changePassword);
-            return Ok();
-        }
     }
 }
