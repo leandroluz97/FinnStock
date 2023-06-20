@@ -2,8 +2,11 @@ import React from 'react';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
+import { useParams } from 'react-router-dom';
 import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
+import { Spinner } from '../../../components/Loading';
+import { useUpdatePassword } from '../api/updatePassword';
 
 type Inputs = {
     password: string;
@@ -17,14 +20,24 @@ const schema = yup.object().shape({
 });
 
 export const PasswordForm = () => {
+    const updatePassword = useUpdatePassword();
+    const { userId } = useParams();
     const {
+        reset,
         register,
         handleSubmit,
         formState: { errors },
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     const submit = async (data: Inputs) => {
-        console.log(data);
+        await updatePassword.mutateAsync({
+            userId,
+            data: {
+                currentPassword: data.password,
+                newPassword: data.newPassword,
+            },
+        });
+        reset();
     };
 
     return (
@@ -73,12 +86,12 @@ export const PasswordForm = () => {
 
                     <div className="mt-5 flex justify-end">
                         <button
-                            disabled={false}
+                            disabled={updatePassword.isLoading}
                             type="submit"
                             className="flex flex-row items-center justify-center text-white  bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5"
                         >
                             Save
-                            {false && (
+                            {updatePassword.isLoading && (
                                 <span className="ml-2">
                                     <Spinner />
                                 </span>

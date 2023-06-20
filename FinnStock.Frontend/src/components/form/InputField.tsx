@@ -8,6 +8,7 @@ interface IInputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     hasError: boolean;
     errorMessage: string;
     groupFormClassList: string;
+    type: string;
     register: IRegister<HTMLInputElement>;
 }
 export const InputField = ({
@@ -17,7 +18,6 @@ export const InputField = ({
     errorMessage,
     groupFormClassList,
     register,
-    name,
     ...inputProps
 }: IInputFieldProps) => {
     const [showPassword, setShowPassword] = useState(false);
