@@ -75,7 +75,7 @@ export const MainLayout = ({ children }) => {
                                         className={({ isActive }) =>
                                             `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
                                                 isActive
-                                                    ? ' before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
+                                                    ? ' bg-slate-100 before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
                                                     : ''
                                             }`
                                         }

@@ -29,7 +29,7 @@ export const InputField = ({
 
     return (
         <div className={groupFormClassList}>
-            <label htmlFor="first_name" className="block mb-1 text-sm font-medium text-primary-950">
+            <label htmlFor={id} className="block mb-1 text-sm font-medium text-primary-950">
                 {label}
             </label>
             <input

@@ -6,6 +6,7 @@ import { StocksRoutes } from '../features/stocks/routes';
 import { Spinner } from '../components/Loading';
 import { NewsRoutes } from '../features/news/routes';
 import { UsersRoutes } from '../features/users/routes';
+import { OrdersRoutes } from '../features/orders/routes';
 
 export const App = () => {
     return (
@@ -30,7 +31,7 @@ export const protectedRoutes = [
         children: [
             { path: 'stocks/*', element: <StocksRoutes /> },
             { path: 'news/*', element: <NewsRoutes /> },
-            { path: 'orders/*', element: <p>Orders</p> },
+            { path: 'orders/*', element: <OrdersRoutes /> },
             { path: 'settings/*', element: <UsersRoutes /> },
             { path: '*', element: <NotFound /> },
         ],

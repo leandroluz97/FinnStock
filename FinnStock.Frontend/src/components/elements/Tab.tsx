@@ -84,7 +84,7 @@ export const Tab = () => {
                             placeholder="Search stock by symbol"
                             name="search"
                             id="search"
-                            className="w-96 bg-white  border-white border-2 text-primary-900 text-sm rounded focus:ring-primary-200 focus:border-primary-500 focus:border-2 block p-2.5 pl-9 placeholder-primary-500"
+                            className="w-96 bg-white  border-white border-2 text-primary-900 text-sm rounded-lg focus:ring-primary-200 focus:border-primary-500 focus:border-2 block p-2.5 pl-9 placeholder-primary-500"
                         />
                         <span className="absolute bottom-0 left-0 p-3 text-sm font-medium text-white rounded-r">
                             <svg
