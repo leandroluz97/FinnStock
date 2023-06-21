@@ -2,19 +2,19 @@ import React from 'react';
 
 export const Search = () => {
     return (
-        <div className="relative overflow-x-auto  sm:rounded-lg">
+        <div className="relative  sm:rounded-lg">
             <div className="flex items-center justify-between pb-4">
                 <div>
                     <button
                         id="dropdownRadioButton"
                         data-dropdown-toggle="dropdownRadio"
-                        className="inline-flex items-center text-gray-500 bg-white border border-gray-300 focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-1.5 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
+                        className="inline-flex items-center text-primary-900 bg-white  focus:outline-none hover:bg-gray-100 focus:ring-4 focus:ring-gray-200 font-medium rounded-lg text-sm px-3 py-3 dark:bg-gray-800 dark:text-white dark:border-gray-600 dark:hover:bg-gray-700 dark:hover:border-gray-600 dark:focus:ring-gray-700"
                         type="button"
                     >
                         <svg
                             className="w-4 h-4 mr-2 text-gray-400"
                             aria-hidden="true"
-                            fill="currentColor"
+                            fill="#5783BC"
                             viewBox="0 0 20 20"
                             xmlns="http://www.w3.org/2000/svg"
                         >
@@ -47,7 +47,12 @@ export const Search = () => {
                         data-popper-reference-hidden=""
                         data-popper-escaped=""
                         data-popper-placement="top"
-                        // style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);"
+                        style={{
+                            position: 'absolute',
+                            inset: 'auto auto 0px 0px',
+                            margin: '0px',
+                            transform: 'translate3d(522.5px, 3847.5px, 0px)',
+                        }}
                     >
                         <ul
                             className="p-3 space-y-1 text-sm text-gray-700 dark:text-gray-200"
@@ -73,7 +78,7 @@ export const Search = () => {
                             <li>
                                 <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                     <input
-                                        // checked=""
+                                        checked=""
                                         id="filter-radio-example-2"
                                         type="radio"
                                         value=""
@@ -145,28 +150,35 @@ export const Search = () => {
                 <label htmlFor="table-search" className="sr-only">
                     Search
                 </label>
-                <div className="relative">
-                    <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                <div className="mr-2 list-none relative">
+                    <input
+                        // defaultValue={QUERIES.searchText || ''}
+                        onChange={(e) => {
+                            // setSearchText(['searchText', e.target.value]);
+                        }}
+                        type="text"
+                        placeholder="Search stock by symbol"
+                        name="search"
+                        id="search"
+                        className="w-96 bg-white  border-white border-2 text-primary-900 text-sm rounded-lg focus:ring-primary-200 focus:border-primary-500 focus:border-2 block p-2.5 pl-9 placeholder-primary-500"
+                    />
+                    <span className="absolute bottom-0 left-0 p-3 text-sm font-medium text-white rounded-r">
                         <svg
-                            className="w-5 h-5 text-gray-500 dark:text-gray-400"
-                            aria-hidden="true"
-                            fill="currentColor"
-                            viewBox="0 0 20 20"
+                            width="19"
+                            height="18"
+                            viewBox="0 0 19 18"
+                            fill="none"
                             xmlns="http://www.w3.org/2000/svg"
                         >
                             <path
-                                fillRule="evenodd"
-                                d="M8 4a4 4 0 100 8 4 4 0 000-8zM2 8a6 6 0 1110.89 3.476l4.817 4.817a1 1 0 01-1.414 1.414l-4.816-4.816A6 6 0 012 8z"
-                                clipRule="evenodd"
+                                d="M16.7119 15.75L12.2119 11.25M13.7119 7.5C13.7119 8.18944 13.5761 8.87213 13.3123 9.50909C13.0484 10.146 12.6617 10.7248 12.1742 11.2123C11.6867 11.6998 11.108 12.0865 10.471 12.3504C9.83404 12.6142 9.15135 12.75 8.46191 12.75C7.77247 12.75 7.08979 12.6142 6.45283 12.3504C5.81587 12.0865 5.23711 11.6998 4.7496 11.2123C4.2621 10.7248 3.87538 10.146 3.61155 9.50909C3.34771 8.87213 3.21191 8.18944 3.21191 7.5C3.21191 6.10761 3.76504 4.77226 4.7496 3.78769C5.73417 2.80312 7.06953 2.25 8.46191 2.25C9.8543 2.25 11.1897 2.80312 12.1742 3.78769C13.1588 4.77226 13.7119 6.10761 13.7119 7.5Z"
+                                stroke="#5783BC"
+                                strokeWidth="1.5"
+                                strokeLinecap="round"
+                                strokeLinejoin="round"
                             />
                         </svg>
-                    </div>
-                    <input
-                        type="text"
-                        id="table-search"
-                        className="block p-2 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg w-80 bg-gray-50 focus:ring-blue-500 focus:border-blue-500 dark:bg-gray-700 dark:border-gray-600 dark:placeholder-gray-400 dark:text-white dark:focus:ring-blue-500 dark:focus:border-blue-500"
-                        placeholder="Search for items"
-                    />
+                    </span>
                 </div>
             </div>
         </div>
