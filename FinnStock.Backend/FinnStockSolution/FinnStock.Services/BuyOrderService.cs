@@ -88,9 +88,9 @@ namespace FinnStock.Services
                 throw new NotFoundException(nameof(orders));
             }
 
-            if (orders.Any())
+            if (!orders.Any())
             {
-                return default;
+                return new List<BuyOrderDto>() { };
             }
 
             return orders.Select(order => BuyOrderMapper.ToDto(order));
