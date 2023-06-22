@@ -12,6 +12,7 @@ namespace FinnStock.Dtos
         public double Amount { get; set; }
         public int Quantity { get; set; }
         public string Symbol { get; set; }
+        public string Logo { get; set; }
         public Guid UserId { get; set; }
         public DateTime CreatedAt { get; set; }
 

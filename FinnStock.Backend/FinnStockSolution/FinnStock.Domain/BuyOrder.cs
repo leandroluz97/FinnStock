@@ -11,6 +11,7 @@ namespace FinnStock.Domain
         public double Amount { get; set; }
         public int Quantity { get; set; }
         public string Symbol { get; set; }
+        public string Logo { get; set; }
         virtual public User User { get; set; }
         public Guid UserId { get; set; }
     }

@@ -16,6 +16,7 @@ namespace FinnStock.Services.Mappers
             {
                 GlobalId = dto.Id,
                 Amount = dto.Amount,
+                Logo = dto.Logo,
                 CreatedAt = dto.CreatedAt,
                 Quantity = dto.Quantity,
                 Symbol = dto.Symbol,
@@ -29,6 +30,7 @@ namespace FinnStock.Services.Mappers
             {
                 Id = domain.GlobalId,
                 Amount = domain.Amount,
+                Logo = domain.Logo,
                 CreatedAt = domain.CreatedAt,
                 Quantity = domain.Quantity,
                 Symbol = domain.Symbol,
