@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { NavLink, useLocation, useSearchParams } from 'react-router-dom';
-import { usePagination } from '../../hooks/usePagination';
 import { debounce } from '../../utils/debounce';
 import { URLSearch } from '../../utils/URLSearch';
 

@@ -1,6 +1,14 @@
 import React from 'react';
+import { useSearchParams } from 'react-router-dom';
+import { debounce } from '../../../utils/debounce';
+import { URLSearch } from '../../../utils/URLSearch';
 
 export const Search = () => {
+    const QUERIES = URLSearch.queries();
+    const [searchParams, setSearchParams] = useSearchParams();
+    const DEBOUNCE_TIME = 1000;
+    const setSearchText = debounce(searchParams, setSearchParams, DEBOUNCE_TIME);
+
     return (
         <div className="relative  sm:rounded-lg">
             <div className="flex items-center justify-between pb-4">
@@ -78,10 +86,12 @@ export const Search = () => {
                             <li>
                                 <div className="flex items-center p-2 rounded hover:bg-gray-100 dark:hover:bg-gray-600">
                                     <input
-                                        checked=""
+                                        defaultValue={QUERIES.searchText || ''}
+                                        onChange={(e) => {
+                                            setSearchText(['searchText', e.target.value]);
+                                        }}
                                         id="filter-radio-example-2"
                                         type="radio"
-                                        value=""
                                         name="filter-radio"
                                         className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 dark:focus:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600"
                                     />

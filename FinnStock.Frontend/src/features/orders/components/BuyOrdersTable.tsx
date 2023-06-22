@@ -1,12 +1,21 @@
 import React from 'react';
-import { Link, useSearchParams } from 'react-router-dom';
+import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { Search } from './Search';
 import { URLSearch } from '../../../utils/URLSearch';
+import { useBuyOrders } from '../api/getBuyStocks';
+import { EmptyState } from '../../../components/States/EmptyState';
+import { Spinner } from '../../../components/Loading';
 
 export const BuyOrdersTable = () => {
-    const QUERIES = URLSearch.queries();
     const [searchParams, setSearchParams] = useSearchParams();
+    const { userId } = useParams();
+    const QUERIES = URLSearch.queries();
     const desc = QUERIES.sortDesc === 'true' ? 'false' : 'true';
+    const { data, isLoading } = useBuyOrders({ userId });
+
+    if (isLoading) return <Spinner />;
+    if (data == null) return null;
+    if (data.length === 0) return <EmptyState />;
 
     return (
         <React.Fragment>
@@ -86,7 +95,7 @@ export const BuyOrdersTable = () => {
                                         sortDesc: QUERIES.sortBy === 'date' ? desc : 'false',
                                     })}
                                 >
-                                    <div className="flex items-center">
+                                    <div className="flex items-center ">
                                         Transaction Date
                                         <svg
                                             xmlns="http://www.w3.org/2000/svg"
@@ -103,142 +112,36 @@ export const BuyOrdersTable = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
+                        {data.map((order) => (
+                            <tr
+                                key={order.id}
+                                className="bg-white border-b dark:bg-gray-800 dark:border-gray-700"
                             >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
-                        <tr className="bg-white border-b dark:bg-gray-800 dark:border-gray-700">
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple
-                            </th>
-                            <th
-                                scope="row"
-                                className="px-6 py-4 font-medium text-primary-900 whitespace-nowrap dark:text-white"
-                            >
-                                Apple MacBook Pro 17"
-                            </th>
-                            <td className="px-6 py-4">Silver</td>
-                            <td className="px-6 py-4">Laptop</td>
-                            <td className="px-6 py-4">$2999</td>
-                        </tr>
+                                <th
+                                    scope="row"
+                                    className="px-6 py-2 font-medium text-primary-900 whitespace-nowrap dark:text-white"
+                                >
+                                    <img
+                                        src={order.logo}
+                                        alt={order.symbol}
+                                        className="rounded-full"
+                                    />
+                                </th>
+                                <th
+                                    scope="row"
+                                    className="px-6 py-2 font-medium text-primary-900 whitespace-nowrap dark:text-white"
+                                >
+                                    {order.symbol}
+                                </th>
+                                <td className="px-6 py-4">{order.amount / order.quantity}</td>
+                                <td className="px-6 py-4">{order.amount}</td>
+                                <td className="px-6 py-4">
+                                    {new Intl.DateTimeFormat('en-US').format(
+                                        new Date(order.createdAt)
+                                    )}
+                                </td>
+                            </tr>
+                        ))}
                     </tbody>
                 </table>
             </div>

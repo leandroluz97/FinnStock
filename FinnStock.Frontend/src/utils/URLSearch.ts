@@ -1,4 +1,4 @@
-export const urlQueries = ['searchText', 'pageSize', 'pageNumber'];
+export const urlQueries = ['searchText', 'pageSize', 'pageNumber', 'sortBy', 'sortDesc'];
 
 export class URLSearch {
     static register(entries) {
