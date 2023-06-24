@@ -91,6 +91,7 @@ export const MainLayout = ({ children }) => {
                                         </div>
                                     </NavLink>
                                 </li>
+
                                 <li
                                     data-tooltip-target="tooltip-animation-logout"
                                     data-tooltip-placement="right"

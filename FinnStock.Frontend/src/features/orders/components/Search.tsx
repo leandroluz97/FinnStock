@@ -55,6 +55,7 @@ export const Search = () => {
                         data-popper-reference-hidden=""
                         data-popper-escaped=""
                         data-popper-placement="top"
+                        // style="position: absolute; inset: auto auto 0px 0px; margin: 0px; transform: translate3d(522.5px, 3847.5px, 0px);"
                         style={{
                             position: 'absolute',
                             inset: 'auto auto 0px 0px',
@@ -162,9 +163,9 @@ export const Search = () => {
                 </label>
                 <div className="mr-2 list-none relative">
                     <input
-                        // defaultValue={QUERIES.searchText || ''}
+                        defaultValue={QUERIES.searchText || ''}
                         onChange={(e) => {
-                            // setSearchText(['searchText', e.target.value]);
+                            setSearchText(['searchText', e.target.value]);
                         }}
                         type="text"
                         placeholder="Search stock by symbol"
