@@ -1,5 +1,12 @@
 export const urlQueries = ['searchText', 'pageSize', 'pageNumber', 'sortBy', 'sortDesc'];
 
+type IQuery = {
+    searchText?: string;
+    pageSize?: string;
+    pageNumber?: string;
+    sortBy?: string;
+    sortDesc?: string;
+};
 export class URLSearch {
     static register(entries) {
         if (!Array.isArray(entries)) {
@@ -16,8 +23,8 @@ export class URLSearch {
 
     static queries() {
         this.#getQueries();
-        const queries = {};
-        this._entries.forEach((entry) => {
+        const queries: IQuery = {} as unknown as IQuery;
+        this._entries.forEach((entry: string) => {
             queries[entry] = this[entry];
         });
         return queries;
