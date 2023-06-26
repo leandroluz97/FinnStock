@@ -11,12 +11,12 @@ export const geBuyOrders = ({ userId }: IGeBuyOrders): Promise<BuyOrder[]> => {
 
 type QueryFnType = typeof geBuyOrders;
 
-type UseNewsOptions = {
+type UseBuyOrderOptions = {
     config?: QueryConfig<QueryFnType>;
     userId: string;
 };
 
-export const useBuyOrders = ({ config, userId }: UseNewsOptions = { userId: '' }) => {
+export const useBuyOrders = ({ config, userId }: UseBuyOrderOptions = { userId: '' }) => {
     return useQuery<ExtractFnReturnType<QueryFnType>>({
         ...config,
         queryKey: ['buyOrders'],

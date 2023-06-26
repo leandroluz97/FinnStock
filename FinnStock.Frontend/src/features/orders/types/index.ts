@@ -7,3 +7,5 @@ export type BuyOrder = {
     userId: string;
     logo: string;
 } & BaseEntity;
+
+export type SellOrder = BuyOrder;
