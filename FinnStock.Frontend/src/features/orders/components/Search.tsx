@@ -11,8 +11,8 @@ export const Search = () => {
 
     return (
         <div className="relative sm:rounded-lg">
-            <div className="flex flex-col md:flex-row items-center justify-between pb-4">
-                <div className="order-2  md:order-1">
+            <div className="flex flex-col md:flex-row items-stretch md:items-center justify-between pb-4">
+                <div className="grow-12 md:grow-10 order-2 md:order-1">
                     <button
                         id="dropdownRadioButton"
                         data-dropdown-toggle="dropdownRadio"
@@ -157,11 +157,8 @@ export const Search = () => {
                         </ul>
                     </div>
                 </div>
-                <label htmlFor="table-search" className="sr-only">
-                    Search
-                </label>
-                <div className="flex justify-end flex-1 mr-2 md:mr-0 order-1 md:order-2 list-none relative">
-                    <div className="relative">
+                <div className="md:grow-2 flex justify-end mb-2 md:mb-0 order-1 md:order-2 list-none relative">
+                    <div className="relative w-full">
                         <input
                             defaultValue={QUERIES.searchText || ''}
                             onChange={(e) => {
@@ -171,7 +168,7 @@ export const Search = () => {
                             placeholder="Search stock by symbol"
                             name="search"
                             id="search"
-                            className="max-w-lg bg-white border-white border-2 text-primary-900 text-sm rounded-lg focus:ring-primary-200 focus:border-primary-500 focus:border-2 block p-2.5 pl-9 placeholder-primary-500"
+                            className="w-full bg-white border-white border-2 text-primary-900 text-sm rounded-lg focus:ring-primary-200 focus:border-primary-500 focus:border-2 block p-2.5 pl-9 placeholder-primary-500"
                         />
                         <span className="absolute bottom-0 left-0 p-3 text-sm font-medium text-white rounded-r">
                             <svg

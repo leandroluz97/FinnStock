@@ -144,7 +144,7 @@ export const BuyOrdersTable = () => {
                                         <img
                                             src={order.logo}
                                             alt={order.symbol}
-                                            className="rounded-full"
+                                            className="rounded-xl object-contain h-10 w-10 max-w-0 "
                                         />
                                     </th>
                                     <th
