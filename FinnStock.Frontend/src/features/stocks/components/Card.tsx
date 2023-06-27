@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 interface ICardProps {
     currency: string;
@@ -11,7 +12,10 @@ interface ICardProps {
 
 export const Card = ({ currency, description, displaySymbol, figi, symbol, type }: ICardProps) => {
     return (
-        <div className="bg-white p-4 rounded cursor-pointer hover:drop-shadow-lg max-w-xl">
+        <Link
+            to={symbol}
+            className="bg-white p-4 rounded cursor-pointer hover:drop-shadow-lg max-w-xl"
+        >
             <span className="bg-gray-100 text-primary-800 text-xs font-medium mr-2 px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
                 {symbol}
             </span>
@@ -22,6 +26,6 @@ export const Card = ({ currency, description, displaySymbol, figi, symbol, type 
             <p className="text-xs text-slate-400 ">
                 Currency: <span className="text-slate-600 font-medium">{currency}</span>
             </p>
-        </div>
+        </Link>
     );
 };
