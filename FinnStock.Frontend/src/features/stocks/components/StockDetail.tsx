@@ -3,7 +3,7 @@ import { Header } from './Header';
 
 export const StockDetail = () => {
     return (
-        <div>
+        <div className="h-full">
             <Header />
         </div>
     );
