@@ -3,7 +3,7 @@ import { Header } from './Header';
 
 export const StockDetail = () => {
     return (
-        <div className="h-full">
+        <div className="h-full flex flex-col">
             <Header />
         </div>
     );
