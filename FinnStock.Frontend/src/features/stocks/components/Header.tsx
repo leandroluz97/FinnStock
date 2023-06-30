@@ -144,7 +144,7 @@ export const Header = () => {
                             </div>
                         </div>
                     </section>
-                    <div className="h-full overflow-hidden">
+                    <div className="overflow-hidden">
                         <section className="grid grid-cols-6 gap-4 my-4">
                             <div className="col-span-4 bg-white rounded p-6">1</div>
                             <div className="col-span-2 bg-white rounded p-6">
@@ -197,10 +197,53 @@ export const Header = () => {
                                     </div>
                                 </section>
                             </div>
-                            <div className="col-span-4 bg-white rounded p-6">
+                            <div className="col-span-4 bg-white rounded p-6 text-justify">
                                 <h3 className="text-primary-950 font-black uppercase text-sm">
-                                    Recent News
+                                    BTC to USD Converter
                                 </h3>
+                                <div className="bg-primary-200 rounded-lg my-4 flex justify-between relative">
+                                    <div className="p-5 flex-1">
+                                        <h4 className="font-extrabold text-primary-900 text-lg">
+                                            1 unit - Apple Inc
+                                        </h4>
+                                    </div>
+                                    <div className="bg-white rounded-full h-10 w-10 flex justify-center content-center flex-wrap absolute top-1/2 left-1/2 -translate-y-1/2 -translate-x-1/2">
+                                        <svg
+                                            xmlns="http://www.w3.org/2000/svg"
+                                            fill="none"
+                                            viewBox="0 0 24 24"
+                                            strokeWidth="1.5"
+                                            stroke="#3E5F8A"
+                                            className="w-6 h-6"
+                                        >
+                                            <path
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                                d="M17.25 8.25L21 12m0 0l-3.75 3.75M21 12H3"
+                                            />
+                                        </svg>
+                                    </div>
+                                    <div className="flex-1 p-5 border-l-2 border-white text-right">
+                                        <h5 className="font-extrabold text-primary-900 text-lg">
+                                            $399,00
+                                        </h5>
+                                    </div>
+                                </div>
+                                <h3 className="text-primary-950 font-black uppercase text-sm">
+                                    What is Apple Inc
+                                </h3>
+                                <p className="text-primary-800 text-justify">
+                                    Lorem Ipsum is simply dummy text of the printing and typesetting
+                                    industry. Lorem Ipsum has been the industry's standard dummy
+                                    text ever since the 1500s, when an unknown printer took a galley
+                                    of type and scrambled it to make a type specimen book. It has
+                                    survived not only five centuries, but also the leap into
+                                    electronic typesetting, remaining essentially unchanged. It was
+                                    popularised in the 1960s with the release of Letraset sheets
+                                    containing Lorem Ipsum passages, and more recently with desktop
+                                    publishing software like Aldus PageMaker including versions of
+                                    Lorem Ipsum.
+                                </p>
                             </div>
                             <div className="col-span-2 bg-white rounded p-6">
                                 <h3 className="text-primary-950 font-black uppercase text-sm">
