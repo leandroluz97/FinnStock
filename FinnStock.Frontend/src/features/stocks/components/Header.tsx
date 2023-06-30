@@ -40,10 +40,10 @@ export const Header = () => {
                     </p>
                 </section>
             </header>
-            <div className="h-full flex flex-col overflow-auto pr-2">
+            <div className="h-full flex flex-col overflow-auto pr-2 rounded-md">
                 <div>
                     <section>
-                        <div className="grid grid-cols-4 gap-4">
+                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
                             <div className="bg-white p-4 rounded max-w-xl">
                                 <div className="bg-primary-500 flex flex-col justify-center content-center w-12 h-12 text-primary-800 text-xs font-medium  px-2.5 py-0.5 rounded dark:bg-gray-700 dark:text-gray-300">
                                     <svg
@@ -146,8 +146,8 @@ export const Header = () => {
                     </section>
                     <div className="overflow-hidden">
                         <section className="grid grid-cols-6 gap-4 my-4">
-                            <div className="col-span-4 bg-white rounded p-6">1</div>
-                            <div className="col-span-2 bg-white rounded p-6">
+                            <div className="col-span-6 md:col-span-4 bg-white rounded p-6">1</div>
+                            <div className="col-span-6 md:col-span-2 bg-white rounded p-6">
                                 <h3 className="text-primary-950 font-black uppercase text-sm">
                                     Recent News
                                 </h3>
@@ -169,7 +169,7 @@ export const Header = () => {
                                             errorMessage=""
                                         />
                                     </div>
-                                    <div className="flex justify-between border-b-2 border-primary-100 py-5">
+                                    <div className="flex justify-between border-b-2 border-primary-100 my-5">
                                         <p className="text-primary-950 font-medium">Value</p>
                                         <p className="text-primary-950 font-black uppercase text-lg">
                                             $250
@@ -197,7 +197,7 @@ export const Header = () => {
                                     </div>
                                 </section>
                             </div>
-                            <div className="col-span-4 bg-white rounded p-6 text-justify">
+                            <div className="col-span-6 md:col-span-4 bg-white rounded p-6 text-justify">
                                 <h3 className="text-primary-950 font-black uppercase text-sm">
                                     BTC to USD Converter
                                 </h3>
@@ -233,19 +233,27 @@ export const Header = () => {
                                     What is Apple Inc
                                 </h3>
                                 <p className="text-primary-800 text-justify">
-                                    Lorem Ipsum is simply dummy text of the printing and typesetting
-                                    industry. Lorem Ipsum has been the industry's standard dummy
-                                    text ever since the 1500s, when an unknown printer took a galley
-                                    of type and scrambled it to make a type specimen book. It has
-                                    survived not only five centuries, but also the leap into
-                                    electronic typesetting, remaining essentially unchanged. It was
-                                    popularised in the 1960s with the release of Letraset sheets
-                                    containing Lorem Ipsum passages, and more recently with desktop
-                                    publishing software like Aldus PageMaker including versions of
-                                    Lorem Ipsum.
+                                    Apple Inc. is an American multinational technology company
+                                    headquartered in Cupertino, California, that designs, develops,
+                                    and sells consumer electronics, computer software, and online
+                                    services. It is considered one of the Big Four technology
+                                    companies, alongside Amazon, Google, and Microsoft. The
+                                    company's hardware products include the iPhone smartphone, the
+                                    iPad tablet computer, the Mac personal computer, the iPod
+                                    portable media player, the Apple Watch smartwatch, the Apple TV
+                                    digital media player, the AirPods wireless earbuds and the
+                                    HomePod smart speaker. Apple's software includes the macOS, iOS,
+                                    iPadOS, watchOS, and tvOS operating systems, the iTunes media
+                                    player, the Safari web browser, the Shazam acoustic fingerprint
+                                    utility, and the iLife and iWork creativity and productivity
+                                    suites, as well as professional applications like Final Cut Pro,
+                                    Logic Pro, and Xcode. Its online services include the iTunes
+                                    Store, the iOS App Store, Mac App Store, Apple Music, Apple TV+,
+                                    iMessage, and iCloud. Other services include Apple Store, Genius
+                                    Bar, AppleCare, Apple Pay, Apple Pay Cash, and Apple Card.
                                 </p>
                             </div>
-                            <div className="col-span-2 bg-white rounded p-6">
+                            <div className="col-span-6 md:col-span-2 bg-white rounded p-6">
                                 <h3 className="text-primary-950 font-black uppercase text-sm">
                                     Recent News
                                 </h3>
