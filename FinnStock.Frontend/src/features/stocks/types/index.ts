@@ -20,3 +20,23 @@ export type FavoriteStock = {
 export type OrderFormInput = {
     quantity: number;
 };
+
+export type Quote = {
+    c: number;
+    h: number;
+    l: number;
+    o: number;
+    pc: number;
+    t: number;
+};
+
+export type StockProfile = {
+    country: string;
+    currency: string;
+    name: string;
+    ipo: string;
+    marketCapitalization: number;
+    ticker: string;
+    weburl: string;
+    logo: string;
+};
