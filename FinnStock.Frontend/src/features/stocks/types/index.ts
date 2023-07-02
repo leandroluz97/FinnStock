@@ -16,3 +16,7 @@ export type FavoriteStock = {
     description: string;
     symbol: string;
 };
+
+export type OrderFormInput = {
+    quantity: number;
+};

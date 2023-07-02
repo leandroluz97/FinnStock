@@ -7,6 +7,7 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 
 import { InputField } from '../../../components/Form';
 import { Metric } from './metric';
+import { NewOrder } from './NewOrder';
 
 const data = [
     {
@@ -99,31 +100,30 @@ export const Header = () => {
             </header>
             <div className="h-full flex flex-col overflow-auto pr-2 rounded-md">
                 <div>
-                    <section>
-                        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
-                            <Metric.Root>
-                                <Metric.Icon Icon={ChartBarIcon} className="w-12 p-3 " />
-                                <Metric.Title title="EXCHANGE" className="mt-4" />
-                                <Metric.Content content="NASDAQ/NMS (GLOBAL MARKET)" />
-                            </Metric.Root>
-                            <Metric.Root>
-                                <Metric.Icon Icon={WalletIcon} className="w-12 p-3 " />
-                                <Metric.Title title="Market Capitalization" className="mt-4" />
-                                <Metric.Content content="1415993" />
-                            </Metric.Root>
-                            <Metric.Root>
-                                <Metric.Icon Icon={ShareIcon} className="w-12 p-3 " />
-                                <Metric.Title title="Share Outstanding" className="mt-4" />
-                                <Metric.Content content="4375.47998046875" />
-                            </Metric.Root>
-                            <Metric.Root>
-                                <Metric.Icon Icon={BanknotesIcon} className="w-12 p-3 " />
-                                <Metric.Title title="Currency" className="mt-4" />
-                                <Metric.Content content="USD" />
-                            </Metric.Root>
-                        </div>
-                    </section>
-                    <div className="overflow-hidden">
+                    <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+                        <Metric.Root>
+                            <Metric.Icon Icon={ChartBarIcon} className="w-12 p-3 " />
+                            <Metric.Title title="EXCHANGE" className="mt-4" />
+                            <Metric.Content content="NASDAQ/NMS (GLOBAL MARKET)" />
+                        </Metric.Root>
+                        <Metric.Root>
+                            <Metric.Icon Icon={WalletIcon} className="w-12 p-3 " />
+                            <Metric.Title title="Market Capitalization" className="mt-4" />
+                            <Metric.Content content="1415993" />
+                        </Metric.Root>
+                        <Metric.Root>
+                            <Metric.Icon Icon={ShareIcon} className="w-12 p-3 " />
+                            <Metric.Title title="Share Outstanding" className="mt-4" />
+                            <Metric.Content content="4375.47998046875" />
+                        </Metric.Root>
+                        <Metric.Root>
+                            <Metric.Icon Icon={BanknotesIcon} className="w-12 p-3 " />
+                            <Metric.Title title="Currency" className="mt-4" />
+                            <Metric.Content content="USD" />
+                        </Metric.Root>
+                    </div>
+
+                    <div className="">
                         <section className="grid grid-cols-6 gap-4 my-4">
                             <div className="col-span-6 md:col-span-4 bg-white rounded p-6 flex flex-col justify-between">
                                 <h3 className="text-primary-950 font-black uppercase text-2xl">
@@ -192,56 +192,7 @@ export const Header = () => {
                                 </div>
                             </div>
                             <div className="col-span-6 md:col-span-2 bg-white rounded p-6">
-                                <h3 className="text-primary-950 font-black uppercase text-sm">
-                                    New Order
-                                </h3>
-                                <section className="h-full">
-                                    <div>
-                                        <div className="pt-8">
-                                            <InputField
-                                                id="quantity"
-                                                name="quantity"
-                                                label="Quantity"
-                                                placeholder=""
-                                                type="number"
-                                                max="1000"
-                                                min="1"
-                                                groupFormClassList="flex-1"
-                                                required
-                                                key="first_name"
-                                                register={register('firstName')}
-                                                hasError={false}
-                                                errorMessage=""
-                                            />
-                                        </div>
-                                        <div className="flex justify-between border-b-2 border-primary-100 my-5">
-                                            <p className="text-primary-950 font-medium">Value</p>
-                                            <p className="text-primary-950 font-black uppercase text-lg">
-                                                $250
-                                            </p>
-                                        </div>
-                                    </div>
-                                    <div className="grid grid-cols-2 gap-3 mt-auto">
-                                        <button
-                                            type="submit"
-                                            className="col-span-1 uppercase flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5"
-                                        >
-                                            Buy
-                                        </button>
-                                        <button
-                                            type="submit"
-                                            className="col-span-1 uppercase flex flex-row items-center justify-center text-white w-full bg-primary-900 hover:bg-primary-950 focus:ring-4 focus:ring-primary-300 disabled:bg-primary-800 font-medium rounded text-sm px-5 py-2.5"
-                                        >
-                                            Sell
-                                        </button>
-                                        <button
-                                            type="submit"
-                                            className="col-span-2 uppercase text-primary-900 border-solid bg-primary-50 border-primary-500 border hover:bg-primary-100 font-medium rounded text-sm px-5 py-2.5 mt-5  focus:outline-none"
-                                        >
-                                            Trade Option
-                                        </button>
-                                    </div>
-                                </section>
+                                <NewOrder />
                             </div>
                             <div className="col-span-6 md:col-span-4 bg-white rounded p-6 text-justify">
                                 <h3 className="text-primary-950 font-black uppercase text-sm">
