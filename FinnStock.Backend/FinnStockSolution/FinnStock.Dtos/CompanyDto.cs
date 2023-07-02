@@ -17,5 +17,6 @@ namespace FinnStock.Dtos
         public string Ticker { get; set; }
         public string Weburl { get; set; }
         public string Logo { get; set; }
+        public string Phone { get; set; }
     }
 }
