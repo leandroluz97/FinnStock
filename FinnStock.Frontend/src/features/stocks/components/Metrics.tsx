@@ -4,7 +4,7 @@ import { Metric } from './metric';
 
 export const Metrics = () => {
     return (
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+        <React.Fragment>
             <Metric.Root>
                 <Metric.Icon Icon={ChartBarIcon} className="w-12 p-3 " />
                 <Metric.Title title="EXCHANGE" className="mt-4" />
@@ -25,6 +25,6 @@ export const Metrics = () => {
                 <Metric.Title title="Currency" className="mt-4" />
                 <Metric.Content content="USD" />
             </Metric.Root>
-        </div>
+        </React.Fragment>
     );
 };
