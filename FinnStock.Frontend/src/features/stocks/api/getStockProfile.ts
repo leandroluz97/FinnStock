@@ -2,13 +2,13 @@ import { useQuery } from 'react-query';
 
 import { axios } from '../../../lib/axios';
 import { ExtractFnReturnType, QueryConfig } from '../../../lib/react-query';
-import { Quote } from '../types';
+import { StockProfile } from '../types';
 
 type PageRequest = {
     symbol: string;
 };
 
-export const getStockProfile = ({ symbol }: PageRequest): Promise<Quote> => {
+export const getStockProfile = ({ symbol }: PageRequest): Promise<StockProfile> => {
     return axios.get(`/Stocks/${symbol}/profile`);
 };
 
@@ -21,7 +21,7 @@ type UseStockProfileOptions = {
 export const useStockProfile = ({ config, symbol }: UseStockProfileOptions = { symbol: '' }) => {
     return useQuery<ExtractFnReturnType<QueryFnType>>({
         ...config,
-        queryKey: ['quote', symbol],
+        queryKey: ['stock', symbol],
         queryFn: () => getStockProfile({ symbol }),
         keepPreviousData: true,
     });
