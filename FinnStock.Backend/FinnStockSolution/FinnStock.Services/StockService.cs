@@ -129,6 +129,36 @@ namespace FinnStock.Services
                 Items = pagedNews
             };
         }
+        public async Task<Pagination<NewsDto>> GetMarketNewsAsync(int pageSize, int pageNumber, string symbol, string fromDate, string toDate )
+        {
+            _logger.LogInformation("{GetMarketNewsAsync} param value", nameof(GetStockQuoteAsync));
+
+            var from = DateTime.Today.AddMonths(-1);
+            var to = DateTime.Now;
+
+            if (!string.IsNullOrWhiteSpace(fromDate))
+            {
+                DateTime.TryParse(fromDate, out from);
+            }
+            if (!string.IsNullOrWhiteSpace(toDate))
+            {
+                DateTime.TryParse(fromDate, out to);
+            }
+
+            var news = await _finnhubClient.GetCompanyNewsAsync(symbol, from.ToString("yyyy-MM-dd"),to.ToString("yyyy-MM-dd"));
+
+            var pagedNews = news.Skip((pageNumber - 1) * pageSize).Take(pageSize).ToList();
+
+            _logger.LogInformation("{GetStockQuoteAsync} found {news}", nameof(GetAllAsync), news.Count());
+
+            return new Pagination<NewsDto>()
+            {
+                PageNumber = pageNumber,
+                PageSize = pageSize,
+                TotalPages = news.Count() / pageSize, 
+                Items = pagedNews
+            };
+        }
 
         public async Task ConnectToWebSocket(string symbol)
         {
