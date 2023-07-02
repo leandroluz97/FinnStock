@@ -43,6 +43,14 @@ namespace FinnStock.WebAPI.Controllers
             return await _stockService.SearchStockAsync(searchText, pageSize, pageNumber);
         }
 
+
+        [HttpGet]
+        [Route("{symbol}/company-news")]
+        public async Task<Pagination<NewsDto>> CompanyNews(string symbol, string? from, string? to, int pageSize = 100, int pageNumber = 1)
+        {
+            return await _stockService.GetCompanyNewsAsync(pageSize, pageNumber, symbol, from, to);
+        }
+
         [HttpGet]
         [Route("{symbol}/profile")]
         public async Task<CompanyDto> GetCompanyAsync(string symbol)

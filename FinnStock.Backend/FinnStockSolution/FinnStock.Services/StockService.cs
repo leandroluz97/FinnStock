@@ -129,7 +129,7 @@ namespace FinnStock.Services
                 Items = pagedNews
             };
         }
-        public async Task<Pagination<NewsDto>> GetMarketNewsAsync(int pageSize, int pageNumber, string symbol, string fromDate, string toDate )
+        public async Task<Pagination<NewsDto>> GetCompanyNewsAsync(int pageSize, int pageNumber, string symbol, string? fromDate, string? toDate )
         {
             _logger.LogInformation("{GetMarketNewsAsync} param value", nameof(GetStockQuoteAsync));
 
@@ -142,7 +142,7 @@ namespace FinnStock.Services
             }
             if (!string.IsNullOrWhiteSpace(toDate))
             {
-                DateTime.TryParse(fromDate, out to);
+                DateTime.TryParse(toDate, out to);
             }
 
             var news = await _finnhubClient.GetCompanyNewsAsync(symbol, from.ToString("yyyy-MM-dd"),to.ToString("yyyy-MM-dd"));
