@@ -26,7 +26,7 @@ type UseNewsOptions = {
     symbol: string;
 } & Page;
 
-export const useNews = (
+export const useNewsBySymbol = (
     { config, pageNumber, pageSize, symbol }: UseNewsOptions = {
         pageNumber: 1,
         pageSize: 100,

@@ -39,4 +39,6 @@ export type StockProfile = {
     ticker: string;
     weburl: string;
     logo: string;
+    phone: string;
+    exchange: string;
 };

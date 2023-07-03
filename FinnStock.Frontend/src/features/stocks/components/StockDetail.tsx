@@ -5,7 +5,7 @@ import { Metrics } from './Metrics';
 import { Graph } from './Graph';
 import { About } from './About';
 import { NewOrder } from './NewOrder';
-import { News } from './news/news';
+import { News } from './news/News';
 
 export const StockDetail = () => {
     return (
