@@ -18,7 +18,7 @@ type UseStockQuoteOptions = {
     config?: QueryConfig<QueryFnType>;
 } & PageRequest;
 
-export const useQuote = ({ config, symbol }: UseStockQuoteOptions = { symbol: '' }) => {
+export const useStockQuote = ({ config, symbol }: UseStockQuoteOptions = { symbol: '' }) => {
     return useQuery<ExtractFnReturnType<QueryFnType>>({
         ...config,
         queryKey: ['quote', symbol],

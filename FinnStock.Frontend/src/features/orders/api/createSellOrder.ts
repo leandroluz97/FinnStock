@@ -9,7 +9,7 @@ export type createSellOrderDto = {
         logo: string;
         amount: number;
         quantity: number;
-        symbol: number;
+        symbol: string;
         userId: string;
     };
 };

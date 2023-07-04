@@ -1,14 +1,15 @@
 import React from 'react';
-import { UseFormRegister } from 'react-hook-form';
+import { UseFormRegister, FieldErrors } from 'react-hook-form';
 import { InputField } from '../../../../components/Form';
 import { OrderFormInput } from '../../types';
 
 interface OrderInputProps {
     register: UseFormRegister<OrderFormInput>;
     amount: number;
+    errors: FieldErrors<OrderFormInput>;
 }
 
-export const OrderInput = ({ register, amount }: OrderInputProps) => {
+export const OrderInput = ({ register, amount, errors }: OrderInputProps) => {
     return (
         <div>
             <div className="pt-8">
@@ -24,13 +25,15 @@ export const OrderInput = ({ register, amount }: OrderInputProps) => {
                     required
                     key="quantity"
                     register={register('quantity')}
-                    hasError={false}
-                    errorMessage=""
+                    hasError={!!errors.quantity}
+                    errorMessage={errors.quantity?.message || ''}
                 />
             </div>
             <div className="flex justify-between border-b-2 border-primary-100 my-5">
                 <p className="text-primary-950 font-medium">Value</p>
-                <p className="text-primary-950 font-black uppercase text-lg">${amount}</p>
+                <p className="text-primary-950 font-black uppercase text-lg">
+                    ${amount.toFixed(2) || 0}
+                </p>
             </div>
         </div>
     );

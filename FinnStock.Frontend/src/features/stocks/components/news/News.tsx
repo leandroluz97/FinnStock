@@ -7,8 +7,6 @@ export const News = () => {
     const { data } = useNewsBySymbol({ symbol, pageNumber: 1, pageSize: 4 });
     if (data === undefined) return null;
 
-    console.log(data);
-
     return (
         <React.Fragment>
             <h3 className="text-primary-950 font-black uppercase text-sm">Recent News</h3>
@@ -17,6 +15,7 @@ export const News = () => {
                     const milliseconds = parseInt(news.datetime?.toString().padEnd(13, '0'), 10);
                     return (
                         <Link
+                            key={news.id}
                             to={news.url}
                             target="_blank"
                             className="flex mt-3 bg-slate-100 rounded cursor-pointer"
