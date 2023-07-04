@@ -25,34 +25,34 @@ const schema = yup.object().shape({
         .min(1, 'Amount is too low - should be at least 1 minimum.')
         .max(10000, 'Amount is too high - should be at least 10000 maximun.'),
 });
+const MAXIMUM_QUANTITY = 10000;
+const MINIMUM_QUANTITY = 1;
+const QUANTITY = 'quantity';
+const ERROR_MESSAGE = 'Invalid quantity value - should be between 1 and 10 000';
 
 export const NewOrder = () => {
     const { userId, symbol } = useParams();
     const { register, setError, watch, formState, getValues, reset } = useForm<OrderFormInput>({
         mode: 'onChange',
-        resolver: yupResolver(schema),
-        defaultValues: { quantity: 1 },
+        // resolver: yupResolver(schema),
+        defaultValues: { quantity: MINIMUM_QUANTITY },
     });
     const { data: profile } = useStockProfile({ symbol });
     const { data: quote } = useStockQuote({ symbol });
     const { errors, isValid } = formState;
     const sellOrder = useCreateSellOrder();
     const buyOrder = useCreateBuyOrder();
-    const total = Number(watch('quantity') || 1) * (quote?.c || 1);
+    const total = Number(watch(QUANTITY) || MINIMUM_QUANTITY) * (quote?.c || MINIMUM_QUANTITY);
 
-    function displayErrorMessage() {
-        setError(
-            'quantity',
-            { type: 'custom', message: `Invalid quantity value - should be between 1 and 10 000` },
-            { shouldFocus: true }
-        );
-    }
+    const displayErrorMessage = () => {
+        setError(QUANTITY, { type: 'custom', message: ERROR_MESSAGE }, { shouldFocus: true });
+    };
 
     const submitOrder = (type: IType) => async () => {
         if (!isValid) return displayErrorMessage();
         if (!(profile && quote)) return;
 
-        const quantity = parseInt(getValues('quantity'), 10);
+        const quantity = Number(Number(getValues(QUANTITY)).toFixed());
         const amount = quantity * quote.c;
         const { logo } = profile;
         const payload = { logo, amount, quantity, symbol, userId };
@@ -66,14 +66,14 @@ export const NewOrder = () => {
             },
         };
         await orderType[type]();
-        reset({ quantity: 1 });
+        reset({ quantity: MINIMUM_QUANTITY });
     };
 
-    if (Number(watch('quantity') || 1) > 10000) {
-        reset({ quantity: 10000 });
+    if (Number(watch(QUANTITY) || MINIMUM_QUANTITY) > MAXIMUM_QUANTITY) {
+        reset({ quantity: MAXIMUM_QUANTITY });
     }
-    if (Number(watch('quantity') || 1) < 1) {
-        reset({ quantity: 1 });
+    if (Number(watch(QUANTITY) || MINIMUM_QUANTITY) < MINIMUM_QUANTITY) {
+        reset({ quantity: MINIMUM_QUANTITY });
     }
 
     return (
