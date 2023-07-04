@@ -83,6 +83,7 @@ export const Header = () => {
             </div>
             <div className="flex">
                 <Link
+                    target="_blank"
                     to={data.weburl}
                     className="self-center font-medium border-r-2 pr-2 border-primary-500 text-primary-900"
                 >
