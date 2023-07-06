@@ -4,6 +4,8 @@ import { useParams } from 'react-router-dom';
 import { useStockQuote } from '../api/getStockQuote';
 import { Spinner } from '../../../components/Loading';
 
+const ONE_SECOND = 1000;
+
 type CustomToolTipProps = {
     active: boolean;
     payload: any[];
@@ -31,7 +33,10 @@ function CustomToolTip({ active, payload, label }: CustomToolTipProps) {
 
 export const Graph = () => {
     const { symbol } = useParams();
-    const { data: quotes, isLoading } = useStockQuote({ symbol });
+    const { data: quotes, isLoading } = useStockQuote({
+        config: { refetchInterval: ONE_SECOND * 30 },
+        symbol,
+    });
 
     if (isLoading)
         return (
@@ -41,7 +46,7 @@ export const Graph = () => {
         );
     if (quotes === undefined) return null;
 
-    const stockQuote = quotes.c.at(-1).toFixed(2) || 0;
+    const stockQuote = quotes.c?.at(-1).toFixed(2) || 0;
     const formatQuotes = (quote: number, index: number) =>
         ({
             name: new Date(quotes.t[index] * 1000).toLocaleDateString(),
@@ -50,7 +55,7 @@ export const Graph = () => {
             amt: 0,
         } as unknown as IQuoteData);
 
-    const quoteData = quotes.c.map(formatQuotes) as unknown as IQuoteData[];
+    const quoteData = quotes.c?.map(formatQuotes) as unknown as IQuoteData[];
 
     return (
         <React.Fragment>

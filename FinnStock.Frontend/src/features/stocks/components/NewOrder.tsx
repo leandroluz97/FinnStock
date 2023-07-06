@@ -41,8 +41,8 @@ export const NewOrder = () => {
     const { errors, isValid } = formState;
     const sellOrder = useCreateSellOrder();
     const buyOrder = useCreateBuyOrder();
-    const quote = quotes?.c.at(-1);
-    const total = Number(watch(QUANTITY) || MINIMUM_QUANTITY) * (quote || MINIMUM_QUANTITY);
+    const quote = quotes?.c?.at(-1);
+    const total = Number(watch(QUANTITY) || MINIMUM_QUANTITY) * (quote || 0);
 
     const displayErrorMessage = () => {
         setError(QUANTITY, { type: 'custom', message: ERROR_MESSAGE }, { shouldFocus: true });

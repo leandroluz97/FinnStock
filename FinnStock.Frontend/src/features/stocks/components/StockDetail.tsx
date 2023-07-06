@@ -1,6 +1,5 @@
 import React from 'react';
 import { Header } from './Header';
-import { Metric } from './metric';
 import { Metrics } from './Metrics';
 import { Graph } from './Graph';
 import { About } from './About';
@@ -25,10 +24,11 @@ export const StockDetail = () => {
                             <div className="col-span-6 md:col-span-2 bg-white rounded p-6">
                                 <NewOrder />
                             </div>
-                            <div className="col-span-6 md:col-span-4 bg-white rounded p-6 text-justify">
+                            {/* <div className="col-span-6 md:col-span-4 bg-white rounded p-6 text-justify">
                                 <About />
-                            </div>
-                            <div className="col-span-6 md:col-span-2 bg-white rounded p-6">
+                            </div> */}
+
+                            <div className="col-span-6 md:col-span-12 bg-white rounded p-6">
                                 <News />
                             </div>
                         </section>

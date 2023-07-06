@@ -99,7 +99,9 @@ namespace FinnStock.Services
             {
                 throw new ArgumentNullException(nameof(symbol));
             }
-            var quote = await _finnhubClient.GetStockPriceQuoteAsync(symbol);
+            var from = DateTime.Today.AddMonths(-1);
+            var to = DateTime.Today;
+            var quote = await _finnhubClient.GetStockPriceQuoteAsync(symbol, from, to);
 
             if (quote == null)
             {

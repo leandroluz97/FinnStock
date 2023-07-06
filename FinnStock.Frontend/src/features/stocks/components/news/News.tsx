@@ -4,13 +4,13 @@ import { useNewsBySymbol } from '../../../news/api/getNewsBySymbol';
 
 export const News = () => {
     const { symbol } = useParams();
-    const { data } = useNewsBySymbol({ symbol, pageNumber: 1, pageSize: 4 });
+    const { data } = useNewsBySymbol({ symbol, pageNumber: 1, pageSize: 12 });
     if (data === undefined) return null;
 
     return (
         <React.Fragment>
             <h3 className="text-primary-950 font-black uppercase text-sm">Recent News</h3>
-            <section>
+            <section className="grid grid-cols-4 gap-3">
                 {data.items.map((news) => {
                     const milliseconds = parseInt(news.datetime?.toString().padEnd(13, '0'), 10);
                     return (

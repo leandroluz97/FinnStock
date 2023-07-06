@@ -33,9 +33,11 @@ namespace FinnStock.Clients.Finnhub
             _httpClient.BaseAddress = new Uri(_configuration["Finnhub:Base_Url"]);
         }
 
-        public async Task<QuoteDto> GetStockPriceQuoteAsync(string symbol)
+        public async Task<QuoteDto> GetStockPriceQuoteAsync(string symbol, DateTime from, DateTime to)
         {
-            var response = await _httpClient.GetAsync($"/api/v1/quote?symbol={symbol}");
+            var fromUnixTimestamp = (Int32)(from.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            var toUnixTimestamp = (Int32)(to.Subtract(new DateTime(1970, 1, 1))).TotalSeconds;
+            var response = await _httpClient.GetAsync($"/api/v1/stock/candle?symbol={symbol}&resolution=D&from={fromUnixTimestamp}&to={toUnixTimestamp}");
 
             response.EnsureSuccessStatusCode();
 
