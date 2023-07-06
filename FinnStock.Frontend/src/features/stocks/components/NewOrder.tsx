@@ -34,15 +34,15 @@ export const NewOrder = () => {
     const { userId, symbol } = useParams();
     const { register, setError, watch, formState, getValues, reset } = useForm<OrderFormInput>({
         mode: 'onChange',
-        // resolver: yupResolver(schema),
         defaultValues: { quantity: MINIMUM_QUANTITY },
     });
     const { data: profile } = useStockProfile({ symbol });
-    const { data: quote } = useStockQuote({ symbol });
+    const { data: quotes } = useStockQuote({ symbol });
     const { errors, isValid } = formState;
     const sellOrder = useCreateSellOrder();
     const buyOrder = useCreateBuyOrder();
-    const total = Number(watch(QUANTITY) || MINIMUM_QUANTITY) * (quote?.c || MINIMUM_QUANTITY);
+    const quote = quotes?.c.at(-1);
+    const total = Number(watch(QUANTITY) || MINIMUM_QUANTITY) * (quote || MINIMUM_QUANTITY);
 
     const displayErrorMessage = () => {
         setError(QUANTITY, { type: 'custom', message: ERROR_MESSAGE }, { shouldFocus: true });
@@ -53,7 +53,7 @@ export const NewOrder = () => {
         if (!(profile && quote)) return;
 
         const quantity = Number(Number(getValues(QUANTITY)).toFixed());
-        const amount = quantity * quote.c;
+        const amount = quantity * quote;
         const { logo } = profile;
         const payload = { logo, amount, quantity, symbol, userId };
 

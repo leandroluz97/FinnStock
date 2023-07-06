@@ -22,12 +22,12 @@ export type OrderFormInput = {
 };
 
 export type Quote = {
-    c: number;
-    h: number;
-    l: number;
-    o: number;
-    pc: number;
-    t: number;
+    c: number[];
+    h: number[];
+    l: number[];
+    o: number[];
+    pc: number[];
+    t: number[];
 };
 
 export type StockProfile = {
