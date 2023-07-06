@@ -42,3 +42,10 @@ export type StockProfile = {
     phone: string;
     exchange: string;
 };
+
+export type Favorite = {
+    id: string;
+    symbol: string;
+    description: string;
+    userId: string;
+};
