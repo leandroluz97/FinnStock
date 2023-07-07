@@ -17,7 +17,7 @@ export type addFavoriteResponseDto = {
 };
 
 export const addFavorite = ({ data }: addFavoriteDto): Promise<any> => {
-    return axios.post(`/Users/${data.userId}/SellOrders`, data);
+    return axios.post(`/Users/${data.userId}/Favorites`, data);
 };
 
 type UseAddFavorite = {
@@ -30,8 +30,7 @@ export const useAddFavorite = ({ config }: UseAddFavorite = {}) => {
             toast.error('Error on Buy Order', toasterConfig);
         },
         onSuccess: (data) => {
-            queryClient.invalidateQueries('sellOrders');
-            toast.success('Order sold successful ', toasterConfig);
+            queryClient.invalidateQueries('favorite');
         },
         ...config,
         mutationFn: addFavorite,

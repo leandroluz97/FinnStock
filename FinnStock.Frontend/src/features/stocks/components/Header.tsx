@@ -1,14 +1,11 @@
 import React from 'react';
-import { ChartBarIcon, WalletIcon, ShareIcon, BanknotesIcon } from '@heroicons/react/24/outline';
+import * as R from 'ramda';
 import { Link, useParams } from 'react-router-dom';
-import { yupResolver } from '@hookform/resolvers/yup';
-import { useForm } from 'react-hook-form';
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
 
-import { InputField } from '../../../components/Form';
-import { Metric } from './metric';
-import { NewOrder } from './NewOrder';
 import { useStockProfile } from '../api/getStockProfile';
+import { useFavoriteStocks } from '../api/getFavoriteStocks';
+import { useDeleteFavoriteStock } from '../api/deleteFavoriteStock';
+import { useAddFavorite } from '../api/addFavoriteStock';
 
 const data = [
     {
@@ -65,10 +62,26 @@ const CustomToolTip = (obe) => {
 };
 
 export const Header = () => {
-    const { symbol } = useParams<{ symbol: string }>();
+    const { symbol, userId } = useParams<{ symbol: string; userId: string }>();
     const { data, isLoading } = useStockProfile({ symbol });
+    const { data: favorites, ...rest } = useFavoriteStocks({ userId });
+    const deleteFavorite = useDeleteFavoriteStock({});
+    const addFavorite = useAddFavorite({});
 
-    if (data === undefined) return null;
+    if (R.isNil(data)) return null;
+    if (R.isNil(favorites)) return null;
+
+    const favorite = favorites.find((favorite) => favorite.symbol === symbol);
+    const isFavorite = !R.isEmpty(favorites) ? !!favorite : false;
+
+    const handleAddFavorite = async () => {
+        await addFavorite.mutateAsync({
+            data: { symbol, description: data.name, userId },
+        });
+    };
+    const handleDeleteFavorite = async (favoriteId, userId) => {
+        await deleteFavorite.mutateAsync({ favoriteId, userId });
+    };
 
     return (
         <header className="py-2">
@@ -77,9 +90,27 @@ export const Header = () => {
                 <span className="bg-primary-500 text-primary-950 text-xs font-medium mx-2 px-2.5 py-0.5 rounded h-5 self-center">
                     {data.ticker}
                 </span>
-                <p className="self-center border-l-2 text-xl border-primary-500 px-3 text-primary-900">
-                    <span className="saturate-0 hover:saturate-100">🏅</span>
-                </p>
+                {isFavorite ? (
+                    <button
+                        onClick={() => {
+                            handleDeleteFavorite(favorite?.id, userId);
+                        }}
+                        type="button"
+                        className="self-center border-l-2 text-xl border-primary-500 px-3 text-primary-900"
+                    >
+                        <span className="saturate-10 hover:saturate-100">🏅</span>
+                    </button>
+                ) : (
+                    <button
+                        onClick={() => {
+                            handleAddFavorite();
+                        }}
+                        type="button"
+                        className="self-center border-l-2 text-xl border-primary-500 px-3 text-primary-900"
+                    >
+                        <span className="saturate-0 hover:saturate-100">🏅</span>
+                    </button>
+                )}
             </div>
             <div className="flex">
                 <Link
