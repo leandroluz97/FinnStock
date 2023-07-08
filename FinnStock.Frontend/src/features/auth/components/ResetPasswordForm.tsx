@@ -1,5 +1,5 @@
 import React from 'react';
-import { NavLink, useLocation } from 'react-router-dom';
+import { NavLink, useLocation, useNavigate } from 'react-router-dom';
 import { useForm } from 'react-hook-form';
 import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -18,10 +18,12 @@ const schema = yup.object().shape({
 export const ResetPasswordForm = () => {
     const { resetPassword, isResetingPassword } = useAuth();
     const location = useLocation();
+    const navigate = useNavigate();
     const {
         register,
         formState: { errors },
         handleSubmit,
+        reset,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     const submit = async (data: Inputs) => {
@@ -40,6 +42,8 @@ export const ResetPasswordForm = () => {
                 password: data.password,
             },
         });
+        reset({ password: '' });
+        navigate('/auth/login');
     };
 
     return (

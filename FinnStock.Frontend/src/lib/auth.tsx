@@ -6,7 +6,7 @@ import { ForgotPasswordDto, forgotPassword } from '../features/auth/api/forgotPa
 import { getUser, userDto } from '../features/auth/api/getUser';
 import { LoginDto, LoginResponseDto, login } from '../features/auth/api/login';
 import { RegisterDto, register } from '../features/auth/api/register';
-import { ResetPasswordDto } from '../features/auth/api/resetPassword';
+import { ResetPasswordDto, resetPassword } from '../features/auth/api/resetPassword';
 import { TwoFactorDto, twoFactor } from '../features/auth/api/twoFactor';
 import { AuthUser } from '../features/auth/types';
 import { storageService } from '../utils/storage';
@@ -45,7 +45,7 @@ async function forgotPasswordFn(data: ForgotPasswordDto) {
 }
 
 async function resetPasswordFn(data: ResetPasswordDto) {
-    const response = await forgotPassword(data);
+    const response = await resetPassword(data);
     return response;
 }
 

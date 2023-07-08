@@ -22,6 +22,7 @@ export const ForgotPasswordForm = () => {
         register,
         formState: { errors },
         handleSubmit,
+        reset,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
 
     const submit = async (data: Inputs) => {
@@ -30,6 +31,7 @@ export const ForgotPasswordForm = () => {
                 email: data.email,
             },
         });
+        reset({ email: '' });
     };
 
     return (
