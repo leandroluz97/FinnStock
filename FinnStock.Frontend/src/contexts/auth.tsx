@@ -130,26 +130,32 @@ export function initReactQuery<
         const loginMutation = useMutation({
             mutationFn: loginFn,
             onError: (error) => {
-                toast.error('Error Login', toasterConfig);
+                toast.error(error.data.description, toasterConfig);
             },
         });
 
         const registerMutation = useMutation({
             mutationFn: registerFn,
             onError: (error) => {
-                toast.error('Error Register', toasterConfig);
+                toast.error(error.data.description, toasterConfig);
             },
         });
 
         const confirmEmailMutation = useMutation({
             mutationFn: confirmEmailFn,
             onSuccess: (user) => {},
+            onError: (error) => {
+                toast.error(error.data.description, toasterConfig);
+            },
         });
 
         const twoFactorMutation = useMutation({
             mutationFn: twoFactorFn,
             onSuccess: (user) => {
                 setUser(user);
+            },
+            onError: (error) => {
+                toast.error(error.data.description, toasterConfig);
             },
         });
 
@@ -158,6 +164,9 @@ export function initReactQuery<
             onSuccess: (user) => {
                 //   setUser(user);
             },
+            onError: (error) => {
+                toast.error(error.data.description, toasterConfig);
+            },
         });
 
         const resetPasswordMutation = useMutation({
@@ -165,12 +174,18 @@ export function initReactQuery<
             onSuccess: (user) => {
                 //  setUser(user);
             },
+            onError: (error) => {
+                toast.error(error.data.description, toasterConfig);
+            },
         });
 
         const logoutMutation = useMutation({
             mutationFn: logoutFn,
             onSuccess: () => {
                 queryClient.clear();
+            },
+            onError: (error) => {
+                toast.error(error.data.description, toasterConfig);
             },
         });
 

@@ -4,11 +4,13 @@ import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
 
 import { NavLink, useNavigate } from 'react-router-dom';
+import { toast } from 'react-toastify';
 import validationRules from '../../../utils/formValidations';
 import { CheckBoxField, InputField } from '../../../components/Form';
 import googleLogo from '../../../assets/google-logo-sm.svg';
 import { Spinner } from '../../../components/Loading';
 import { useAuth } from '../../../lib/auth';
+import { toasterConfig } from '../../../lib/react-toastify';
 
 type Inputs = {
     email: string;

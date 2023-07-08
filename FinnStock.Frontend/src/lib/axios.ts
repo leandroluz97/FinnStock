@@ -27,6 +27,7 @@ axios.interceptors.response.use(
             storageService.clearToken();
             window.location.href = '/auth/login';
         }
-        Promise.reject(error);
+        // Promise.reject(error.response);
+        throw error.response;
     }
 );
