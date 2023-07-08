@@ -1,4 +1,5 @@
 import { useQuery } from 'react-query';
+import * as R from 'ramda';
 
 import { axios } from '../../../lib/axios';
 import { ExtractFnReturnType, QueryConfig } from '../../../lib/react-query';
@@ -16,7 +17,7 @@ export const getStocks = (
         searchText: null,
     }
 ): Promise<Pagination<Stock>> => {
-    if (searchText != null) {
+    if (!R.isNil(searchText)) {
         return axios.get(`/Stocks/Search?searchText=${searchText}`);
     }
     return axios.get(`/Stocks?pageNumber=${pageNumber}&pageSize=${pageSize}`);

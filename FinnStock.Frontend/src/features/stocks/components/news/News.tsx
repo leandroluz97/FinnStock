@@ -1,11 +1,13 @@
 import React from 'react';
+import * as R from 'ramda';
 import { Link, useParams } from 'react-router-dom';
 import { useNewsBySymbol } from '../../../news/api/getNewsBySymbol';
 
 export const News = () => {
     const { symbol } = useParams();
     const { data } = useNewsBySymbol({ symbol, pageNumber: 1, pageSize: 12 });
-    if (data === undefined) return null;
+
+    if (R.isNil(data)) return null;
 
     return (
         <React.Fragment>

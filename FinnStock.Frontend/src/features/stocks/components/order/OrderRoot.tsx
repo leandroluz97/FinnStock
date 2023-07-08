@@ -5,5 +5,5 @@ interface OrderRootProps {
 }
 
 export const OrderRoot = ({ children }: OrderRootProps) => {
-    return <div className="">{children}</div>;
+    return <div>{children}</div>;
 };

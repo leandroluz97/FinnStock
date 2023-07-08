@@ -3,18 +3,8 @@ import { Link } from 'react-router-dom';
 
 import { News } from '../types';
 
-type CardProps = {} & News;
-export const Card = ({
-    category,
-    datetime,
-    id,
-    image,
-    related,
-    summary,
-    url,
-    source,
-    headline,
-}: CardProps) => {
+type CardProps = News;
+export const Card = ({ category, datetime, image, url, source, headline }: CardProps) => {
     const milliseconds = parseInt(datetime?.toString().padEnd(13, '0'), 10);
 
     return (

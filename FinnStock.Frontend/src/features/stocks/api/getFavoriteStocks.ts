@@ -3,7 +3,6 @@ import { useQuery } from 'react-query';
 import { axios } from '../../../lib/axios';
 import { ExtractFnReturnType, QueryConfig } from '../../../lib/react-query';
 import { FavoriteStock } from '../types';
-import { Page, Pagination } from '../../../types/pagination';
 
 type PageRequest = {
     userId: string;

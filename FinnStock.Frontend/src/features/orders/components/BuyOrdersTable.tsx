@@ -1,10 +1,12 @@
 import React from 'react';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
+import * as R from 'ramda';
 import { Search } from './Search';
 import { URLSearch } from '../../../utils/URLSearch';
 import { useBuyOrders } from '../api/getBuyStocks';
 import { EmptyState } from '../../../components/States/EmptyState';
 import { Spinner } from '../../../components/Loading';
+import { normalize } from '../../../utils/normalize';
 
 export const BuyOrdersTable = () => {
     const [searchParams, setSearchParams] = useSearchParams();
@@ -19,25 +21,17 @@ export const BuyOrdersTable = () => {
                 <Spinner />
             </div>
         );
-    if (data == null) return null;
-    if (data.length === 0) return <EmptyState />;
+    if (R.isNil(data)) return null;
+    if (R.isEmpty(data)) return <EmptyState />;
 
-    let dataToDisplay = data;
-    if (QUERIES.searchText !== null) {
-        dataToDisplay = data.filter((order) =>
-            order.symbol.toLowerCase().includes(
-                QUERIES.searchText
-                    .toLowerCase()
-                    .normalize('NFD')
-                    .replace(/[\u0300-\u036f]/g, '')
-            )
-        );
-    }
+    const dataToDisplay = R.isNil(QUERIES.searchText)
+        ? data
+        : data.filter((order) => normalize(order.symbol).includes(normalize(QUERIES.searchText)));
 
     return (
         <React.Fragment>
             <Search />
-            {dataToDisplay.length === 0 ? (
+            {R.isEmpty(dataToDisplay) ? (
                 <EmptyState />
             ) : (
                 <div className="relative overflow-x-auto sm:rounded-lg">

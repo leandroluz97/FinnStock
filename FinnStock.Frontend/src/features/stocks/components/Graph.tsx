@@ -1,5 +1,6 @@
 import React from 'react';
 import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import * as R from 'ramda';
 import { useParams } from 'react-router-dom';
 import { useStockQuote } from '../api/getStockQuote';
 import { Spinner } from '../../../components/Loading';
@@ -44,7 +45,7 @@ export const Graph = () => {
                 <Spinner />
             </div>
         );
-    if (quotes === undefined) return null;
+    if (R.isNil(quotes)) return null;
 
     const stockQuote = quotes.c?.at(-1).toFixed(2) || 0;
     const formatQuotes = (quote: number, index: number) =>

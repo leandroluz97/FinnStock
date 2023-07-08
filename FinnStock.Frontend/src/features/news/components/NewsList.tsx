@@ -1,4 +1,5 @@
 import React from 'react';
+import * as R from 'ramda';
 import { Pagination } from '../../../components/Elements/Pagination';
 import { useNews } from '../api/getNews';
 import { usePagination } from '../../../hooks/usePagination';
@@ -11,8 +12,6 @@ const NewsList = () => {
     const { data, isLoading } = useNews({ pageSize, pageNumber });
     const items = data?.items;
 
-    console.log(pageNumber, pageSize);
-
     return (
         <React.Fragment>
             <div className="h-full overflow-hidden rounded-md">
@@ -23,7 +22,7 @@ const NewsList = () => {
                         </div>
                     ) : (
                         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 ">
-                            {items != null && items.length !== 0
+                            {!R.isNil(items) && !R.isEmpty(items)
                                 ? items.map((news) => (
                                       <Card
                                           key={news.id}
@@ -41,7 +40,7 @@ const NewsList = () => {
                                 : null}
                         </div>
                     )}
-                    {items != null && items.length === 0 && <EmptyState />}
+                    {R.isEmpty(items) && <EmptyState />}
                 </div>
             </div>
             <Pagination

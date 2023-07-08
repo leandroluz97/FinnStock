@@ -7,10 +7,8 @@ interface MetricIconProps extends HTMLAttributes<HTMLOrSVGElement> {
 
 export const MetricIcon = ({ Icon, ...rest }: MetricIconProps) => {
     return (
-        // <div className="bg-primary-500 flex flex-col justify-center content-center w-12 h-12 text-primary-800 text-xs font-medium flex-wrap rounded">
         <Icon
             className={twMerge('w-12 bg-primary-500 p-3 text-primary-800 rounded', rest.className)}
         />
-        // </div>
     );
 };
