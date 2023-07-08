@@ -56,6 +56,7 @@ export const TwoFactorForm = () => {
         } else if (!R.isEmpty(values.one) && R.isEmpty(values.two)) {
             setFocus('two');
         }
+        // eslint-disable-next-line
     }, [watch()]);
 
     const submit = async (data: Inputs) => {

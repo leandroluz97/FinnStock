@@ -1,13 +1,12 @@
 import React, { ReactNode } from 'react';
-import { title } from 'process';
 import finnstockLogo from '../../../assets/finnstock-white.svg';
 
-interface IBannerProps {
+interface BannerProps {
     title: string;
     content: ReactNode;
 }
 
-export const Banner = ({ title, content }) => {
+export const Banner = ({ title, content }: BannerProps) => {
     return (
         <div className=" hidden md:block  flex-1 bg-primary-900 p-10 bg-logo-pattern bg-no-repeat bg-bottom bg-contain">
             <div>

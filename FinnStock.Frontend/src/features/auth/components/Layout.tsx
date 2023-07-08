@@ -1,14 +1,13 @@
 import React, { ReactNode } from 'react';
 import { Banner } from './Banner';
-
 import finnstockPrimaryLogo from '../../../assets/finnstock-primary.svg';
 
-interface ILayoutProps {
+interface LayoutProps {
     children: ReactNode;
     title: string;
     content: ReactNode;
 }
-export const Layout = ({ children, title, content }: ILayoutProps) => {
+export const Layout = ({ children, title, content }: LayoutProps) => {
     return (
         <div className="h-screen">
             <div className="flex h-full">

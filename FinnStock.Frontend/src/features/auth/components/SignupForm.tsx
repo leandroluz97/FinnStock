@@ -186,7 +186,7 @@ export const SignupForm = () => {
             </form>
             <div>
                 <form
-                    action="https://localhost:7100/api/v1/auth/ExternalLogin?provider=Google&returnUrl=/home"
+                    action="https://finnstock.azurewebsites.net/api/v1/auth/ExternalLogin?provider=Google&returnUrl=/home"
                     method="post"
                 >
                     <button
