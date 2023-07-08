@@ -76,9 +76,9 @@ namespace FinnStock.WebAPI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> RequestResetPassword(string email)
+        public async Task<IActionResult> RequestResetPassword(RequestResetPasswordDto requestPasswordDto)
         {
-            await _authenticationService.RequestResetPassword(email);
+            await _authenticationService.RequestResetPassword(requestPasswordDto.Email);
             return Ok();
         }
 
