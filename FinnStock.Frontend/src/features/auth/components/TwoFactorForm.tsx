@@ -89,8 +89,6 @@ export const TwoFactorForm = () => {
                         label=""
                         placeholder=""
                         type="text"
-                        min="0"
-                        max="9"
                         autoFocus
                         groupFormClassList="flex-1"
                         required
