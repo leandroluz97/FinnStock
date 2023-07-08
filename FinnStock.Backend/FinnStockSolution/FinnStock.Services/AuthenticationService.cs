@@ -287,7 +287,7 @@ namespace FinnStock.Services
             var codeString = Conversor.ToBase64(code);
 
             var uriBuilder = new UriBuilder("http://localhost:3000/auth/reset-password");
-            uriBuilder.Query = $"activationToken={code}&email={user.Email}";
+            uriBuilder.Query = $"activationToken={codeString}&email={user.Email}";
             var confirmationLink = uriBuilder.Uri.ToString();
 
             var subject = "Reset Password";
