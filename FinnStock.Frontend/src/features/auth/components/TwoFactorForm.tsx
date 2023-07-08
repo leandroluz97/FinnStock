@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import * as R from 'ramda';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { useForm } from 'react-hook-form';
 import { NavLink, useLocation, useNavigate } from 'react-router-dom';
@@ -37,7 +38,25 @@ export const TwoFactorForm = () => {
         register,
         formState: { errors },
         handleSubmit,
+        watch,
+        getValues,
+        setFocus,
     } = useForm<Inputs>({ resolver: yupResolver(schema) });
+
+    useEffect(() => {
+        const values = getValues();
+        if (!R.isEmpty(values.five) && R.isEmpty(values.six)) {
+            setFocus('six');
+        } else if (!R.isEmpty(values.four) && R.isEmpty(values.five)) {
+            setFocus('five');
+        } else if (!R.isEmpty(values.three) && R.isEmpty(values.four)) {
+            setFocus('four');
+        } else if (!R.isEmpty(values.two) && R.isEmpty(values.three)) {
+            setFocus('three');
+        } else if (!R.isEmpty(values.one) && R.isEmpty(values.two)) {
+            setFocus('two');
+        }
+    }, [watch()]);
 
     const submit = async (data: Inputs) => {
         const searchQueries = new URLSearchParams(location.search);
@@ -69,7 +88,10 @@ export const TwoFactorForm = () => {
                         name="one"
                         label=""
                         placeholder=""
-                        type="number"
+                        type="text"
+                        min="0"
+                        max="9"
+                        autoFocus
                         groupFormClassList="flex-1"
                         required
                         key="one"
