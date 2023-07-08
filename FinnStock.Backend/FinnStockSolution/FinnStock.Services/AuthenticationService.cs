@@ -284,8 +284,9 @@ namespace FinnStock.Services
             }
 
             var code = await _userManager.GeneratePasswordResetTokenAsync(user);
+            var codeString = Conversor.ToBase64(code);
 
-            var uriBuilder = new UriBuilder("https://localhost:3000/auth/reset-password");
+            var uriBuilder = new UriBuilder("http://localhost:3000/auth/reset-password");
             uriBuilder.Query = $"activationToken={code}&email={user.Email}";
             var confirmationLink = uriBuilder.Uri.ToString();
 
@@ -313,7 +314,9 @@ namespace FinnStock.Services
                 throw new NotFoundException(nameof(user));
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, resetDto.ActivationToken, resetDto.Password);
+            var activationToken = Conversor.ToString(resetDto.ActivationToken);
+
+            var result = await _userManager.ResetPasswordAsync(user, activationToken, resetDto.Password);
             
             if (!result.Succeeded)
             {
