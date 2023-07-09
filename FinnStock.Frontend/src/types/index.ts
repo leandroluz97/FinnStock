@@ -1,2 +1,3 @@
-export * from './formTypes';
-import * from './pagination';
+import * as Pagination from './pagination';
+
+export * as FormTypes from './formTypes';

@@ -1,1 +1,1 @@
-import * from './EmptyState'
+import * as EmptyState from './EmptyState';
