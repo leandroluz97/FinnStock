@@ -3,7 +3,7 @@ import { Outlet } from 'react-router-dom';
 import { MainLayout } from '../components/Layout/MainLayout';
 import { NotFound } from '../features/misc/routes/NotFound';
 import { StocksRoutes } from '../features/stocks/routes';
-import { Spinner } from '../components/Loading';
+import { Spinner } from '../components/Loading/Spinner';
 import { NewsRoutes } from '../features/news/routes';
 import { UsersRoutes } from '../features/users/routes';
 import { OrdersRoutes } from '../features/orders/routes';

@@ -10,7 +10,7 @@ import validationRules from '../../../utils/formValidations';
 import { InputField } from '../../../components/Form';
 import { CountryCode } from '../../../components/Elements';
 import { useAuth } from '../../../lib/auth';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { useUpdateUser } from '../api/updateUser';
 
 type Inputs = {

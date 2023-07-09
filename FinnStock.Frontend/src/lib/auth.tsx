@@ -1,5 +1,5 @@
 import jwtDecode from 'jwt-decode';
-import { Spinner } from '../components/Loading';
+import { Spinner } from '../components/Loading/Spinner';
 import { AuthProviderConfig, initReactQuery } from '../contexts/auth';
 import { ConfirmEmailDto, confirmEmail } from '../features/auth/api/confirmEmail';
 import { ForgotPasswordDto, forgotPassword } from '../features/auth/api/forgotPassword';

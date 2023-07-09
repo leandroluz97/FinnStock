@@ -5,7 +5,7 @@ import { Search } from './Search';
 import { URLSearch } from '../../../utils/URLSearch';
 import { useBuyOrders } from '../api/getBuyStocks';
 import { EmptyState } from '../../../components/States/EmptyState';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { normalize } from '../../../utils/normalize';
 
 export const BuyOrdersTable = () => {

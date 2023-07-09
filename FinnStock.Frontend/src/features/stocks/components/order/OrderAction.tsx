@@ -1,6 +1,6 @@
 import React, { ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
-import { Spinner } from '../../../../components/Loading';
+import { Spinner } from '../../../../components/Loading/Spinner';
 
 type OrderActionProps = ButtonHTMLAttributes<HTMLButtonElement>;
 

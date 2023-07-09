@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import { useParams } from 'react-router-dom';
 import { Card } from './Card';
 import { useFavoriteStocks } from '../api/getFavoriteStocks';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { EmptyState } from '../../../components/States/EmptyState';
 
 export const FavoriteStocksList = () => {

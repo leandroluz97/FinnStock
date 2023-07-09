@@ -8,7 +8,7 @@ import { toast } from 'react-toastify';
 import validationRules from '../../../utils/formValidations';
 import { CheckBoxField, InputField } from '../../../components/Form';
 import googleLogo from '../../../assets/google-logo-sm.svg';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { useAuth } from '../../../lib/auth';
 import { toasterConfig } from '../../../lib/react-toastify';
 

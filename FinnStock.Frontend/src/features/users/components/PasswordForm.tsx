@@ -5,7 +5,7 @@ import { useForm } from 'react-hook-form';
 import { useParams } from 'react-router-dom';
 import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { useUpdatePassword } from '../api/updatePassword';
 
 type Inputs = {

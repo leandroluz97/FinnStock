@@ -5,7 +5,7 @@ import * as yup from 'yup';
 import { yupResolver } from '@hookform/resolvers/yup';
 import { InputField } from '../../../components/Form';
 import validationRules from '../../../utils/formValidations';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { useAuth } from '../../../lib/auth';
 
 type Inputs = {

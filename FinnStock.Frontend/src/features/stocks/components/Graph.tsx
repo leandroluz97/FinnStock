@@ -3,7 +3,7 @@ import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'rec
 import * as R from 'ramda';
 import { useParams } from 'react-router-dom';
 import { useStockQuote } from '../api/getStockQuote';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 
 const ONE_SECOND = 1000;
 

@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useSellOrders } from '../api/getSellStocks';
 import { URLSearch } from '../../../utils/URLSearch';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { EmptyState } from '../../../components/States/EmptyState';
 import { Search } from './Search';
 import { normalize } from '../../../utils/normalize';

@@ -1,7 +1,7 @@
 import React from 'react';
 import { Card } from './Card';
 import { useStocks } from '../api/getStocks';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { usePagination } from '../../../hooks/usePagination';
 import { Pagination } from '../../../components/Elements/Pagination';
 

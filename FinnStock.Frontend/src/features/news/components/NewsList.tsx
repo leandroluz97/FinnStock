@@ -3,7 +3,7 @@ import * as R from 'ramda';
 import { Pagination } from '../../../components/Elements/Pagination';
 import { useNews } from '../api/getNews';
 import { usePagination } from '../../../hooks/usePagination';
-import { Spinner } from '../../../components/Loading';
+import { Spinner } from '../../../components/Loading/Spinner';
 import { Card } from './Card';
 import { EmptyState } from '../../../components/States/EmptyState';
 
