@@ -8,7 +8,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import { queryClient } from '../lib/react-query';
 import { AuthProvider } from '../lib/auth';
 import { URLSearch, urlQueries } from '../utils/URLSearch';
-import { ErrorFallback } from '../components/Error/ErrorFallback';
+import { ErrorFallback } from '../components/Error';
 import { Loading } from '../components/Loading';
 
 URLSearch.register(urlQueries);
