@@ -8,6 +8,7 @@ import {
     RefetchOptions,
 } from 'react-query';
 import { toast } from 'react-toastify';
+import { AxiosError } from 'axios';
 import { toasterConfig } from '../lib/react-toastify';
 
 export interface AuthProviderConfig<
@@ -129,14 +130,14 @@ export function initReactQuery<
 
         const loginMutation = useMutation({
             mutationFn: loginFn,
-            onError: (error) => {
+            onError: (error: any) => {
                 toast.error(error.data.description, toasterConfig);
             },
         });
 
         const registerMutation = useMutation({
             mutationFn: registerFn,
-            onError: (error) => {
+            onError: (error: any) => {
                 toast.error(error.data.description, toasterConfig);
             },
         });
@@ -144,7 +145,7 @@ export function initReactQuery<
         const confirmEmailMutation = useMutation({
             mutationFn: confirmEmailFn,
             onSuccess: (user) => {},
-            onError: (error) => {
+            onError: (error: AxiosError<unknown, any>) => {
                 toast.error(error.data.description, toasterConfig);
             },
         });
