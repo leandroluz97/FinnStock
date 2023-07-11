@@ -145,7 +145,7 @@ export function initReactQuery<
         const confirmEmailMutation = useMutation({
             mutationFn: confirmEmailFn,
             onSuccess: (user) => {},
-            onError: (error: AxiosError<unknown, any>) => {
+            onError: (error: any) => {
                 toast.error(error.data.description, toasterConfig);
             },
         });
