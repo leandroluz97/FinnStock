@@ -153,15 +153,6 @@ namespace FinnStock.Services
             return new LoginResponseDto() { UserId = user.Id.ToString() };
         }
 
-
-        public async Task  ValidateOTPTest()
-        {
-            //_logger.LogInformation("{ValidateOTP} param value {validateOtpDto}", nameof(ValidateOTP), validateOtpDto);
-
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if(user != null) { }
-        }
-
         public async Task<ResponseToken> ValidateOTP(ValidateOtpDto validateOtpDto)
         {
             _logger.LogInformation("{ValidateOTP} param value {validateOtpDto}", nameof(ValidateOTP), validateOtpDto);
