@@ -1,3 +1,4 @@
+import React from 'react';
 import * as R from 'ramda';
 import { Pagination } from '../../../components/Elements/Pagination';
 import { useNews } from '../api/getNews';

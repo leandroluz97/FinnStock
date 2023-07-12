@@ -1,13 +1,12 @@
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 import { Link } from 'react-router-dom';
 import { URLSearch } from '../../utils/URLSearch';
 
 type PaginationProps = {
     pageNumber: number;
-    pageSize: number;
     totalPages: number;
 };
-export const Pagination = ({ pageNumber, pageSize, totalPages }: PaginationProps) => {
+export const Pagination = ({ pageNumber, totalPages }: PaginationProps) => {
     const pagination = useMemo(() => {
         let pageNumbers = [1, 2, 3];
         if (totalPages > pageNumber && pageNumber > 1)

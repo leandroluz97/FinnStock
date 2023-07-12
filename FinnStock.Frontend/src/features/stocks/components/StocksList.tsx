@@ -1,3 +1,4 @@
+import React from 'react';
 import { Card } from './Card';
 import { useStocks } from '../api/getStocks';
 import { Spinner } from '../../../components/Loading/Spinner';

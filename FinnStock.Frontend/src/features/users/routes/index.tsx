@@ -1,5 +1,5 @@
+import React from 'react';
 import { Route, Routes } from 'react-router-dom';
-
 import { NotFound } from '../../misc/routes/NotFound';
 import { Information } from './Information';
 import { Password } from './Password';

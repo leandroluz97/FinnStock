@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { IRegister } from '../../types';
+import { IRegister } from '../../types/formTypes';
 
 interface IInputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     id: string;

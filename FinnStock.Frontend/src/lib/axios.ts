@@ -1,4 +1,4 @@
-import Axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
+import Axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { storageService } from '../utils/storage';
 
 // const API_URL = 'https://localhost:7100/api/v1';
@@ -27,7 +27,7 @@ axios.interceptors.response.use(
             storageService.clearToken();
             window.location.href = '/auth/login';
         }
-        // Promise.reject(error.response);
+
         throw error.response;
     }
 );

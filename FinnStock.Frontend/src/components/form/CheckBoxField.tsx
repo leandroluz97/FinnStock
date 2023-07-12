@@ -1,5 +1,5 @@
-import React, { ReactNode } from 'react';
-import { IRegister } from '../../types';
+import { ReactNode } from 'react';
+import { IRegister } from '../../types/formTypes';
 
 interface ICheckBoxFieldProps {
     children: ReactNode;
@@ -7,7 +7,6 @@ interface ICheckBoxFieldProps {
     hasError: boolean;
     groupFormClassList: string;
     register: IRegister<HTMLInputElement>;
-    errorMessage: string;
 }
 
 export const CheckBoxField = ({
@@ -16,7 +15,6 @@ export const CheckBoxField = ({
     hasError,
     groupFormClassList,
     register,
-    errorMessage,
 }: ICheckBoxFieldProps) => {
     const classList = hasError
         ? 'w-4 h-4 text-red-600 bg-red-100 border-red-300 rounded focus:ring-red-600'
