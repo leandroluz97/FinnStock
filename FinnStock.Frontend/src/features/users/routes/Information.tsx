@@ -1,4 +1,3 @@
-import React from 'react';
 import { InformationForm } from '../components/InformationForm';
 import { ContentLayout } from '../../../components/Layout/ContentLayout';
 

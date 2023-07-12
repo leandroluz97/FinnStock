@@ -1,4 +1,3 @@
-import React from 'react';
 import { ChartBarIcon, WalletIcon, ShareIcon, BanknotesIcon } from '@heroicons/react/24/outline';
 import { useParams } from 'react-router-dom';
 import { Metric } from './metric';

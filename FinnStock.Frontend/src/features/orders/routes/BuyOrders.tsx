@@ -1,4 +1,3 @@
-import React from 'react';
 import { BuyOrdersTable } from '../components/BuyOrdersTable';
 import { ContentLayout } from '../../../components/Layout/ContentLayout';
 

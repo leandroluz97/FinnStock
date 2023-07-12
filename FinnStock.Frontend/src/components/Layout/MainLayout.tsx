@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink, Outlet, useLocation } from 'react-router-dom';
 import FinnstockLogo from '../../assets/finnstock-log.svg';
 import ProfilePicture from '../../assets/profile.svg';

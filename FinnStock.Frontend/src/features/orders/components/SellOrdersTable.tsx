@@ -1,4 +1,3 @@
-import React from 'react';
 import * as R from 'ramda';
 import { Link, useParams, useSearchParams } from 'react-router-dom';
 import { useSellOrders } from '../api/getSellStocks';

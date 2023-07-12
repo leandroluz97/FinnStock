@@ -1,4 +1,3 @@
-import React from 'react';
 import { StocksList } from '../components/StocksList';
 import { ContentLayout } from '../../../components/Layout/ContentLayout';
 

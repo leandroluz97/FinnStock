@@ -1,4 +1,3 @@
-import React from 'react';
 import { useParams } from 'react-router-dom';
 import * as yup from 'yup';
 import { useForm } from 'react-hook-form';

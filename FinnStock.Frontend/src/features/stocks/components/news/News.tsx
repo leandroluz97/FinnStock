@@ -1,4 +1,3 @@
-import React from 'react';
 import * as R from 'ramda';
 import { Link, useParams } from 'react-router-dom';
 import { useNewsBySymbol } from '../../../news/api/getNewsBySymbol';

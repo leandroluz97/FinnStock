@@ -1,4 +1,3 @@
-import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 export const Breadcrumb = () => {
@@ -7,7 +6,7 @@ export const Breadcrumb = () => {
             <ol className="inline-flex items-center space-x-0 md:space-x-1">
                 <li className="inline-flex items-center">
                     <NavLink
-                        href="#"
+                        to="home"
                         className="inline-flex items-center text-sm font-medium text-primary-900 hover:text-primary-800"
                     >
                         <svg
@@ -38,7 +37,7 @@ export const Breadcrumb = () => {
                             />
                         </svg>
                         <NavLink
-                            href="#"
+                            to="projects"
                             className="ml-1 text-sm font-medium text-primary-900 hover:text-primary-800 md:ml-2 dark:text-gray-400 dark:hover:text-white"
                         >
                             Projects

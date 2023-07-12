@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const EmptyState = () => {
     return (
         <div className="h-full flex justify-center content-center">

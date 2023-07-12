@@ -1,4 +1,3 @@
-import React from 'react';
 import { ContentLayout } from '../../../components/Layout/ContentLayout';
 import { FavoriteStocksList } from '../components/FavoriteStocksList';
 

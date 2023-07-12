@@ -1,4 +1,3 @@
-import React from 'react';
 import { AppProvider } from './providers';
 import AppRoutes from './routes';
 

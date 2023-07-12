@@ -1,4 +1,3 @@
-import React from 'react';
 import { Header } from './Header';
 import { Metrics } from './Metrics';
 import { Graph } from './Graph';

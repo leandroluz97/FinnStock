@@ -1,4 +1,3 @@
-import React from 'react';
 import * as R from 'ramda';
 import { useParams } from 'react-router-dom';
 import { Card } from './Card';

@@ -1,4 +1,3 @@
-import React from 'react';
 import codes from 'country-calling-code';
 import { error } from 'console';
 

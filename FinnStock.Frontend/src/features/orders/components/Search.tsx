@@ -1,4 +1,3 @@
-import React from 'react';
 import { useSearchParams } from 'react-router-dom';
 import { debounce } from '../../../utils/debounce';
 import { URLSearch } from '../../../utils/URLSearch';
