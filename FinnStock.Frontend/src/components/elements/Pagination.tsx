@@ -19,7 +19,9 @@ export const Pagination = ({ pageNumber, totalPages }: PaginationProps) => {
             <ul className="inline-flex items-center -space-x-px">
                 <li>
                     <Link
-                        to={URLSearch.set({ pageNumber: pageNumber > 1 ? pageNumber - 1 : 1 })}
+                        to={URLSearch.set({
+                            pageNumber: pageNumber > 1 ? (pageNumber - 1).toString() : '1',
+                        })}
                         className="block px-3 py-2 ml-0 leading-tight text-gray-500 bg-white border border-gray-300 rounded-l-lg hover:bg-gray-100 hover:text-gray-700"
                     >
                         <span className="sr-only">Previous</span>
@@ -41,7 +43,7 @@ export const Pagination = ({ pageNumber, totalPages }: PaginationProps) => {
                 {pagination.map((page) => (
                     <li key={page}>
                         <Link
-                            to={URLSearch.set({ pageNumber: page })}
+                            to={URLSearch.set({ pageNumber: page.toString() })}
                             className={`px-3 py-2 leading-tight border border-gray-300 ${
                                 page === pageNumber
                                     ? 'text-blue-600 bg-blue-50 hover:bg-blue-100 hover:text-blue-700'
@@ -55,7 +57,10 @@ export const Pagination = ({ pageNumber, totalPages }: PaginationProps) => {
                 <li>
                     <Link
                         to={URLSearch.set({
-                            pageNumber: totalPages > pageNumber ? pageNumber + 1 : pageNumber,
+                            pageNumber:
+                                totalPages > pageNumber
+                                    ? (pageNumber + 1).toString()
+                                    : pageNumber.toString(),
                         })}
                         className="block px-3 py-2 leading-tight text-gray-500 bg-white border border-gray-300 rounded-r-lg hover:bg-gray-100 hover:text-gray-700"
                     >
