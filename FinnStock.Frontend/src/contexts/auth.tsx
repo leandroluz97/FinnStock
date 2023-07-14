@@ -1,3 +1,4 @@
+import React from 'react';
 import {
     useQuery,
     useMutation,
@@ -7,7 +8,6 @@ import {
     RefetchOptions,
 } from 'react-query';
 import { toast } from 'react-toastify';
-import { AxiosError } from 'axios';
 import { toasterConfig } from '../lib/react-toastify';
 
 export interface AuthProviderConfig<
@@ -129,23 +129,22 @@ export function initReactQuery<
 
         const loginMutation = useMutation({
             mutationFn: loginFn,
-            onError: (error: any) => {
-                toast.error(error.data.description, toasterConfig);
+            onError: (err: any) => {
+                toast.error(err.data.description, toasterConfig);
             },
         });
 
         const registerMutation = useMutation({
             mutationFn: registerFn,
-            onError: (error: any) => {
-                toast.error(error.data.description, toasterConfig);
+            onError: (err: any) => {
+                toast.error(err.data.description, toasterConfig);
             },
         });
 
         const confirmEmailMutation = useMutation({
             mutationFn: confirmEmailFn,
-            onSuccess: (user) => {},
-            onError: (error: any) => {
-                toast.error(error.data.description, toasterConfig);
+            onError: (err: any) => {
+                toast.error(err.data.description, toasterConfig);
             },
         });
 
@@ -154,28 +153,22 @@ export function initReactQuery<
             onSuccess: (user) => {
                 setUser(user);
             },
-            onError: (error) => {
-                toast.error(error.data.description, toasterConfig);
+            onError: (err: any) => {
+                toast.error(err.data.description, toasterConfig);
             },
         });
 
         const forgotPasswordMutation = useMutation({
             mutationFn: forgotPasswordFn,
-            onSuccess: (user) => {
-                //   setUser(user);
-            },
-            onError: (error) => {
-                toast.error(error.data.description, toasterConfig);
+            onError: (err: any) => {
+                toast.error(err.data.description, toasterConfig);
             },
         });
 
         const resetPasswordMutation = useMutation({
             mutationFn: resetPasswordFn,
-            onSuccess: (user) => {
-                //  setUser(user);
-            },
-            onError: (error) => {
-                toast.error(error.data.description, toasterConfig);
+            onError: (err: any) => {
+                toast.error(err.data.description, toasterConfig);
             },
         });
 
@@ -184,8 +177,8 @@ export function initReactQuery<
             onSuccess: () => {
                 queryClient.clear();
             },
-            onError: (error) => {
-                toast.error(error.data.description, toasterConfig);
+            onError: (err: any) => {
+                toast.error(err.data.description, toasterConfig);
             },
         });
 

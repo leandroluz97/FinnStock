@@ -1,182 +1,9 @@
-import { NavLink, Outlet, useLocation } from 'react-router-dom';
+import { NavLink, Outlet } from 'react-router-dom';
 import FinnstockLogo from '../../assets/finnstock-log.svg';
 import ProfilePicture from '../../assets/profile.svg';
 import { useAuth } from '../../lib/auth';
 
-export const MainLayout = ({ children }) => {
-    const { user } = useAuth();
-    const routes = [
-        {
-            path: 'stocks',
-            label: 'Dashboard',
-            icon: <DashboardIcon />,
-        },
-        {
-            path: 'news',
-            label: 'News',
-            icon: <NewIcon />,
-        },
-        {
-            path: 'orders',
-            label: 'Orders',
-            icon: <OrderItem />,
-        },
-    ];
-
-    return (
-        <div className="h-screen  overflow-hidden bg-slate-200">
-            <section className="h-full flex flex-col md:flex-row justify-between ">
-                <aside className="bg-white order-2 md:order-1">
-                    <div className="w-full md:w-24 h-full flex  justify-center md:flex-col  border-r-2 border-slate-200">
-                        <div className="hidden m-3 md:flex  md:flex-col justify-center items-center">
-                            <img src={FinnstockLogo} alt="finnstock" className="w-12 text-center" />
-                        </div>
-                        <nav className="md:mt-10 h-full flex flex-row md:flex-col justify-between ">
-                            <header className="flex flex-row md:flex-col">
-                                {routes.map((route) => (
-                                    <li
-                                        key={route.path}
-                                        data-tooltip-target={`tooltip-animation-${route.path}`}
-                                        data-tooltip-placement="right"
-                                        className="list-none relative my-2"
-                                    >
-                                        <NavLink
-                                            to={route.path}
-                                            className={({ isActive }) =>
-                                                `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
-                                                    isActive
-                                                        ? ' bg-slate-100 before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
-                                                        : ''
-                                                }`
-                                            }
-                                        >
-                                            {route.icon}
-                                        </NavLink>
-                                        <div
-                                            id={`tooltip-animation-${route.path}`}
-                                            role="tooltip"
-                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
-                                        >
-                                            {route.label}
-                                            <div className="tooltip-arrow" data-popper-arrow />
-                                        </div>
-                                    </li>
-                                ))}
-                            </header>
-                            <div className="flex flex-row md:flex-col">
-                                <li
-                                    data-tooltip-target="tooltip-animation-settings"
-                                    data-tooltip-placement="right"
-                                    className="list-none relative my-2"
-                                >
-                                    <NavLink
-                                        to="settings"
-                                        className={({ isActive }) =>
-                                            `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
-                                                isActive
-                                                    ? ' bg-slate-100 before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
-                                                    : ''
-                                            }`
-                                        }
-                                    >
-                                        <SettingsIcon />
-                                        <div
-                                            id="tooltip-animation-settings"
-                                            role="tooltip"
-                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
-                                        >
-                                            Settings
-                                            <div className="tooltip-arrow" data-popper-arrow />
-                                        </div>
-                                    </NavLink>
-                                </li>
-
-                                <li
-                                    data-tooltip-target="tooltip-animation-logout"
-                                    data-tooltip-placement="right"
-                                    className="list-none relative my-2"
-                                >
-                                    <NavLink
-                                        to="logout"
-                                        className={({ isActive }) =>
-                                            `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
-                                                isActive
-                                                    ? ' before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
-                                                    : ''
-                                            }`
-                                        }
-                                    >
-                                        <LogoutIcon />
-                                        <div
-                                            id="tooltip-animation-logout"
-                                            role="tooltip"
-                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
-                                        >
-                                            Logout
-                                            <div className="tooltip-arrow" data-popper-arrow />
-                                        </div>
-                                    </NavLink>
-                                </li>
-                            </div>
-                        </nav>
-                    </div>
-                </aside>
-                <main className="w-full flex flex-col order-1 md:order-2 overflow-hidden">
-                    <header className="">
-                        <section className="bg-white p-3">
-                            <div className="w-100 flex justify-between items-center">
-                                <h1 className="text-3xl font-bold text-primary-900">Finnstock</h1>
-                                <div className="flex ">
-                                    <div className="flex bg-slate-100 items-center rounded-full pl-2 mx-3">
-                                        <p className="px-2 text-primary-900 font-medium">
-                                            {`${user?.firstName} ${user?.lastName}`}
-                                        </p>
-                                        <img
-                                            src={user?.profileUrl || ProfilePicture}
-                                            alt="profile"
-                                            className="w-12 p-1 rounded-full"
-                                        />
-                                    </div>
-                                    <div className="rounded-full bg-slate-100 p-2 px-4 flex justify-center items-center">
-                                        <svg
-                                            width="20"
-                                            height="21"
-                                            viewBox="0 0 20 21"
-                                            fill="none"
-                                            xmlns="http://www.w3.org/2000/svg"
-                                        >
-                                            <path
-                                                d="M1.06658 12.7417C0.865117 14.0235 1.76581 14.9132 2.8686 15.3566C7.09647 17.0566 12.98 17.0566 17.2079 15.3566C18.3107 14.9132 19.2113 14.0235 19.0099 12.7417C18.8861 11.954 18.2739 11.298 17.8203 10.6575C17.2262 9.80818 17.1671 8.88183 17.1671 7.89629C17.1671 4.08757 13.9754 1 10.0382 1C6.10109 1 2.9094 4.08757 2.9094 7.89629C2.90932 8.88183 2.85028 9.80818 2.25618 10.6575C1.8026 11.298 1.19039 11.954 1.06658 12.7417Z"
-                                                stroke="#3E5F8A"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                            <path
-                                                d="M7.19607 19C7.9503 19.5891 8.9463 19.9474 10.0382 19.9474C11.13 19.9474 12.126 19.5891 12.8803 19"
-                                                stroke="#3E5F8A"
-                                                strokeWidth="1.5"
-                                                strokeLinecap="round"
-                                                strokeLinejoin="round"
-                                            />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-                        </section>
-                    </header>
-
-                    <section className="flex flex-col overflow-hidden m-3 flex-1">
-                        {/* <p>content</p> */}
-                        {/* {children} */}
-                        <Outlet />
-                    </section>
-                </main>
-            </section>
-        </div>
-    );
-};
-
+// #region Icons
 function DashboardIcon() {
     // 3E5F8A
     return (
@@ -355,3 +182,177 @@ function LogoutIcon() {
         </svg>
     );
 }
+// #endregion
+export const MainLayout = () => {
+    const { user } = useAuth();
+    const routes = [
+        {
+            path: 'stocks',
+            label: 'Dashboard',
+            icon: <DashboardIcon />,
+        },
+        {
+            path: 'news',
+            label: 'News',
+            icon: <NewIcon />,
+        },
+        {
+            path: 'orders',
+            label: 'Orders',
+            icon: <OrderItem />,
+        },
+    ];
+
+    return (
+        <div className="h-screen  overflow-hidden bg-slate-200">
+            <section className="h-full flex flex-col md:flex-row justify-between ">
+                <aside className="bg-white order-2 md:order-1">
+                    <div className="w-full md:w-24 h-full flex  justify-center md:flex-col  border-r-2 border-slate-200">
+                        <div className="hidden m-3 md:flex  md:flex-col justify-center items-center">
+                            <img src={FinnstockLogo} alt="finnstock" className="w-12 text-center" />
+                        </div>
+                        <nav className="md:mt-10 h-full flex flex-row md:flex-col justify-between ">
+                            <header className="flex flex-row md:flex-col">
+                                {routes.map((route) => (
+                                    <li
+                                        key={route.path}
+                                        data-tooltip-target={`tooltip-animation-${route.path}`}
+                                        data-tooltip-placement="right"
+                                        className="list-none relative my-2"
+                                    >
+                                        <NavLink
+                                            to={route.path}
+                                            className={({ isActive }) =>
+                                                `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                    isActive
+                                                        ? ' bg-slate-100 before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
+                                                        : ''
+                                                }`
+                                            }
+                                        >
+                                            {route.icon}
+                                        </NavLink>
+                                        <div
+                                            id={`tooltip-animation-${route.path}`}
+                                            role="tooltip"
+                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
+                                        >
+                                            {route.label}
+                                            <div className="tooltip-arrow" data-popper-arrow />
+                                        </div>
+                                    </li>
+                                ))}
+                            </header>
+                            <div className="flex flex-row md:flex-col">
+                                <li
+                                    data-tooltip-target="tooltip-animation-settings"
+                                    data-tooltip-placement="right"
+                                    className="list-none relative my-2"
+                                >
+                                    <NavLink
+                                        to="settings"
+                                        className={({ isActive }) =>
+                                            `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                isActive
+                                                    ? ' bg-slate-100 before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
+                                                    : ''
+                                            }`
+                                        }
+                                    >
+                                        <SettingsIcon />
+                                        <div
+                                            id="tooltip-animation-settings"
+                                            role="tooltip"
+                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
+                                        >
+                                            Settings
+                                            <div className="tooltip-arrow" data-popper-arrow />
+                                        </div>
+                                    </NavLink>
+                                </li>
+
+                                <li
+                                    data-tooltip-target="tooltip-animation-logout"
+                                    data-tooltip-placement="right"
+                                    className="list-none relative my-2"
+                                >
+                                    <NavLink
+                                        to="logout"
+                                        className={({ isActive }) =>
+                                            `mx-3 p-4 md:p-3 md:py-5 rounded-md flex justify-center content-center hover:bg-slate-100${
+                                                isActive
+                                                    ? ' before:md:absolute before:md:w-1 before:md:h-full before:md:bg-primary-800 before:md:right-0 before:md:top-0 before:md:rounded-s-lg'
+                                                    : ''
+                                            }`
+                                        }
+                                    >
+                                        <LogoutIcon />
+                                        <div
+                                            id="tooltip-animation-logout"
+                                            role="tooltip"
+                                            className="absolute z-10 invisible hidden md:inline-block p-3 text-sm font-medium text-white transition-opacity duration-300 bg-primary-900 rounded-lg shadow-sm opacity-0 tooltip dark:bg-primary-950"
+                                        >
+                                            Logout
+                                            <div className="tooltip-arrow" data-popper-arrow />
+                                        </div>
+                                    </NavLink>
+                                </li>
+                            </div>
+                        </nav>
+                    </div>
+                </aside>
+                <main className="w-full flex flex-col order-1 md:order-2 overflow-hidden">
+                    <header className="">
+                        <section className="bg-white p-3">
+                            <div className="w-100 flex justify-between items-center">
+                                <h1 className="text-3xl font-bold text-primary-900">Finnstock</h1>
+                                <div className="flex ">
+                                    <div className="flex bg-slate-100 items-center rounded-full pl-2 mx-3">
+                                        <p className="px-2 text-primary-900 font-medium">
+                                            {`${user?.firstName} ${user?.lastName}`}
+                                        </p>
+                                        <img
+                                            src={user?.profileUrl || ProfilePicture}
+                                            alt="profile"
+                                            className="w-12 p-1 rounded-full"
+                                        />
+                                    </div>
+                                    <div className="rounded-full bg-slate-100 p-2 px-4 flex justify-center items-center">
+                                        <svg
+                                            width="20"
+                                            height="21"
+                                            viewBox="0 0 20 21"
+                                            fill="none"
+                                            xmlns="http://www.w3.org/2000/svg"
+                                        >
+                                            <path
+                                                d="M1.06658 12.7417C0.865117 14.0235 1.76581 14.9132 2.8686 15.3566C7.09647 17.0566 12.98 17.0566 17.2079 15.3566C18.3107 14.9132 19.2113 14.0235 19.0099 12.7417C18.8861 11.954 18.2739 11.298 17.8203 10.6575C17.2262 9.80818 17.1671 8.88183 17.1671 7.89629C17.1671 4.08757 13.9754 1 10.0382 1C6.10109 1 2.9094 4.08757 2.9094 7.89629C2.90932 8.88183 2.85028 9.80818 2.25618 10.6575C1.8026 11.298 1.19039 11.954 1.06658 12.7417Z"
+                                                stroke="#3E5F8A"
+                                                strokeWidth="1.5"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                            <path
+                                                d="M7.19607 19C7.9503 19.5891 8.9463 19.9474 10.0382 19.9474C11.13 19.9474 12.126 19.5891 12.8803 19"
+                                                stroke="#3E5F8A"
+                                                strokeWidth="1.5"
+                                                strokeLinecap="round"
+                                                strokeLinejoin="round"
+                                            />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+                    </header>
+
+                    <section className="flex flex-col overflow-hidden m-3 flex-1">
+                        {/* <p>content</p> */}
+                        {/* {children} */}
+                        <Outlet />
+                    </section>
+                </main>
+            </section>
+        </div>
+    );
+};
