@@ -1,4 +1,4 @@
-import Axios, { AxiosError, AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
+import Axios, { AxiosRequestConfig, InternalAxiosRequestConfig } from 'axios';
 import { storageService } from '../utils/storage';
 
 // const API_URL = 'https://localhost:7100/api/v1';
