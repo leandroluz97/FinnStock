@@ -1,6 +1,10 @@
-export const debounce = (searchParams, fn, timeout) => {
-    let timer;
-    return ([name, value]) => {
+export const debounce = (
+    searchParams: string,
+    fn: (a: URLSearchParams) => void,
+    timeout: number
+) => {
+    let timer: NodeJS.Timeout;
+    return ([name, value]: Array<string>) => {
         clearTimeout(timer);
         timer = setTimeout(() => {
             const search = new URLSearchParams(searchParams);
