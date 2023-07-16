@@ -1,8 +1,12 @@
+import { ReactNode } from 'react';
 import { NavLink, Outlet } from 'react-router-dom';
 import FinnstockLogo from '../../assets/finnstock-log.svg';
 import ProfilePicture from '../../assets/profile.svg';
 import { useAuth } from '../../lib/auth';
 
+interface MainLayoutProps {
+    children: ReactNode;
+}
 // #region Icons
 function DashboardIcon() {
     // 3E5F8A
@@ -183,7 +187,7 @@ function LogoutIcon() {
     );
 }
 // #endregion
-export const MainLayout = () => {
+export const MainLayout = ({ children }: MainLayoutProps) => {
     const { user } = useAuth();
     const routes = [
         {
