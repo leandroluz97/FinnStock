@@ -1,5 +1,5 @@
 export const debounce = (
-    searchParams: string,
+    searchParams: URLSearchParams,
     fn: (a: URLSearchParams) => void,
     timeout: number
 ) => {
