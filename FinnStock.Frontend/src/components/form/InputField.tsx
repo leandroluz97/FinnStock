@@ -9,6 +9,7 @@ interface IInputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     errorMessage: string;
     groupFormClassList: string;
     type: string;
+    required: boolean;
     register: IRegister<HTMLInputElement>;
 }
 export const InputField = ({
