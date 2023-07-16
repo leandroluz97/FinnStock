@@ -77,7 +77,6 @@ export const LoginForm = () => {
                         key="link_checkbox"
                         register={register('remember')}
                         hasError={!!errors.remember}
-                        errorMessage={errors.remember?.message || ''}
                     >
                         <label
                             htmlFor="link-checkbox"

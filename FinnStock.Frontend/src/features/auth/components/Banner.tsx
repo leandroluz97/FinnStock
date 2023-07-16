@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import finnstockLogo from '../../../assets/finnstock-white.svg';
 
 interface BannerProps {

@@ -22,12 +22,11 @@ type UseDelteFavoriteOptions = {
 
 export const useDeleteFavoriteStock = ({ config }: UseDelteFavoriteOptions) => {
     return useMutation({
-        onError: (_, __, context: any) => {
-            toast.error('Error on add as favorite', toasterConfig);
+        onError: (err: any) => {
+            toast.error(err.data.description, toasterConfig);
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
             queryClient.invalidateQueries('favorite');
-            // toast.success('Order bought successful ', toasterConfig);
         },
         ...config,
         mutationFn: deleteFavoriteStock,
