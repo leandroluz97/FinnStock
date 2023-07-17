@@ -9,11 +9,11 @@ import { Search } from './Search';
 import { normalize } from '../../../utils/normalize';
 
 export const SellOrdersTable = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    useSearchParams();
     const { userId } = useParams();
     const QUERIES = URLSearch.queries();
     const desc = QUERIES.sortDesc === 'true' ? 'false' : 'true';
-    const { data, isLoading } = useSellOrders({ userId });
+    const { data, isLoading } = useSellOrders({ userId: userId || '' });
 
     if (isLoading)
         return (
@@ -26,7 +26,9 @@ export const SellOrdersTable = () => {
 
     const dataToDisplay = R.isNil(QUERIES.searchText)
         ? data
-        : data.filter((order) => normalize(order.symbol).includes(normalize(QUERIES.searchText)));
+        : data.filter((order) =>
+              normalize(order.symbol).includes(normalize(QUERIES.searchText || ''))
+          );
 
     return (
         <React.Fragment>
@@ -38,7 +40,9 @@ export const SellOrdersTable = () => {
                     <table className="w-full text-sm text-left text-primary-900 ">
                         <thead className="text-xs text-primary-950 uppercase bg-gray-50 dark:bg-gray-700 dark:text-gray-400 sticky top-0">
                             <tr>
-                                <th scope="col" className="px-6 py-3" />
+                                <th scope="col" className="px-6 py-3 sr-only">
+                                    .
+                                </th>
                                 <th scope="col" className="px-6 py-3">
                                     <Link
                                         to={URLSearch.set({

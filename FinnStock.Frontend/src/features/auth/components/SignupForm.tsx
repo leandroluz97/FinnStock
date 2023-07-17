@@ -155,7 +155,6 @@ export const SignupForm = () => {
                     key="link_checkbox"
                     register={register('term')}
                     hasError={!!errors.term}
-                    errorMessage={errors.term?.message || ''}
                 >
                     <label
                         htmlFor="link-checkbox"

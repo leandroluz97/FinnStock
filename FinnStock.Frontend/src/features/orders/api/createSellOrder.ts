@@ -28,10 +28,10 @@ type UseSellOrder = {
 
 export const useCreateSellOrder = ({ config }: UseSellOrder = {}) => {
     return useMutation({
-        onError: (_, __, context: any) => {
-            toast.error('Error on Buy Order', toasterConfig);
+        onError: (error: any) => {
+            toast.error(error.data.description, toasterConfig);
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
             queryClient.invalidateQueries('sellOrders');
             toast.success('Order sold successful ', toasterConfig);
         },

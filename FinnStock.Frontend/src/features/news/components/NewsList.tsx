@@ -43,11 +43,7 @@ const NewsList = () => {
                     {R.isEmpty(items) && <EmptyState />}
                 </div>
             </div>
-            <Pagination
-                pageNumber={pageNumber}
-                pageSize={pageSize}
-                totalPages={data ? data.totalPages : 1}
-            />
+            <Pagination pageNumber={pageNumber} totalPages={data ? data.totalPages : 1} />
         </React.Fragment>
     );
 };

@@ -6,9 +6,11 @@ import { toasterConfig } from '../../../lib/react-toastify';
 
 export type UpdateUserDto = {
     data: {
+        email: string;
         firstName: string;
         lastName: string;
         birthDate: string;
+        phoneNumber: string;
         id: string;
     };
 };

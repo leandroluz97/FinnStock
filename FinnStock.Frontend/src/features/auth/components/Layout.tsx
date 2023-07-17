@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import { ReactNode } from 'react';
 import { Banner } from './Banner';
 import finnstockPrimaryLogo from '../../../assets/finnstock-primary.svg';
 

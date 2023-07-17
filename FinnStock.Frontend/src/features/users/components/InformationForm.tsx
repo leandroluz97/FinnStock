@@ -1,4 +1,5 @@
-import React, { useEffect, useState } from 'react';
+import { useEffect, useState } from 'react';
+import * as R from 'ramda';
 import * as yup from 'yup';
 import codes from 'country-calling-code';
 import { yupResolver } from '@hookform/resolvers/yup';
@@ -40,14 +41,15 @@ export const InformationForm = () => {
 
     useEffect(() => {
         if (user !== null) {
-            const parsed = parsePhoneNumber(user.phoneNumber);
+            const parsed = parsePhoneNumber(!R.isNil(user) ? user.phoneNumber : '');
             setCode(codes.findIndex((c) => c.isoCode2 === parsed.country));
-            setValue('firstName', user.firstName, { shouldValidate: true });
-            setValue('lastName', user.lastName, { shouldValidate: true });
-            setValue('email', user.email, { shouldValidate: true });
+            setValue('firstName', !R.isNil(user) ? user.firstName : '', { shouldValidate: true });
+            setValue('lastName', !R.isNil(user) ? user.lastName : '', { shouldValidate: true });
+            setValue('email', !R.isNil(user) ? user.email : '', { shouldValidate: true });
             setValue('birthDate', user.birthDate, { shouldValidate: false });
             setValue('phoneNumber', parsed.nationalNumber, { shouldValidate: true });
         }
+        // eslint-disable-next-line
     }, [user]);
 
     const submit = async (data: Inputs) => {
@@ -57,9 +59,9 @@ export const InformationForm = () => {
                     firstName: data.firstName,
                     lastName: data.lastName,
                     birthDate: new Date().toISOString(),
-                    phoneNumber: user?.phoneNumber,
-                    email: user.email,
-                    id: userId,
+                    phoneNumber: user?.phoneNumber || '',
+                    email: user?.email || '',
+                    id: userId || '',
                 },
             });
         } catch (error) {}
