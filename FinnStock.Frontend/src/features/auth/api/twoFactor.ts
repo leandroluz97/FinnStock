@@ -7,7 +7,11 @@ export type TwoFactorDto = {
     };
 };
 
-export const twoFactor = ({ data }: TwoFactorDto): Promise<any> => {
+export type TwoFactorDtoResponse = {
+    token: string;
+};
+
+export const twoFactor = ({ data }: TwoFactorDto): Promise<TwoFactorDtoResponse> => {
     return axios.post('/auth/ValidateOTPCode', data);
 };
 
