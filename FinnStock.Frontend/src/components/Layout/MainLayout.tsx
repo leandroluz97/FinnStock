@@ -187,6 +187,7 @@ function LogoutIcon() {
     );
 }
 // #endregion
+
 export const MainLayout = ({ children }: MainLayoutProps) => {
     const { user } = useAuth();
     const routes = [

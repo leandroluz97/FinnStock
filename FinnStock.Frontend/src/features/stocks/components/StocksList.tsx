@@ -28,19 +28,13 @@ export const StocksList = () => {
                                         description={stock.description}
                                         symbol={stock.symbol}
                                         type={stock.type}
-                                        displaySymbol={stock.displaySymbol}
-                                        figi={stock.figi}
                                     />
                                 ))}
                         </div>
                     )}
                 </div>
             </div>
-            <Pagination
-                pageNumber={pageNumber}
-                pageSize={pageSize}
-                totalPages={data ? data.totalPages : 1}
-            />
+            <Pagination pageNumber={pageNumber} totalPages={data ? data.totalPages : 1} />
         </React.Fragment>
     );
 };

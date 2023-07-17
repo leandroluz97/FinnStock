@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes } from 'react';
+import { ButtonHTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 import { Spinner } from '../../../../components/Loading/Spinner';
 
@@ -7,6 +7,7 @@ type OrderActionProps = ButtonHTMLAttributes<HTMLButtonElement>;
 const OrderAction = ({ content, ...rest }: OrderActionProps) => {
     return (
         <button
+            // eslint-disable-next-line react/button-has-type
             type={rest.type || 'button'}
             {...rest}
             className={twMerge(

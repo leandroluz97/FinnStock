@@ -17,13 +17,13 @@ type IOrderType = {
     sell: () => void;
 };
 
-const schema = yup.object().shape({
-    amount: yup
-        .string()
-        .required('Number is a required field')
-        .min(1, 'Amount is too low - should be at least 1 minimum.')
-        .max(10000, 'Amount is too high - should be at least 10000 maximun.'),
-});
+// const schema = yup.object().shape({
+//     amount: yup
+//         .string()
+//         .required('Number is a required field')
+//         .min(1, 'Amount is too low - should be at least 1 minimum.')
+//         .max(10000, 'Amount is too high - should be at least 10000 maximun.'),
+// });
 const MAXIMUM_QUANTITY = 10000;
 const MINIMUM_QUANTITY = 1;
 const QUANTITY = 'quantity';
@@ -35,8 +35,8 @@ export const NewOrder = () => {
         mode: 'onChange',
         defaultValues: { quantity: MINIMUM_QUANTITY },
     });
-    const { data: profile } = useStockProfile({ symbol });
-    const { data: quotes } = useStockQuote({ symbol });
+    const { data: profile } = useStockProfile({ symbol: symbol || '' });
+    const { data: quotes } = useStockQuote({ symbol: symbol || '' });
     const { errors, isValid } = formState;
     const sellOrder = useCreateSellOrder();
     const buyOrder = useCreateBuyOrder();
@@ -47,8 +47,10 @@ export const NewOrder = () => {
         setError(QUANTITY, { type: 'custom', message: ERROR_MESSAGE }, { shouldFocus: true });
     };
 
+    // eslint-disable-next-line consistent-return
     const submitOrder = (type: IType) => async () => {
         if (!isValid) return displayErrorMessage();
+        // eslint-disable-next-line consistent-return
         if (!(profile && quote)) return;
 
         const quantity = Number(Number(getValues(QUANTITY)).toFixed());

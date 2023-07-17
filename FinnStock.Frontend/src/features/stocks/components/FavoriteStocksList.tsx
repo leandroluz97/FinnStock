@@ -24,8 +24,6 @@ export const FavoriteStocksList = () => {
                                       key={stock.symbol}
                                       description={stock.description}
                                       symbol={stock.symbol}
-                                      displaySymbol=""
-                                      figi=""
                                       type=""
                                       currency="USD"
                                   />

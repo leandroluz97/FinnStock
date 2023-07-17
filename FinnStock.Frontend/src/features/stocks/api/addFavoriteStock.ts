@@ -26,10 +26,10 @@ type UseAddFavorite = {
 
 export const useAddFavorite = ({ config }: UseAddFavorite = {}) => {
     return useMutation({
-        onError: (_, __, context: any) => {
-            toast.error('Error on Buy Order', toasterConfig);
+        onError: (err: any) => {
+            toast.error(err.data.description, toasterConfig);
         },
-        onSuccess: (data) => {
+        onSuccess: () => {
             queryClient.invalidateQueries('favorite');
         },
         ...config,

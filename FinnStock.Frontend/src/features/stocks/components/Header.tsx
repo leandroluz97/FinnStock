@@ -6,80 +6,26 @@ import { useFavoriteStocks } from '../api/getFavoriteStocks';
 import { useDeleteFavoriteStock } from '../api/deleteFavoriteStock';
 import { useAddFavorite } from '../api/addFavoriteStock';
 
-const data = [
-    {
-        name: '01/07/2023',
-        uv: 4000,
-        pv: 2400,
-        amt: 2400,
-    },
-    {
-        name: '',
-        uv: 3000,
-        pv: 1398,
-        amt: 2210,
-    },
-    {
-        name: '',
-        uv: 2000,
-        pv: 9800,
-        amt: 2290,
-    },
-    {
-        name: '',
-        uv: 2780,
-        pv: 3908,
-        amt: 2000,
-    },
-    {
-        name: '',
-        uv: 1890,
-        pv: 4800,
-        amt: 2181,
-    },
-    {
-        name: '',
-        uv: 2390,
-        pv: 3800,
-        amt: 2500,
-    },
-    {
-        name: '',
-        uv: 3490,
-        pv: 4300,
-        amt: 2100,
-    },
-];
-
-const CustomToolTip = (obe) => {
-    return (
-        <div className="bg-primary-800 p-2 px-3 rounded-lg text-white opacity-90 ">
-            <p className="text-xs font-thin">22 March 2023</p>
-            <p className="text-lg font-bold">$ 78,560</p>
-        </div>
-    );
-};
-
 export const Header = () => {
     const { symbol, userId } = useParams<{ symbol: string; userId: string }>();
-    const { data, isLoading } = useStockProfile({ symbol });
-    const { data: favorites, ...rest } = useFavoriteStocks({ userId });
+    const { data } = useStockProfile({ symbol: symbol || '' });
+    const { data: favorites } = useFavoriteStocks({ userId: userId || '' });
     const deleteFavorite = useDeleteFavoriteStock({});
     const addFavorite = useAddFavorite({});
 
     if (R.isNil(data)) return null;
     if (R.isNil(favorites)) return null;
 
-    const favorite = favorites.find((favorite) => favorite.symbol === symbol);
+    const favorite = favorites.find((fav) => fav.symbol === symbol);
     const isFavorite = !R.isEmpty(favorites) ? !!favorite : false;
 
     const handleAddFavorite = async () => {
         await addFavorite.mutateAsync({
-            data: { symbol, description: data.name, userId },
+            data: { symbol: symbol || '', description: data.name, userId: userId || '' },
         });
     };
-    const handleDeleteFavorite = async (favoriteId, userId) => {
-        await deleteFavorite.mutateAsync({ favoriteId, userId });
+    const handleDeleteFavorite = async (favoriteId: string, id: string) => {
+        await deleteFavorite.mutateAsync({ favoriteId, userId: id });
     };
 
     return (
@@ -92,7 +38,7 @@ export const Header = () => {
                 {isFavorite ? (
                     <button
                         onClick={() => {
-                            handleDeleteFavorite(favorite?.id, userId);
+                            handleDeleteFavorite(favorite?.id as string, userId as string);
                         }}
                         type="button"
                         className="self-center border-l-2 text-xl border-primary-500 px-3 text-primary-900"

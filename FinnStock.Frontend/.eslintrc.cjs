@@ -28,5 +28,6 @@ module.exports = {
         'react/jsx-props-no-spreading': 0,
         'import/no-extraneous-dependencies': 0,
         'react/react-in-jsx-scope': 0,
+        'typescript-eslint/no-unused-vars': 0,
     },
 };

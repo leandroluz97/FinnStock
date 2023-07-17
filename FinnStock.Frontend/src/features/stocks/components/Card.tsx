@@ -3,13 +3,11 @@ import { Link } from 'react-router-dom';
 interface ICardProps {
     currency: string;
     description: string;
-    displaySymbol: string;
-    figi: string;
     symbol: string;
     type: string;
 }
 
-export const Card = ({ currency, description, displaySymbol, figi, symbol, type }: ICardProps) => {
+export const Card = ({ currency, description, symbol, type }: ICardProps) => {
     return (
         <Link
             to={symbol}

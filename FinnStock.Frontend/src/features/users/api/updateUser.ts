@@ -25,19 +25,10 @@ type UseUpdateUser = {
 
 export const useUpdateUser = ({ config }: UseUpdateUser = {}) => {
     return useMutation({
-        onMutate: async ({ data }: UpdateUserDto) => {
-            // await queryClient.cancelQueries('user');
-            // const previousAuth = queryClient.getQueriesData('user');
-            // queryClient.setQueriesData('user', { ...previousAuth, ...data });
-            // return { previousAuth };
+        onError: (err: any) => {
+            toast.error(err.data.description, toasterConfig);
         },
-        onError: (_, __, context: any) => {
-            // if (context?.previousAuth) {
-            //     queryClient.setQueriesData('user', context.previousAuth);
-            // }
-            toast.error('Error Register', toasterConfig);
-        },
-        onSuccess: (data) => {
+        onSuccess: () => {
             queryClient.invalidateQueries('user');
             toast.success('User updated successful', toasterConfig);
         },

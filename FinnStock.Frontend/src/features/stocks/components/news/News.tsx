@@ -5,7 +5,7 @@ import { useNewsBySymbol } from '../../../news/api/getNewsBySymbol';
 
 export const News = () => {
     const { symbol } = useParams();
-    const { data } = useNewsBySymbol({ symbol, pageNumber: 1, pageSize: 12 });
+    const { data } = useNewsBySymbol({ symbol: symbol || '', pageNumber: 1, pageSize: 12 });
 
     if (R.isNil(data)) return null;
 

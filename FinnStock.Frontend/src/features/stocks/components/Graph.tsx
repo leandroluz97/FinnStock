@@ -36,7 +36,7 @@ export const Graph = () => {
     const { symbol } = useParams();
     const { data: quotes, isLoading } = useStockQuote({
         config: { refetchInterval: ONE_SECOND * 30 },
-        symbol,
+        symbol: symbol || '',
     });
 
     if (isLoading)
@@ -47,7 +47,9 @@ export const Graph = () => {
         );
     if (R.isNil(quotes)) return null;
 
-    const stockQuote = quotes.c?.at(-1).toFixed(2) || 0;
+    const stockQuote =
+        (!R.isNil(quotes.c) && !R.isEmpty(quotes.c) && quotes.c[quotes.c.length - 1].toFixed(2)) ||
+        0;
     const formatQuotes = (quote: number, index: number) =>
         ({
             name: new Date(quotes.t[index] * 1000).toLocaleDateString(),

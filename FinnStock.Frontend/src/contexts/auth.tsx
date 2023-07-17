@@ -151,8 +151,8 @@ export function initReactQuery<
 
         const twoFactorMutation = useMutation({
             mutationFn: twoFactorFn,
-            onSuccess: (user) => {
-                setUser(user);
+            onSuccess: (response) => {
+                setUser(response as unknown as User);
             },
             onError: (err: any) => {
                 toast.error(err.data.description, toasterConfig);

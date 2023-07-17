@@ -9,7 +9,7 @@ import { Spinner } from '../../../components/Loading/Spinner';
 import { normalize } from '../../../utils/normalize';
 
 export const BuyOrdersTable = () => {
-    const [searchParams, setSearchParams] = useSearchParams();
+    useSearchParams();
     const { userId } = useParams();
     const QUERIES = URLSearch.queries();
     const desc = QUERIES.sortDesc === 'true' ? 'false' : 'true';

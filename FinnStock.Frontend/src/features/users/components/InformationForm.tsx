@@ -46,7 +46,7 @@ export const InformationForm = () => {
             setValue('firstName', !R.isNil(user) ? user.firstName : '', { shouldValidate: true });
             setValue('lastName', !R.isNil(user) ? user.lastName : '', { shouldValidate: true });
             setValue('email', !R.isNil(user) ? user.email : '', { shouldValidate: true });
-            setValue('birthDate', user.birthDate, { shouldValidate: false });
+            setValue('birthDate', user?.birthDate || '', { shouldValidate: false });
             setValue('phoneNumber', parsed.nationalNumber, { shouldValidate: true });
         }
         // eslint-disable-next-line
