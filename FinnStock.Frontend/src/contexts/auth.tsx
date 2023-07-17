@@ -9,6 +9,7 @@ import {
 } from 'react-query';
 import { toast } from 'react-toastify';
 import { toasterConfig } from '../lib/react-toastify';
+import { TwoFactorDtoResponse } from '../features/auth/api/twoFactor';
 
 export interface AuthProviderConfig<
     User = unknown,
@@ -20,7 +21,7 @@ export interface AuthProviderConfig<
     loginFn: (data: any) => Promise<LoginResponseCredencial>;
     registerFn: (data: any) => Promise<User>;
     confirmEmailFn: (data: any) => Promise<User>;
-    twoFactorFn: (data: any) => Promise<User>;
+    twoFactorFn: (data: any) => Promise<TwoFactorDtoResponse>;
     forgotPasswordFn: (data: any) => Promise<User>;
     resetPasswordFn: (data: any) => Promise<User>;
     logoutFn: () => Promise<any>;
