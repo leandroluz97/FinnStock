@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from 'react';
+import { HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface MetricTitleProps extends HTMLAttributes<HTMLHeadingElement> {

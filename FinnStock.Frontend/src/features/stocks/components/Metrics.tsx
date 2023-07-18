@@ -6,7 +6,7 @@ import { useStockProfile } from '../api/getStockProfile';
 
 export const Metrics = () => {
     const { symbol } = useParams<{ symbol: string }>();
-    const { data, isLoading } = useStockProfile({ symbol });
+    const { data } = useStockProfile({ symbol: symbol as unknown as string });
     if (data === undefined) return null;
 
     return (

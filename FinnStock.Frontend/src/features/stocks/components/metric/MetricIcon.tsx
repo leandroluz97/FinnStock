@@ -1,4 +1,4 @@
-import React, { ElementType, HTMLAttributes } from 'react';
+import { ElementType, HTMLAttributes } from 'react';
 import { twMerge } from 'tailwind-merge';
 
 interface MetricIconProps extends HTMLAttributes<HTMLOrSVGElement> {
