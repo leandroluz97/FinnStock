@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { IRegister } from '../../types/formTypes';
 
-interface IInputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
+interface IInputFieldProps extends React.InputHTMLAttributes<HTMLInputElement> {
     id: string;
     label: string;
     name: string;
@@ -9,7 +9,6 @@ interface IInputFieldProps extends React.HTMLAttributes<HTMLInputElement> {
     errorMessage: string;
     groupFormClassList: string;
     type: string;
-    required: boolean;
     register: IRegister<HTMLInputElement>;
 }
 export const InputField = ({
