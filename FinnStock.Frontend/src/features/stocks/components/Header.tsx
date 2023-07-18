@@ -8,8 +8,8 @@ import { useAddFavorite } from '../api/addFavoriteStock';
 
 export const Header = () => {
     const { symbol, userId } = useParams<{ symbol: string; userId: string }>();
-    const { data } = useStockProfile({ symbol: symbol || '' });
-    const { data: favorites } = useFavoriteStocks({ userId: userId || '' });
+    const { data } = useStockProfile({ symbol: symbol as unknown as string });
+    const { data: favorites } = useFavoriteStocks({ userId: userId as unknown as string });
     const deleteFavorite = useDeleteFavoriteStock({});
     const addFavorite = useAddFavorite({});
 
@@ -21,7 +21,11 @@ export const Header = () => {
 
     const handleAddFavorite = async () => {
         await addFavorite.mutateAsync({
-            data: { symbol: symbol || '', description: data.name, userId: userId || '' },
+            data: {
+                symbol: symbol as unknown as string,
+                description: data.name,
+                userId: userId as unknown as string,
+            },
         });
     };
     const handleDeleteFavorite = async (favoriteId: string, id: string) => {

@@ -1,4 +1,3 @@
-import React, { useContext } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { Stocks } from './Stocks';
 import { NotFound } from '../../misc/routes/NotFound';

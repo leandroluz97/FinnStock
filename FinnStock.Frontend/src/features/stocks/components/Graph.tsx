@@ -36,7 +36,7 @@ export const Graph = () => {
     const { symbol } = useParams();
     const { data: quotes, isLoading } = useStockQuote({
         config: { refetchInterval: ONE_SECOND * 30 },
-        symbol: symbol || '',
+        symbol: symbol as unknown as string,
     });
 
     if (isLoading)

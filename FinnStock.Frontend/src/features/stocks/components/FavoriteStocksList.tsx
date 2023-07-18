@@ -7,7 +7,7 @@ import { EmptyState } from '../../../components/States/EmptyState';
 
 export const FavoriteStocksList = () => {
     const { userId } = useParams();
-    const { data, isLoading } = useFavoriteStocks({ userId: userId || '' });
+    const { data, isLoading } = useFavoriteStocks({ userId: userId as unknown as string });
 
     return (
         <div className="h-full overflow-hidden rounded-md">

@@ -1,12 +1,10 @@
 import { useParams } from 'react-router-dom';
-import * as yup from 'yup';
 import { useForm } from 'react-hook-form';
-import { yupResolver } from '@hookform/resolvers/yup';
 import { Order } from './order';
 import { Title } from './_common/Title';
 import { OrderFormInput } from '../types';
-import { useCreateSellOrder } from '../../orders/api/createSellOrder';
-import { useCreateBuyOrder } from '../../orders/api/createbuyOrder';
+import { createSellOrderDto, useCreateSellOrder } from '../../orders/api/createSellOrder';
+import { createBuyOrderDto, useCreateBuyOrder } from '../../orders/api/createbuyOrder';
 
 import { useStockProfile } from '../api/getStockProfile';
 import { useStockQuote } from '../api/getStockQuote';
@@ -35,8 +33,8 @@ export const NewOrder = () => {
         mode: 'onChange',
         defaultValues: { quantity: MINIMUM_QUANTITY },
     });
-    const { data: profile } = useStockProfile({ symbol: symbol || '' });
-    const { data: quotes } = useStockQuote({ symbol: symbol || '' });
+    const { data: profile } = useStockProfile({ symbol: symbol as unknown as string });
+    const { data: quotes } = useStockQuote({ symbol: symbol as unknown as string });
     const { errors, isValid } = formState;
     const sellOrder = useCreateSellOrder();
     const buyOrder = useCreateBuyOrder();
@@ -56,14 +54,14 @@ export const NewOrder = () => {
         const quantity = Number(Number(getValues(QUANTITY)).toFixed());
         const amount = quantity * quote;
         const { logo } = profile;
-        const payload = { logo, amount, quantity, symbol, userId };
+        const data = { logo, amount, quantity, symbol, userId };
 
         const orderType: IOrderType = {
             buy: async () => {
-                await buyOrder.mutateAsync({ data: payload });
+                await buyOrder.mutateAsync({ data } as unknown as createBuyOrderDto);
             },
             sell: async () => {
-                await sellOrder.mutateAsync({ data: payload });
+                await sellOrder.mutateAsync({ data } as unknown as createSellOrderDto);
             },
         };
         await orderType[type]();

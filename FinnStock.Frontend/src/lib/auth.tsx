@@ -3,7 +3,7 @@ import { Spinner } from '../components/Loading/Spinner';
 import { AuthProviderConfig, initReactQuery } from '../contexts/auth';
 import { ConfirmEmailDto, confirmEmail } from '../features/auth/api/confirmEmail';
 import { ForgotPasswordDto, forgotPassword } from '../features/auth/api/forgotPassword';
-import { getUser, userDto } from '../features/auth/api/getUser';
+import { getUser } from '../features/auth/api/getUser';
 import { LoginDto, LoginResponseDto, login } from '../features/auth/api/login';
 import { RegisterDto, register } from '../features/auth/api/register';
 import { ResetPasswordDto, resetPassword } from '../features/auth/api/resetPassword';
@@ -11,15 +11,15 @@ import { TwoFactorDto, twoFactor } from '../features/auth/api/twoFactor';
 import { AuthUser } from '../features/auth/types';
 import { storageService } from '../utils/storage';
 
-async function loadUser(data: userDto) {
+async function loadUser() {
     const token = storageService.getToken();
 
     if (token) {
-        const decoded = jwtDecode(token);
+        const decoded: Record<string, string> = jwtDecode(token);
         const userId =
             decoded['http://schemas.xmlsoap.org/ws/2005/05/identity/claims/nameidentifier'];
-        const data = await getUser(userId);
-        return data;
+        const response = await getUser(userId);
+        return response;
     }
     return null;
 }
