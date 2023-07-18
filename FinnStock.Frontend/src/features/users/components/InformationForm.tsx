@@ -53,18 +53,16 @@ export const InformationForm = () => {
     }, [user]);
 
     const submit = async (data: Inputs) => {
-        try {
-            await updateUser.mutateAsync({
-                data: {
-                    firstName: data.firstName,
-                    lastName: data.lastName,
-                    birthDate: new Date().toISOString(),
-                    phoneNumber: user?.phoneNumber || '',
-                    email: user?.email || '',
-                    id: userId || '',
-                },
-            });
-        } catch (error) {}
+        await updateUser.mutateAsync({
+            data: {
+                firstName: data.firstName,
+                lastName: data.lastName,
+                birthDate: new Date().toISOString(),
+                phoneNumber: user?.phoneNumber || '',
+                email: user?.email || '',
+                id: userId || '',
+            },
+        });
     };
 
     return (

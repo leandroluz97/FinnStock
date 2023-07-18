@@ -30,7 +30,7 @@ export const PasswordForm = () => {
 
     const submit = async (data: Inputs) => {
         await updatePassword.mutateAsync({
-            userId: userId || '',
+            userId: userId as unknown as string,
             data: {
                 currentPassword: data.password,
                 newPassword: data.newPassword,
