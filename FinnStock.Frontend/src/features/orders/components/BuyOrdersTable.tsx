@@ -13,7 +13,7 @@ export const BuyOrdersTable = () => {
     const { userId } = useParams();
     const QUERIES = URLSearch.queries();
     const desc = QUERIES.sortDesc === 'true' ? 'false' : 'true';
-    const { data, isLoading } = useBuyOrders({ userId: userId || '' });
+    const { data, isLoading } = useBuyOrders({ userId: userId as unknown as string });
 
     if (isLoading)
         return (

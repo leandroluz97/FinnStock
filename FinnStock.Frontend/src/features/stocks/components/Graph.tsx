@@ -1,17 +1,21 @@
+/* eslint-disable react/no-unstable-nested-components */
 import React from 'react';
-import { AreaChart, Area, XAxis, YAxis, Tooltip, ResponsiveContainer } from 'recharts';
+import {
+    AreaChart,
+    Area,
+    XAxis,
+    YAxis,
+    Tooltip,
+    ResponsiveContainer,
+    TooltipProps,
+} from 'recharts';
 import * as R from 'ramda';
 import { useParams } from 'react-router-dom';
+import { NameType, ValueType } from 'recharts/types/component/DefaultTooltipContent';
 import { useStockQuote } from '../api/getStockQuote';
 import { Spinner } from '../../../components/Loading/Spinner';
 
 const ONE_SECOND = 1000;
-
-type CustomToolTipProps = {
-    active: boolean;
-    payload: any[];
-    label: string;
-};
 
 type IQuoteData = {
     name: string;
@@ -20,7 +24,7 @@ type IQuoteData = {
     amt: string;
 };
 
-function CustomToolTip({ active, payload, label }: CustomToolTipProps) {
+const CustomToolTip = ({ active, payload, label }: TooltipProps<ValueType, NameType>) => {
     if (active && payload && payload.length) {
         const [data] = payload;
         return (
@@ -30,7 +34,8 @@ function CustomToolTip({ active, payload, label }: CustomToolTipProps) {
             </div>
         );
     }
-}
+    return <p> </p>;
+};
 
 export const Graph = () => {
     const { symbol } = useParams();
@@ -97,7 +102,11 @@ export const Graph = () => {
                             tickLine={{ stroke: '#fffff' }}
                         />
                         {/* <CartesianGrid strokeDasharray="3 3" /> */}
-                        <Tooltip content={<CustomToolTip />} />
+                        <Tooltip
+                            content={(props: TooltipProps<ValueType, NameType>) => (
+                                <CustomToolTip {...props} />
+                            )}
+                        />
 
                         <Area
                             type="monotone"

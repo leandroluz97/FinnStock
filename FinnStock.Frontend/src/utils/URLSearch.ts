@@ -1,19 +1,27 @@
-export const urlQueries: string[] = ['searchText', 'pageSize', 'pageNumber', 'sortBy', 'sortDesc'];
-
 interface IQuery {
-    searchText?: string;
-    pageSize?: string;
-    pageNumber?: string;
-    sortBy?: string;
-    sortDesc?: string;
+    searchText: string;
+    pageSize: string;
+    pageNumber: string;
+    sortBy: string;
+    sortDesc: string;
 }
 
+type IEntries = 'pageSize' | 'searchText' | 'pageNumber' | 'sortBy' | 'sortDesc';
+
+export const urlQueries: IEntries[] = [
+    'searchText',
+    'pageSize',
+    'pageNumber',
+    'sortBy',
+    'sortDesc',
+];
+
 export class URLSearch {
-    static #entries: string[];
+    static #entries: IEntries[];
 
     private static searchParams: URLSearchParams;
 
-    static register(entries: string[]) {
+    static register(entries: IEntries[]) {
         if (!Array.isArray(entries)) {
             throw new Error(
                 `Registered 'queries ${entries}' is not an array of strings. Eg.: ["sortBy", "sortDesc", "status" ]`
@@ -29,15 +37,19 @@ export class URLSearch {
     static queries(): IQuery {
         this.#getQueries();
         const queries: IQuery = {} as IQuery;
-        this.#entries.forEach((entry: string) => {
-            queries[entry] = this[entry];
+        this.#entries.forEach((entry: IEntries) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
+            queries[entry] = this[entry] as unknown as IEntries;
         });
         return queries;
     }
 
     static #getQueries() {
         this.searchParams = new URLSearchParams(window.location.search);
-        this.#entries.forEach((entry: string) => {
+        this.#entries.forEach((entry: IEntries) => {
+            // eslint-disable-next-line @typescript-eslint/ban-ts-comment
+            // @ts-ignore
             this[entry] = this.searchParams.get(entry);
         });
     }
