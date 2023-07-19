@@ -45,7 +45,7 @@ export interface AuthContextValue<
     login: UseMutateAsyncFunction<LoginResponseCredencial, any, LoginCredentials>;
     register: UseMutateAsyncFunction<User, any, RegisterCredentials>;
     confirmEmail: UseMutateAsyncFunction<User, any, ConfirmEmailCredentials>;
-    twoFactor: UseMutateAsyncFunction<User, any, TwoFactorCredentials>;
+    twoFactor: UseMutateAsyncFunction<any, any, TwoFactorCredentials>;
     forgotPassword: UseMutateAsyncFunction<User, any, ForgotPasswordCredentials>;
     resetPassword: UseMutateAsyncFunction<User, any, ResetPasswordCredentials>;
     logout: UseMutateAsyncFunction<any, any, void, any>;
