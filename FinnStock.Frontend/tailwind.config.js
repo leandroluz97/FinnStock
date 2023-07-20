@@ -27,7 +27,7 @@ export default {
                 sans: ['DM Sans', 'sans-serif'],
             },
             backgroundImage: {
-                'logo-pattern': 'url("./logo-cut-xl-02.svg")',
+                'logo-pattern': 'url("/logo-cut-xl-02.svg")',
             },
             flexGrow: {
                 2: '2',
