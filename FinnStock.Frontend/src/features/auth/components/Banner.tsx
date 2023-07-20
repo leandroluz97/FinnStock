@@ -1,5 +1,6 @@
 import { ReactNode } from 'react';
 import finnstockLogo from '../../../assets/finnstock-white.svg';
+import logo from '../../../assets/Logo-cut-xl-02.svg';
 
 interface BannerProps {
     title: string;
@@ -8,7 +9,9 @@ interface BannerProps {
 
 export const Banner = ({ title, content }: BannerProps) => {
     return (
-        <div className=" hidden md:block  flex-1 bg-primary-900 p-10 bg-logo-pattern bg-no-repeat bg-bottom bg-contain">
+        <div
+            className={`hidden md:block  flex-1 bg-primary-900 p-10 bg-[url('${logo}')] bg-logo-pattern bg-no-repeat bg-bottom bg-contain`}
+        >
             <div>
                 <img src={finnstockLogo} alt="finnstock" />
             </div>
