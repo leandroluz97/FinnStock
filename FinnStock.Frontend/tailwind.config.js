@@ -4,7 +4,7 @@ import colors from 'tailwindcss/colors';
 /** @type {import('tailwindcss').Config} */
 
 export default {
-    content: ['./index.html', './src/**/*.{js,jsx,ts,tsx}', './node_modules/flowbite/**/*.js'],
+    content: ['./index.html', './src/**/*.{html,js,jsx,ts,tsx}', './node_modules/flowbite/**/*.js'],
     theme: {
         extend: {
             colors: {
@@ -27,7 +27,7 @@ export default {
                 sans: ['DM Sans', 'sans-serif'],
             },
             backgroundImage: {
-                'logo-pattern': "url('/src/assets/logo-cut-xl-02.svg')",
+                'logo-pattern': 'url("./logo-cut-xl-02.svg")',
             },
             flexGrow: {
                 2: '2',
