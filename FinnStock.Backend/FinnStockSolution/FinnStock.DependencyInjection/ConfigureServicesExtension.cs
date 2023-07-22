@@ -31,23 +31,23 @@ namespace FinnStock.DependencyInjection
             services.AddDbContext<ApplicationDbContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection"))); //ServiceLifetime.Transient
 
-            //services.AddCors((options) =>
-            //{
-            //    options.AddDefaultPolicy((builder) =>
-            //    {
-            //        builder.WithOrigins("*");
-            //        builder.WithOrigins(configuration.GetSection("AllowedOrigin").Value);
-            //    });
-            //});
-            services.AddCors(options =>
+            services.AddCors((options) =>
             {
-                options.AddDefaultPolicy(builder =>
+                options.AddDefaultPolicy((builder) =>
                 {
-                    builder.WithOrigins("http://localhost:3000")
-                           .AllowAnyHeader()
-                           .AllowAnyMethod();
+                    builder.WithOrigins("*");
+                    builder.WithOrigins(configuration.GetSection("AllowedOrigin").Value!);
                 });
             });
+            //services.AddCors(options =>
+            //{
+            //    options.AddDefaultPolicy(builder =>
+            //    {
+            //        builder.WithOrigins("http://localhost:3000")
+            //               .AllowAnyHeader()
+            //               .AllowAnyMethod();
+            //    });
+            //});
             services.AddLogging();
 
             services.AddSingleton<IConfiguration>(configuration);

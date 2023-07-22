@@ -12,7 +12,7 @@ namespace FinnStock.SQLWork
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             //modelBuilder.ApplyConfiguration(new OrderConfiguration());
-            modelBuilder.ApplyConfiguration(new BuyOrderConfiguration());
+            modelBuilder.ApplyConfiguration(new BuyOrderConfiguration()); 
             modelBuilder.ApplyConfiguration(new SellOrderConfiguration());
             modelBuilder.ApplyConfiguration(new FavoriteConfiguration());
             base.OnModelCreating(modelBuilder);
