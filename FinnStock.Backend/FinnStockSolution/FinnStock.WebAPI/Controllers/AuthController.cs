@@ -20,7 +20,8 @@ namespace FinnStock.WebAPI.Controllers
     {
         private readonly AuthenticationService _authenticationService;
         private readonly SignInManager<User> _signInManager;
-        public AuthController(AuthenticationService authenticationService, SignInManager<User> signInManager)
+        private readonly IConfiguration _configuration;
+        public AuthController(AuthenticationService authenticationService, SignInManager<User> signInManager, IConfiguration configuration)
         {
             _authenticationService = authenticationService;
             _signInManager = signInManager;
@@ -36,7 +37,7 @@ namespace FinnStock.WebAPI.Controllers
         [HttpPost]
         public IActionResult ExternalLogin(string provider, string returnUrl)
         {
-            var redirectUrl = $"http://localhost:5100/api/v1/auth/ExternalAuthCallBack?returnUrl={returnUrl}";
+            var redirectUrl = $"http://finnstock.azurewebsites.net/api/v1/auth/ExternalAuthCallBack?returnUrl={returnUrl}";
             var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             properties.AllowRefresh = true;
             return Challenge(properties, provider);
@@ -53,7 +54,7 @@ namespace FinnStock.WebAPI.Controllers
                 throw new InvalidOperationException();
             }
 
-            return Redirect($"http://localhost:3000/dashboard?token={result.Token}");
+            return Redirect($"{_configuration["WebApp:frontEnd"]}/?token={result.Token}");
         }
 
         [HttpPost]
